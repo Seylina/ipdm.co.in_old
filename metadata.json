@@ -1,0 +1,8 @@
+{
+  "name": "Remix: IPDM Professional Architecture Ecosystem",
+  "description": "Enterprise-grade system architectures, unified operational environments, and strategic intelligence ecosystems.",
+  "requestFramePermissions": [
+    "microphone"
+  ],
+  "majorCapabilities": []
+}
