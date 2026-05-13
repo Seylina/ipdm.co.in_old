@@ -153,7 +153,6 @@ export function JarvisChat() {
       };
 
       setMessages(prev => [...prev, jarvisMessage]);
-      speak(response);
     } catch (error) {
       console.error(error);
       const errorMessage: Message = {
@@ -222,7 +221,14 @@ export function JarvisChat() {
               </div>
               <div className="flex items-center gap-1">
                 <button 
-                  onClick={() => setVoiceEnabled(!voiceEnabled)}
+                  onClick={() => {
+                    const nextState = !voiceEnabled;
+                    setVoiceEnabled(nextState);
+                    if (!nextState) {
+                      window.speechSynthesis.cancel();
+                      setIsSpeaking(false);
+                    }
+                  }}
                   className={`p-2 transition-colors ${voiceEnabled ? 'text-primary' : 'text-zinc-500'}`}
                   title={voiceEnabled ? "Voice Enabled" : "Voice Disabled"}
                 >
