@@ -325,9 +325,6 @@ export function JarvisChat() {
                 />
               </svg>
             </motion.div>
-            
-            {/* Notification Dot */}
-            <div className="absolute top-2.5 right-2.5 w-3.5 h-3.5 bg-red-500 border-2 border-zinc-950 rounded-full animate-pulse z-20" />
           </motion.button>
         )}
       </AnimatePresence>
