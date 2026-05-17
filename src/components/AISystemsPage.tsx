@@ -188,7 +188,7 @@ export function AISystemsPage({ onNavigateEngine }: { onNavigateEngine: (engineI
                  transition={{ duration: 1.5, delay: 0.5, ease: "circOut" }}
                  className="absolute -top-6 left-0 h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent"
                />
-               <h1 className="font-display font-bold text-5xl md:text-7xl lg:text-8xl leading-[1.1] tracking-tighter italic py-2 pr-4">
+               <h1 className="font-display font-bold text-3xl sm:text-5xl md:text-7xl lg:text-8xl leading-[1.1] tracking-tighter italic py-2 pr-4">
                  AI Systems That <br />
                  <motion.span 
                    className="text-primary not-italic relative inline-block py-2"
@@ -247,7 +247,7 @@ export function AISystemsPage({ onNavigateEngine }: { onNavigateEngine: (engineI
                  viewport={{ once: true }}
                  className="space-y-6"
                >
-                  <h2 className="font-display font-bold text-5xl md:text-7xl lg:text-8xl leading-[1.1] tracking-tighter flex flex-col italic py-2">
+                  <h2 className="font-display font-bold text-3xl sm:text-5xl md:text-7xl lg:text-8xl leading-[1.1] tracking-tighter flex flex-col italic py-2">
                     <span className="pr-4">Integrated</span>
                     <span className="text-primary not-italic scale-y-105 origin-left py-4">Intelligence</span>
                     <span className="pr-4">Framework</span>
@@ -349,7 +349,7 @@ export function AISystemsPage({ onNavigateEngine }: { onNavigateEngine: (engineI
                whileInView={{ opacity: 1, y: 0 }}
                viewport={{ once: true }}
              >
-               <h2 className="font-display font-bold text-4xl md:text-6xl lg:text-7xl mb-12 tracking-tighter leading-[1.1] italic text-[var(--color-text)] transition-colors duration-1000 py-2">
+               <h2 className="font-display font-bold text-3xl sm:text-4xl md:text-6xl lg:text-7xl mb-12 tracking-tighter leading-[1.1] italic text-[var(--color-text)] transition-colors duration-1000 py-2">
                  <span className="inline-block pr-4">From Fragmented Operations</span> <br />
                  <span className="text-secondary not-italic uppercase tracking-tight">To Intelligent Systems.</span>
                </h2>
@@ -466,7 +466,7 @@ export function AISystemsPage({ onNavigateEngine }: { onNavigateEngine: (engineI
                 <div className="text-[10px] font-mono font-black text-primary uppercase tracking-[0.5em] mb-6 flex items-center gap-4">
                   <div className="w-12 h-px bg-primary/20" /> Technical Inventory
                 </div>
-                <h2 className="text-4xl md:text-7xl font-display font-bold text-[var(--color-text)] mb-8 tracking-tighter leading-tight">IPDM Architecture <span className="text-gradient-vibrant italic pr-2">Systems Index™</span></h2>
+                <h2 className="text-3xl sm:text-4xl md:text-7xl font-display font-bold text-[var(--color-text)] mb-8 tracking-tighter leading-tight">IPDM Architecture <span className="text-gradient-vibrant italic pr-2">Systems Index™</span></h2>
                 <p className="text-zinc-500 light:text-zinc-800 text-xl leading-relaxed max-w-2xl font-medium">
                   Access the full directory of proprietary AI architectures designed to unify your enterprise intelligence layers.
                 </p>
@@ -700,7 +700,7 @@ export function AISystemsPage({ onNavigateEngine }: { onNavigateEngine: (engineI
                      initial={{ opacity: 0 }}
                      whileInView={{ opacity: 0.15 }}
                      viewport={{ once: false }}
-                     className="font-display font-bold text-4xl md:text-6xl lg:text-7xl tracking-[0.2em] uppercase italic text-[var(--color-text)]"
+                     className="font-display font-bold text-xl sm:text-4xl md:text-6xl lg:text-7xl tracking-[0.2em] uppercase italic text-[var(--color-text)]"
                    >
                       THE SYSTEM <span className="not-italic">OPERATES.</span>
                    </motion.h2>

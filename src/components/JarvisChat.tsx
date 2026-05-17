@@ -178,13 +178,156 @@ export function JarvisChat() {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             onClick={() => setIsOpen(true)}
-            className="w-16 h-16 rounded-2xl bg-primary text-black shadow-[0_0_30px_rgba(34,211,238,0.4)] flex items-center justify-center group relative overflow-hidden"
+            className="w-16 h-16 rounded-[1.5rem] bg-zinc-950/90 border border-primary/40 text-primary shadow-[0_0_35px_rgba(34,211,238,0.3)] flex items-center justify-center group relative overflow-hidden"
           >
-            <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent pointer-events-none" />
-            <MessageSquare size={28} className="group-hover:scale-110 transition-transform" />
+            {/* Cybernetic overlay background */}
+            <div className="absolute inset-0 bg-gradient-to-tr from-primary/20 via-transparent to-transparent opacity-60 group-hover:opacity-100 transition-opacity" />
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(34,211,238,0.15)_0%,_transparent_70%)] animate-pulse" />
+            
+            {/* Interactive Glowing Cyber-Robot */}
+            <motion.div
+              className="relative w-12 h-12 flex items-center justify-center z-10"
+              animate={{ y: [0, -3, 0] }}
+              transition={{
+                duration: 3,
+                repeat: Infinity,
+                ease: "easeInOut"
+              }}
+            >
+              <svg
+                width="40"
+                height="40"
+                viewBox="0 0 40 40"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                className="text-primary drop-shadow-[0_0_6px_rgba(34,211,238,0.6)]"
+              >
+                {/* Antenna */}
+                <motion.path
+                  d="M20 10V4"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  animate={{ stroke: ["#22d3ee", "#67e8f9", "#22d3ee"] }}
+                  transition={{ duration: 1.5, repeat: Infinity }}
+                />
+                
+                {/* Antenna Tip (Glowing Beacon) */}
+                <motion.circle
+                  cx="20"
+                  cy="3"
+                  r="2"
+                  fill="#22d3ee"
+                  animate={{
+                    scale: [1, 1.4, 1],
+                    fill: ["#22d3ee", "#ffffff", "#22d3ee"],
+                  }}
+                  transition={{
+                    duration: 1.5,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                  }}
+                />
+                
+                {/* Ears / Side Bolts */}
+                <path d="M7 19C7 18.4477 7.44772 18 8 18H9V26H8C7.44772 26 7 25.5523 7 25V19Z" fill="currentColor" opacity="0.6" />
+                <path d="M33 19C33 18.4477 32.5523 18 32 18H31V26H32C32.5523 26 33 25.5523 33 25V19Z" fill="currentColor" opacity="0.6" />
+
+                {/* Robot Head Frame */}
+                <rect
+                  x="9"
+                  y="11"
+                  width="22"
+                  height="18"
+                  rx="6"
+                  fill="#09090b"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                />
+
+                {/* Digital Screen Overlay */}
+                <rect
+                  x="12"
+                  y="14"
+                  width="16"
+                  height="12"
+                  rx="3"
+                  fill="#030712"
+                  stroke="currentColor"
+                  strokeWidth="1"
+                  opacity="0.8"
+                />
+
+                {/* Blinking Eyes (glowing digital cyan lights) */}
+                <motion.ellipse
+                  cx="16.5"
+                  cy="19"
+                  rx="1.5"
+                  ry="1.5"
+                  fill="#22d3ee"
+                  animate={{
+                    scaleY: [1, 1, 0.1, 1, 1, 1, 0.1, 1],
+                  }}
+                  transition={{
+                    duration: 3.8,
+                    repeat: Infinity,
+                    times: [0, 0.4, 0.42, 0.44, 0.7, 0.72, 0.74, 1],
+                  }}
+                />
+                <motion.ellipse
+                  cx="23.5"
+                  cy="19"
+                  rx="1.5"
+                  ry="1.5"
+                  fill="#22d3ee"
+                  animate={{
+                    scaleY: [1, 1, 0.1, 1, 1, 1, 0.1, 1],
+                  }}
+                  transition={{
+                    duration: 3.8,
+                    repeat: Infinity,
+                    times: [0, 0.4, 0.42, 0.44, 0.7, 0.72, 0.74, 1],
+                  }}
+                />
+
+                {/* Mouth/Audio Frequency Wave */}
+                <motion.path
+                  d="M17 23H23"
+                  stroke="#22d3ee"
+                  strokeWidth="1"
+                  strokeLinecap="round"
+                  animate={{
+                    strokeWidth: [1, 1.6, 1, 1.6, 1],
+                    d: [
+                      "M17 23H23",
+                      "M16 23.5H24",
+                      "M17 23H23",
+                      "M16 23.5H24",
+                      "M17 23H23"
+                    ]
+                  }}
+                  transition={{
+                    duration: 2,
+                    repeat: Infinity,
+                    ease: "easeInOut"
+                  }}
+                />
+
+                {/* Neck */}
+                <rect x="19" y="29" width="2" height="2" fill="currentColor" opacity="0.6" />
+
+                {/* Shoulders / Upper torso */}
+                <path
+                  d="M14 31H26C27.5 31 28.5 32 28.5 33.5V35H11.5V33.5C11.5 32 12.5 31 14 31Z"
+                  fill="#09090b"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                />
+              </svg>
+            </motion.div>
             
             {/* Notification Dot */}
-            <div className="absolute top-3 right-3 w-3 h-3 bg-red-500 border-2 border-primary rounded-full animate-pulse" />
+            <div className="absolute top-2.5 right-2.5 w-3.5 h-3.5 bg-red-500 border-2 border-zinc-950 rounded-full animate-pulse z-20" />
           </motion.button>
         )}
       </AnimatePresence>

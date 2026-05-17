@@ -219,7 +219,7 @@ export function IPDMStrategos({ onNavigate }: { onNavigate: (page: any) => void 
       <div className="flex-1 max-w-[1800px] mx-auto w-full p-6 grid grid-cols-1 lg:grid-cols-12 gap-6 overflow-y-auto mt-2 custom-scrollbar">
         
         {/* Left Column: System Architecture (Layer 1-8) */}
-        <aside className="lg:col-span-3 space-y-6 overflow-y-auto pr-2 custom-scrollbar max-h-[calc(100vh-140px)]">
+        <aside className="lg:col-span-3 space-y-6 lg:overflow-y-auto pr-2 custom-scrollbar lg:max-h-[calc(100vh-140px)]">
            <div className="p-6 rounded-[2rem] bg-white/[0.02] border border-white/5 glass">
               <div className="flex items-center gap-3 mb-6">
                  <Layers className="text-primary" size={18} />
@@ -378,7 +378,7 @@ export function IPDMStrategos({ onNavigate }: { onNavigate: (page: any) => void 
         </section>
 
         {/* Right Column: CXO Dashboard & Visualizations */}
-        <section className="lg:col-span-4 space-y-6 flex flex-col overflow-y-auto pr-2 custom-scrollbar max-h-[calc(100vh-140px)]">
+        <section className="lg:col-span-4 space-y-6 flex flex-col lg:overflow-y-auto pr-2 custom-scrollbar lg:max-h-[calc(100vh-140px)]">
            <div className="p-8 rounded-[2.5rem] bg-white/[0.02] border border-white/5 glass relative overflow-hidden group">
               <div className="flex items-center justify-between mb-8 relative z-10">
                 <div>

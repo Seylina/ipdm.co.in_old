@@ -244,7 +244,7 @@ export function CompanyPage({ onNavigate }: { onNavigate: (page: 'home' | 'advis
       </div>
 
       {/* HEADER SECTION: ABOUT IPDM */}
-      <section className="relative pt-32 pb-40 px-6 overflow-hidden">
+      <section className="relative pt-20 md:pt-32 pb-24 md:pb-40 px-6 overflow-hidden">
         <LogicGrid mouseX={smoothX} mouseY={smoothY} />
         <Orb color="bg-primary/20" size="w-[500px] h-[500px]" top="-10%" left="60%" delay={0} mouseX={smoothX} mouseY={smoothY} />
         <Orb color="bg-blue-600/10" size="w-[600px] h-[600px]" top="40%" left="-10%" delay={2} mouseX={smoothX} mouseY={smoothY} />
@@ -269,13 +269,13 @@ export function CompanyPage({ onNavigate }: { onNavigate: (page: 'home' | 'advis
              <div className="mb-4">
                <span className="text-[10px] md:text-xs font-mono font-black text-zinc-500 uppercase tracking-[0.5em]">Infinite Potential Digital Marketing Pvt Ltd</span>
              </div>
-             <h1 className="font-display font-bold text-5xl md:text-7xl lg:text-[7.5rem] leading-[1.05] tracking-[calc(-0.04em)] mb-16 text-[var(--color-text)]">
+             <h1 className="font-display font-bold text-3xl sm:text-5xl md:text-7xl lg:text-[7.5rem] leading-[1.05] tracking-[calc(-0.04em)] mb-16 text-[var(--color-text)]">
                Architecting <br />
                <span className="text-gradient-vibrant italic">Infinite Potential<Trademark className="text-[0.4em] ml-1" /></span>
              </h1>
              
              <div className="max-w-4xl mx-auto">
-               <p className="text-2xl md:text-3xl text-zinc-400 leading-tight font-medium mb-12">
+               <p className="text-lg sm:text-2xl md:text-3xl text-zinc-400 leading-tight font-medium mb-12">
                  IPDM is an AI-first technology engine. We don&apos;t just build tools; we engineer the <span className="text-[var(--color-text)]">autonomous strategic cores</span> that redefine enterprise capability.
                </p>
                
@@ -308,9 +308,9 @@ export function CompanyPage({ onNavigate }: { onNavigate: (page: 'home' | 'advis
       </section>
 
       {/* CORE IDENTITY - REVOLUTIONARY GRID */}
-      <section className="py-32 px-6 relative overflow-hidden bg-[var(--color-text)]/[0.03] transition-colors duration-1000">
+      <section className="py-16 md:py-32 px-6 relative overflow-hidden bg-[var(--color-text)]/[0.03] transition-colors duration-1000">
         <div className="max-w-7xl mx-auto">
-          <div className="flex flex-col lg:flex-row gap-32 items-center">
+          <div className="flex flex-col lg:flex-row gap-16 md:gap-32 items-center">
             <motion.div 
               initial={{ opacity: 0, x: -50 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -319,10 +319,10 @@ export function CompanyPage({ onNavigate }: { onNavigate: (page: 'home' | 'advis
             >
               <div>
                 <div className="text-[10px] font-mono font-black text-primary uppercase tracking-[0.5em] mb-6 block">Structural Foundations</div>
-                <h2 className="font-display font-bold text-4xl md:text-6xl leading-tight tracking-tighter mb-8">
+                <h2 className="font-display font-bold text-3xl sm:text-4xl md:text-6xl leading-tight tracking-tighter mb-8">
                   The IPDM <br /><span className="text-gradient-primary">Multiverse.</span>
                 </h2>
-                <p className="text-2xl text-zinc-500 leading-relaxed max-w-xl">
+                <p className="text-xl sm:text-2xl text-zinc-500 leading-relaxed max-w-xl">
                   We operate at the convergence of four critical intelligence dimensions, creating a unified ecosystem of <span className="text-[var(--color-text)]">unstoppable growth.</span>
                 </p>
               </div>
@@ -340,7 +340,7 @@ export function CompanyPage({ onNavigate }: { onNavigate: (page: 'home' | 'advis
                     whileInView={{ opacity: 1, y: 0 }}
                     whileHover={{ scale: 1.02, y: -5, backgroundColor: "rgba(255,255,255,0.03)" }}
                     transition={{ delay: i * 0.1 }}
-                    className={`p-10 glass rounded-[2.5rem] border ${item.color} group transition-all h-full`}
+                    className={`p-6 md:p-10 glass rounded-[2rem] md:rounded-[2.5rem] border ${item.color} group transition-all h-full`}
                   >
                     <div className="w-14 h-14 rounded-2xl bg-[var(--color-text)]/5 flex items-center justify-center text-primary mb-6 group-hover:scale-110 group-hover:bg-primary group-hover:text-black transition-all transition-colors duration-1000">
                       {React.cloneElement(item.icon as React.ReactElement<any>, { size: 28 })}
@@ -352,29 +352,29 @@ export function CompanyPage({ onNavigate }: { onNavigate: (page: 'home' | 'advis
               </div>
             </motion.div>
             
-            <div className="lg:w-1/2 relative">
+            <div className="lg:w-1/2 relative w-full">
                <motion.div 
                  initial={{ scale: 0.8, opacity: 0, rotate: -20 }}
                  whileInView={{ scale: 1, opacity: 1, rotate: 0 }}
-                 className="relative aspect-square w-full glass rounded-[5rem] border-primary/20 bg-primary/5 p-1 flex items-center justify-center overflow-hidden shadow-[0_0_100px_rgba(34,211,238,0.1)]"
+                 className="relative aspect-square w-full glass rounded-[2.5rem] md:rounded-[5rem] border-primary/20 bg-primary/5 p-4 md:p-1 flex items-center justify-center overflow-hidden shadow-[0_0_100px_rgba(34,211,238,0.1)]"
                >
                   <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(34,211,238,0.2)_0%,_transparent_70%)]" />
                   <div className="absolute inset-0 blueprint-grid opacity-10" />
                   
-                  <div className="relative z-10 text-center space-y-12 px-12">
+                  <div className="relative z-10 text-center space-y-6 md:space-y-12 px-4 md:px-12">
                      <motion.div
                        animate={{ 
                          boxShadow: ["0 0 20px rgba(34,211,238,0.2)", "0 0 80px rgba(34,211,238,0.5)", "0 0 20px rgba(34,211,238,0.2)"]
                        }}
                        transition={{ duration: 4, repeat: Infinity }}
-                       className="w-32 h-32 rounded-full bg-black border border-primary/40 flex items-center justify-center mx-auto"
+                       className="w-24 h-24 md:w-32 md:h-32 rounded-full bg-black border border-primary/40 flex items-center justify-center mx-auto"
                      >
-                        <Network size={48} className="text-primary animate-pulse" />
+                        <Network size={36} className="text-primary animate-pulse md:w-12 md:h-12" />
                      </motion.div>
                      
                      <div className="space-y-4">
                         <div className="text-[10px] font-mono text-zinc-600 uppercase tracking-[0.6em]">System Mission Status</div>
-                        <h3 className="text-4xl md:text-5xl font-display font-bold text-[var(--color-text)] tracking-tighter leading-[1.1]">
+                        <h3 className="text-xl sm:text-2xl md:text-5xl font-display font-bold text-[var(--color-text)] tracking-tighter leading-[1.1]">
                           Embedding <span className="text-primary italic">Intelligence</span> <br />at the Core of Operation.
                         </h3>
                      </div>
@@ -418,7 +418,7 @@ export function CompanyPage({ onNavigate }: { onNavigate: (page: 'home' | 'advis
       <section className="py-32 px-6 relative overflow-hidden bg-[var(--color-bg)] transition-colors duration-1000">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_50%,_rgba(34,211,238,0.1)_0%,_transparent_50%)]" />
         <div className="max-w-7xl mx-auto">
-          <div className="glass p-12 md:p-32 rounded-[5rem] border-[var(--color-text)]/5 bg-[var(--color-text)]/[0.02] relative overflow-hidden group transition-colors duration-1000">
+          <div className="glass p-6 md:p-32 rounded-[2rem] md:rounded-[5rem] border-[var(--color-text)]/5 bg-[var(--color-text)]/[0.02] relative overflow-hidden group transition-colors duration-1000">
              <div className="absolute inset-0 blueprint-grid opacity-10" />
              
              <div className="grid lg:grid-cols-2 gap-32 items-center relative z-10 transition-colors duration-1000">
@@ -428,10 +428,10 @@ export function CompanyPage({ onNavigate }: { onNavigate: (page: 'home' | 'advis
                   viewport={{ once: true }}
                 >
                    <div className="text-[10px] font-mono font-black text-secondary uppercase tracking-[0.6em] mb-8 bg-secondary/10 px-4 py-1 rounded inline-block">Core DNA: Recursive Logic</div>
-                   <h2 className="text-4xl md:text-6xl font-display font-bold mb-10 tracking-tighter leading-tight text-[var(--color-text)] transition-colors duration-1000">
+                   <h2 className="text-3xl sm:text-4xl md:text-6xl font-display font-bold mb-10 tracking-tighter leading-tight text-[var(--color-text)] transition-colors duration-1000">
                      The <span className="text-gradient-secondary italic">Recursive</span> <br />Logic Engine
                    </h2>
-                   <p className="text-xl text-zinc-500 dark:text-zinc-400 leading-relaxed mb-12 max-w-md transition-colors duration-1000">
+                   <p className="text-base sm:text-l md:text-xl text-zinc-500 dark:text-zinc-400 leading-relaxed mb-12 max-w-md transition-colors duration-1000">
                      We don&apos;t build software. We engineer <span className="text-[var(--color-text)] font-bold underline decoration-secondary/30 underline-offset-8 transition-colors duration-1000">self-optimizing logic cores</span> that evolve autonomously with your enterprise data.
                    </p>
                    <div className="flex flex-wrap gap-4 transition-colors duration-1000">
@@ -500,7 +500,7 @@ export function CompanyPage({ onNavigate }: { onNavigate: (page: 'home' | 'advis
           <div className="flex flex-col md:flex-row items-end justify-between mb-24 gap-8">
             <div className="max-w-3xl px-1">
               <div className="text-[10px] font-mono font-black text-red-500 uppercase tracking-[0.4em] mb-6">Market Diagnostic</div>
-              <h2 className="text-4xl md:text-6xl font-display font-bold text-[var(--color-text)] mb-8 tracking-tighter leading-tight">The Systemic <br /><span className="text-gradient-secondary">Mismatch.</span></h2>
+              <h2 className="text-3xl sm:text-4xl md:text-6xl font-display font-bold text-[var(--color-text)] mb-8 tracking-tighter leading-tight">The Systemic <br /><span className="text-gradient-secondary">Mismatch.</span></h2>
               <p className="text-2xl text-zinc-500 leading-relaxed">
                 Legacy digital infrastructure was built for presence, not performance. In an AI-first world, this creates a catastrophic structural gap.
               </p>
@@ -523,19 +523,19 @@ export function CompanyPage({ onNavigate }: { onNavigate: (page: 'home' | 'advis
                     <motion.div 
                       key={i} 
                       whileHover={{ backgroundColor: "rgba(239, 68, 68, 0.05)", x: 10 }}
-                      className="p-12 glass border border-white/5 border-l-red-500/30 group transition-all cursor-default"
+                    className="p-6 md:p-12 glass border border-white/5 border-l-red-500/30 group transition-all cursor-default"
                     >
                     <div className="text-[11px] font-mono font-black text-zinc-700 mb-4 group-hover:text-red-500 transition-colors uppercase tracking-wider">{item.label}</div>
-                    <p className="text-2xl font-display font-bold text-zinc-400 group-hover:text-[var(--color-text)] transition-colors">{item.text}</p>
+                    <p className="text-lg sm:text-2xl font-display font-bold text-zinc-400 group-hover:text-[var(--color-text)] transition-colors">{item.text}</p>
                   </motion.div>
                 ))}
              </div>
 
-             <div className="bg-[var(--color-bg)] p-12 md:p-24 border border-[var(--color-text)]/5 flex flex-col justify-between relative overflow-hidden transition-colors duration-1000">
+             <div className="bg-[var(--color-bg)] p-6 md:p-24 border border-[var(--color-text)]/5 flex flex-col justify-between relative overflow-hidden transition-colors duration-1000">
                 <div className="absolute top-0 right-0 p-12 text-[10px] font-mono text-zinc-500 transition-colors duration-1000">Latency Offline</div>
                 <div className="space-y-12 relative z-10 transition-colors duration-1000">
                    <div className="w-16 h-1 bg-red-500/50" />
-                   <p className="text-2xl md:text-4xl font-display font-bold text-[var(--color-text)] leading-tight tracking-tighter italic transition-colors duration-1000">
+                   <p className="text-xl sm:text-2xl md:text-4xl font-display font-bold text-[var(--color-text)] leading-tight tracking-tighter italic transition-colors duration-1000">
                      Conclusion: Modern business needs have <span className="text-zinc-500 dark:text-zinc-600 transition-colors duration-1000">outpaced the architecture</span> of traditional digital providers.
                    </p>
                 </div>
@@ -857,11 +857,11 @@ export function CompanyPage({ onNavigate }: { onNavigate: (page: 'home' | 'advis
       </section>
 
       {/* CAPABILITY STACK - RECURSIVE LAYOUT */}
-      <section className="py-40 px-6 border-y border-[var(--color-text)]/5 bg-[var(--color-bg)] relative overflow-hidden transition-colors duration-1000">
+      <section className="py-16 md:py-40 px-6 border-y border-[var(--color-text)]/5 bg-[var(--color-bg)] relative overflow-hidden transition-colors duration-1000">
         <div className="absolute inset-0 bg-grid opacity-5" />
-        <div className="max-w-7xl mx-auto text-center mb-32 transition-colors duration-1000">
+        <div className="max-w-7xl mx-auto text-center mb-16 md:mb-32 transition-colors duration-1000">
            <div className="text-[10px] font-mono font-black text-primary uppercase tracking-[0.6em] mb-8">System_Architecture_Stack</div>
-           <h2 className="font-display font-bold text-4xl md:text-6xl tracking-tighter leading-tight px-4 text-[var(--color-text)] transition-colors duration-1000">Our Intelligence <br /><span className="text-primary italic">Architecture.</span></h2>
+           <h2 className="font-display font-bold text-3xl sm:text-4xl md:text-6xl tracking-tighter leading-tight px-4 text-[var(--color-text)] transition-colors duration-1000">Our Intelligence <br /><span className="text-primary italic">Architecture.</span></h2>
         </div>
 
         <div className="max-w-7xl mx-auto grid md:grid-cols-2 lg:grid-cols-4 gap-4 transition-colors duration-1000">
@@ -874,7 +874,7 @@ export function CompanyPage({ onNavigate }: { onNavigate: (page: 'home' | 'advis
                  content: [stack.details, ...stack.list],
                  icon: stack.icon
                })}
-               className="p-12 glass border border-[var(--color-text)]/5 relative group hover:border-primary/40 transition-all flex flex-col h-full cursor-pointer overflow-hidden transition-colors duration-1000"
+               className="p-6 md:p-12 glass border border-[var(--color-text)]/5 relative group hover:border-primary/40 transition-all flex flex-col h-full cursor-pointer overflow-hidden transition-colors duration-1000"
              >
                 <div className="text-[11px] font-mono font-black text-zinc-500 dark:text-zinc-700 mb-12 tracking-wider transition-colors duration-1000">NODE_{stack.id} // CONFIG</div>
                 <div className="w-14 h-14 rounded-2xl bg-[var(--color-text)]/5 border border-[var(--color-text)]/10 flex items-center justify-center text-zinc-500 dark:text-zinc-600 mb-12 group-hover:text-primary transition-all duration-500 transition-colors duration-1000">
@@ -892,7 +892,7 @@ export function CompanyPage({ onNavigate }: { onNavigate: (page: 'home' | 'advis
       </section>
 
       {/* MARKET POSITION TABLE - HIGH FIDELITY */}
-      <section className="py-40 px-6 overflow-hidden relative bg-[var(--color-bg)] transition-colors duration-1000">
+      <section className="py-16 md:py-40 px-6 overflow-hidden relative bg-[var(--color-bg)] transition-colors duration-1000">
         <motion.div 
           style={{ x: bgX2, y: bgY2 }}
           className="absolute top-10 right-10 w-[400px] h-[400px] bg-primary/10 blur-[100px] rounded-full" 
@@ -902,9 +902,9 @@ export function CompanyPage({ onNavigate }: { onNavigate: (page: 'home' | 'advis
           className="absolute bottom-10 left-10 w-[400px] h-[400px] bg-secondary/10 blur-[100px] rounded-full" 
         />
         <div className="max-w-7xl mx-auto">
-           <div className="text-center mb-32 transition-colors duration-1000">
+           <div className="text-center mb-16 md:mb-32 transition-colors duration-1000">
               <div className="text-[10px] font-mono font-black text-secondary uppercase tracking-[0.5em] mb-8">Competitive_Advantage_Matrix</div>
-              <h2 className="font-display font-bold text-4xl md:text-6xl tracking-tighter leading-tight px-4 text-[var(--color-text)] transition-colors duration-1000">Where IPDM <br /><span className="text-gradient-secondary italic">Outperforms.</span></h2>
+              <h2 className="font-display font-bold text-3xl sm:text-4xl md:text-6xl tracking-tighter leading-tight px-4 text-[var(--color-text)] transition-colors duration-1000">Where IPDM <br /><span className="text-gradient-secondary italic">Outperforms.</span></h2>
            </div>
 
            <div className="overflow-x-auto pb-8 scrollbar-hide">
@@ -946,8 +946,8 @@ export function CompanyPage({ onNavigate }: { onNavigate: (page: 'home' | 'advis
            </div>
 
            <div className="mt-20 text-center">
-              <div className="inline-block p-10 glass border border-primary/20 bg-primary/5">
-                 <p className="text-2xl md:text-3xl font-display font-bold text-[var(--color-text)] tracking-tighter uppercase leading-none">
+              <div className="inline-block p-6 md:p-10 glass border border-primary/20 bg-primary/5">
+                 <p className="text-lg sm:text-2xl md:text-3xl font-display font-bold text-[var(--color-text)] tracking-tighter uppercase leading-normal md:leading-none">
                     IPDM operates as a hybrid engine of <span className="text-primary italic">consulting, engineering, and predictive systems.</span>
                  </p>
               </div>
@@ -967,15 +967,15 @@ export function CompanyPage({ onNavigate }: { onNavigate: (page: 'home' | 'advis
                 initial={{ opacity: 0, x: -30 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
-                className="p-16 glass rounded-[4rem] border-[var(--color-text)]/5 relative overflow-hidden bg-primary/[0.01] transition-colors duration-1000"
+                className="p-6 md:p-16 glass rounded-[2rem] md:rounded-[4rem] border-[var(--color-text)]/5 relative overflow-hidden bg-primary/[0.01] transition-colors duration-1000"
               >
                  <div className="absolute top-0 right-0 p-12 text-[10px] font-mono text-zinc-500 dark:text-zinc-800 tracking-widest uppercase transition-colors duration-1000">Protocol_V_1.2</div>
-                 <h2 className="font-display font-bold text-4xl md:text-6xl mb-12 tracking-tighter leading-tight text-[var(--color-text)] transition-colors duration-1000">Designing the <br /><span className="text-gradient-vibrant italic">Intelligence Core.</span></h2>
+                 <h2 className="font-display font-bold text-3xl sm:text-4xl md:text-6xl mb-6 md:mb-12 tracking-tighter leading-tight text-[var(--color-text)] transition-colors duration-1000">Designing the <br /><span className="text-gradient-vibrant italic">Intelligence Core.</span></h2>
                  
-                 <p className="text-zinc-500 dark:text-zinc-600 font-mono text-[10px] uppercase tracking-[0.4em] mb-12 transition-colors duration-1000">The future is not defined by:</p>
+                 <p className="text-zinc-500 dark:text-zinc-600 font-mono text-[10px] uppercase tracking-[0.4em] mb-6 md:mb-12 transition-colors duration-1000">The future is not defined by:</p>
                  <div className="space-y-6 transition-colors duration-1000">
                     {["Static Web Presence", "Siloed Automations", "Incremental Gains"].map((li, i) => (
-                       <div key={i} className="flex gap-6 text-zinc-500 dark:text-zinc-600 font-black text-2xl uppercase tracking-tighter line-through decoration-red-500/30 transition-colors duration-1000">
+                       <div key={i} className="flex gap-6 text-zinc-500 dark:text-zinc-600 font-black text-xl sm:text-2xl uppercase tracking-tighter line-through decoration-red-500/30 transition-colors duration-1000">
                           {li}
                        </div>
                     ))}
@@ -993,10 +993,10 @@ export function CompanyPage({ onNavigate }: { onNavigate: (page: 'home' | 'advis
                        <motion.div 
                          key={i} 
                          whileHover={{ x: 10, backgroundColor: "rgba(34,211,238,0.05)" }}
-                         className={`flex items-center gap-8 p-10 glass rounded-[2.5rem] border ${item.color} bg-white/[0.02] transition-all`}
+                         className={`flex items-center gap-4 md:gap-8 p-6 md:p-10 glass rounded-[1.5rem] md:rounded-[2.5rem] border ${item.color} bg-white/[0.02] transition-all`}
                        >
                           <div className="text-primary">{React.cloneElement(item.icon as React.ReactElement<any>, { size: 32 })}</div>
-                          <span className="text-3xl font-display font-bold text-[var(--color-text)] tracking-tighter uppercase">{item.t}</span>
+                          <span className="text-xl sm:text-3xl font-display font-bold text-[var(--color-text)] tracking-tighter uppercase">{item.t}</span>
                        </motion.div>
                     ))}
                  </div>
@@ -1109,17 +1109,17 @@ export function CompanyPage({ onNavigate }: { onNavigate: (page: 'home' | 'advis
                 We are engineering the future of <span className="text-[var(--color-text)] border-b border-primary/30 pb-2 transition-colors duration-1000">autonomous business.</span>
               </p>
 
-              <div className="flex flex-col md:flex-row items-center justify-center gap-10 transition-colors duration-1000">
+              <div className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-10 transition-colors duration-1000">
                  <button 
                    onClick={() => contactIPDM()}
-                   className="w-full md:w-auto px-20 py-10 bg-[var(--color-text)] text-[var(--color-bg)] font-black text-2xl uppercase tracking-[0.1em] rounded-3xl hover:bg-primary transition-all duration-500 shadow-2xl group flex items-center gap-6"
+                   className="w-full md:w-auto px-8 py-5 md:px-20 md:py-10 bg-[var(--color-text)] text-[var(--color-bg)] font-black text-lg md:text-2xl uppercase tracking-[0.1em] rounded-[2rem] md:rounded-3xl hover:bg-primary transition-all duration-500 shadow-2xl group flex items-center justify-center gap-6"
                  >
-                   Sync with IPDM <ArrowRight size={32} className="group-hover:translate-x-4 transition-transform duration-500" />
+                   Sync with IPDM <ArrowRight size={20} className="md:w-8 md:h-8 group-hover:translate-x-4 transition-transform duration-500" />
                  </button>
                  
                  <button 
                     onClick={() => onNavigate('ai-systems')}
-                    className="w-full md:w-auto px-20 py-10 glass text-[var(--color-text)] font-black text-2xl uppercase tracking-[0.1em] rounded-3xl border-[var(--color-text)]/5 hover:border-primary/40 transition-all duration-500 transition-colors duration-1000"
+                    className="w-full md:w-auto px-8 py-5 md:px-20 md:py-10 glass text-[var(--color-text)] font-black text-lg md:text-2xl uppercase tracking-[0.1em] rounded-[2rem] md:rounded-3xl border-[var(--color-text)]/5 hover:border-primary/40 transition-all duration-500 transition-colors duration-1000"
                  >
                    System Specs
                  </button>

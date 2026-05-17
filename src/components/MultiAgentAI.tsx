@@ -75,7 +75,22 @@ export function MultiAgentAI({ onNavigate }: { onNavigate: (page: any) => void }
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [activeTab, setActiveTab ] = useState<'overview' | 'routing' | 'perf' | 'collab' | 'conversion' | 'admin'>('overview');
-  const [activeAgent, setActiveAgent] = useState('Orchestration Layer');
+  const [activeAgent, setActiveAgent] = useState('AI Orchestration Layer');
+  const [selectedAdminAction, setSelectedAdminAction] = useState<string | null>(null);
+  const [agentSettings, setAgentSettings] = useState({
+    salesEnabled: true,
+    supportEnabled: true,
+    knowledgeEnabled: true,
+    leadEnabled: true,
+    convEnabled: true,
+    routingRules: 'contextual_semantic',
+    concurrencyLimit: 250,
+    temperature: 0.7,
+    knowledgeBaseInput: 'Infinite Potential Digital Marketing Pvt. Ltd. (IPDM) brand parameters, services, and FAQ.',
+    leadThreshold: 75,
+    escalationEmail: 'escalation@ipdm-engage.com'
+  });
+  const [saveStatus, setSaveStatus] = useState<string | null>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -128,9 +143,9 @@ export function MultiAgentAI({ onNavigate }: { onNavigate: (page: any) => void }
           </button>
           <div className="flex flex-col">
             <h1 className="text-xl font-display font-black italic tracking-widest text-white group cursor-default">
-              <Trademark text="IPDM Multi-Agent" />
+              <Trademark text="IPDM ENGAGE™ Multi-Agent AI Orchestration Console" />
             </h1>
-            <span className="text-[12px] font-mono text-primary font-bold uppercase tracking-wider">AI ORCHESTRATION ARCHITECTURE</span>
+            <span className="text-[12px] font-mono text-primary font-bold uppercase tracking-wider">Coordinated AI Orchestration Framework</span>
           </div>
         </div>
 
@@ -365,12 +380,12 @@ export function MultiAgentAI({ onNavigate }: { onNavigate: (page: any) => void }
                  {/* Tab Navigation */}
                  <div className="flex flex-wrap gap-2">
                     {[
-                      { id: 'overview', label: 'Agent Hub', icon: <PieChartIcon size={12} /> },
-                      { id: 'routing', label: 'Routing', icon: <Navigation size={12} /> },
-                      { id: 'perf', label: 'Performance', icon: <Cpu size={12} /> },
-                      { id: 'collab', label: 'Collab', icon: <Share2 size={12} /> },
-                      { id: 'conversion', label: 'Conversion', icon: <Target size={12} /> },
-                      { id: 'admin', label: 'Admin', icon: <Settings size={12} /> },
+                      { id: 'overview', label: 'AI Agent Overview', icon: <PieChartIcon size={12} /> },
+                      { id: 'routing', label: 'Routing Analytics', icon: <Navigation size={12} /> },
+                      { id: 'perf', label: 'Agent Performance Metrics', icon: <Cpu size={12} /> },
+                      { id: 'collab', label: 'Collaboration Analytics', icon: <Share2 size={12} /> },
+                      { id: 'conversion', label: 'Conversion Intelligence', icon: <Target size={12} /> },
+                      { id: 'admin', label: 'Admin Control Center', icon: <Settings size={12} /> },
                     ].map(tab => (
                       <button
                         key={tab.id}
@@ -401,24 +416,24 @@ export function MultiAgentAI({ onNavigate }: { onNavigate: (page: any) => void }
                       <div className="space-y-8">
                          <div className="grid grid-cols-2 gap-4">
                             <div className="p-6 bg-white/[0.02] border border-white/5 rounded-3xl group hover:border-primary/40 transition-all">
-                               <p className="text-[9px] font-mono text-zinc-500 uppercase tracking-widest mb-1">Active Agents</p>
+                               <p className="text-[9px] font-mono text-zinc-500 uppercase tracking-widest mb-1">Active AI agents</p>
                                <p className="text-3xl font-display italic text-white">06</p>
                             </div>
                             <div className="p-6 bg-white/[0.02] border border-white/5 rounded-3xl group hover:border-primary/40 transition-all">
-                               <p className="text-[9px] font-mono text-zinc-500 uppercase tracking-widest mb-1">Workload</p>
-                               <p className="text-3xl font-display italic text-primary">14%</p>
+                               <p className="text-[9px] font-mono text-zinc-500 uppercase tracking-widest mb-1">AI workload distribution</p>
+                               <p className="text-3xl font-display italic text-primary">14.2%</p>
                             </div>
                          </div>
 
                          <div className="space-y-4">
-                            <h4 className="text-[10px] font-mono font-black uppercase text-zinc-500 tracking-widest">Agent Usage Distribution</h4>
-                            <div className="h-48 w-full">
+                            <h4 className="text-[10px] font-mono font-black uppercase text-zinc-500 tracking-widest">Agent usage distribution</h4>
+                            <div className="h-40 w-full">
                                <ResponsiveContainer width="100%" height="100%">
                                   <PieChart>
                                      <Pie
                                         data={ROUTING_STATS}
-                                        innerRadius={60}
-                                        outerRadius={80}
+                                        innerRadius={48}
+                                        outerRadius={64}
                                         paddingAngle={5}
                                         dataKey="value"
                                      >
@@ -439,6 +454,30 @@ export function MultiAgentAI({ onNavigate }: { onNavigate: (page: any) => void }
                                     <div className="w-2 h-2 rounded-full" style={{ backgroundColor: stat.color }} />
                                     <span className="text-[8px] font-mono text-zinc-500 uppercase truncate">{stat.name}</span>
                                  </div>
+                               ))}
+                            </div>
+                         </div>
+
+                         <div className="space-y-4">
+                            <h4 className="text-[10px] font-mono font-black uppercase text-zinc-500 tracking-widest">Real-time agent activity</h4>
+                            <div className="space-y-2 max-h-48 overflow-y-auto custom-scrollbar-thin pr-1">
+                               {[
+                                  { agent: 'AI Orchestration Agent', action: 'Directing conversation state...', status: 'master' },
+                                  { agent: 'Sales AI Agent', action: 'Idle - ready for pricing queries', status: 'idle' },
+                                  { agent: 'Support AI Agent', action: 'Analyzing client process queries', status: 'active' },
+                                  { agent: 'Knowledge AI Agent', action: 'Indexing Corporate Assets Guidelines', status: 'idle' },
+                                  { agent: 'Lead Qual Agent', action: 'Scoring active session behavior', status: 'active' },
+                                  { agent: 'Conv Optimization', action: 'A/B testing CTA response elements', status: 'shadow' }
+                               ].map((act, i) => (
+                                  <div key={i} className="p-3 bg-white/[0.01] border border-white/5 rounded-2xl flex items-center justify-between">
+                                     <div className="truncate max-w-[80%]">
+                                        <p className="text-[10px] font-bold text-white uppercase">{act.agent}</p>
+                                        <p className="text-[9px] font-mono text-zinc-500 uppercase truncate">{act.action}</p>
+                                     </div>
+                                     <span className={`w-2 h-2 rounded-full flex-shrink-0 ${
+                                       act.status === 'active' || act.status === 'master' ? 'bg-primary animate-pulse' : 'bg-zinc-800'
+                                     }`} />
+                                  </div>
                                ))}
                             </div>
                          </div>
