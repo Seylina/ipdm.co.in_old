@@ -131,11 +131,11 @@ export function Hero({ onNavigate }: { onNavigate: (page: 'home' | 'advisory' | 
                  {/* Pupil / Core */}
                  <motion.div 
                    animate={{ 
-                     scale: [1, 1.2, 1],
-                     boxShadow: ["0 0 20px rgba(34,211,238,0.3)", "0 0 50px rgba(34,211,238,0.6)", "0 0 20px rgba(34,211,238,0.3)"]
+                     scale: [1, 1.1, 1],
+                     boxShadow: ["0 0 15px rgba(34,211,238,0.2)", "0 0 30px rgba(34,211,238,0.4)", "0 0 15px rgba(34,211,238,0.2)"]
                    }}
-                   transition={{ duration: 4, repeat: Infinity }}
-                   className="w-16 h-16 bg-primary/20 rounded-full border-2 border-primary shadow-neon relative overflow-hidden"
+                   transition={{ duration: 6, repeat: Infinity }}
+                   className="w-16 h-16 bg-primary/20 rounded-full border-2 border-primary shadow-neon relative overflow-hidden will-change-transform"
                  >
                     <div className="absolute inset-0 bg-gradient-to-tr from-primary/40 to-transparent" />
                     <div className="absolute top-1/4 left-1/4 w-3 h-3 bg-[var(--color-text)] rounded-full blur-[1px]" />
@@ -143,17 +143,17 @@ export function Hero({ onNavigate }: { onNavigate: (page: 'home' | 'advisory' | 
                  </motion.div>
               </div>
 
-              {/* Data streams around the eye */}
-              {[...Array(8)].map((_, i) => (
+              {/* Data streams around the eye - Reduced for performance */}
+              {[...Array(4)].map((_, i) => (
                 <motion.div
                   key={i}
                   animate={{ 
-                    opacity: [0, 1, 0],
-                    x: [0, (i % 2 === 0 ? 100 : -100)],
-                    y: [0, (i < 4 ? 100 : -100)],
+                    opacity: [0, 0.8, 0],
+                    x: [0, (i % 2 === 0 ? 80 : -80)],
+                    y: [0, (i < 2 ? 80 : -80)],
                   }}
-                  transition={{ duration: 3, delay: i * 0.4, repeat: Infinity }}
-                  className="absolute top-1/2 left-1/2 w-4 h-[1px] bg-primary/40"
+                  transition={{ duration: 4, delay: i * 0.8, repeat: Infinity }}
+                  className="absolute top-1/2 left-1/2 w-4 h-[1px] bg-primary/30"
                 />
               ))}
            </div>

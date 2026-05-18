@@ -610,7 +610,7 @@ export function ProprietarySystems() {
           >
             <Sparkles className="w-3 h-3" /> Proprietary Core
           </motion.div>
-          <h2 className="font-display font-bold text-4xl md:text-5xl mb-6 tracking-tighter text-[var(--color-text)] transition-colors duration-1000">Proprietary <br /><span className="text-gradient-teal-pink font-black italic"><Trademark text="Business Architecture™" /></span></h2>
+          <h2 className="font-display font-bold text-4xl md:text-5xl mb-6 tracking-tighter text-[var(--color-text)] transition-colors duration-1000">Proprietary <br /><span className="text-gradient-teal-pink font-black italic inline-block"><Trademark text="Business Architecture™" /></span></h2>
           <p className="text-zinc-500 dark:text-zinc-400 max-w-2xl mx-auto text-lg leading-relaxed mb-10 transition-colors duration-1000">
             A Complete Ecosystem of Proprietary AI Systems Designed to Operate, Scale, and Continuously Improve Businesses
           </p>

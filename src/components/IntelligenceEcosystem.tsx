@@ -32,21 +32,21 @@ export function IntelligenceEcosystem() {
   const mouseMoveX = useTransform(smoothMouseX, [0, 2000], [-30, 30]);
   const mouseMoveY = useTransform(smoothMouseY, [0, 1200], [-30, 30]);
 
-  // Generate stable random nodes
+  // Generate stable random nodes - Reduced for performance
   const nodes = useMemo(() => {
-    return [...Array(30)].map((_, i) => ({
+    return [...Array(20)].map((_, i) => ({
       id: i,
       x: Math.random() * 100,
       y: Math.random() * 100,
       size: Math.random() * 2 + 1,
-      duration: 5 + Math.random() * 5,
-      delay: Math.random() * 8,
-      depth: 0.5 + Math.random() * 1.5
+      duration: 6 + Math.random() * 6,
+      delay: Math.random() * 10,
+      depth: 0.5 + Math.random() * 1.2
     }));
   }, []);
 
   return (
-    <div className={`absolute inset-0 z-0 pointer-events-none overflow-hidden select-none transition-colors duration-1000 ${theme === 'dark' ? 'bg-black' : 'bg-[#f1f5f9]'}`}>
+    <div className={`absolute inset-0 z-0 pointer-events-none overflow-hidden select-none transition-colors duration-1000 will-change-transform ${theme === 'dark' ? 'bg-black' : 'bg-[#f1f5f9]'}`}>
       {/* Premium Background Gradient */}
       <div className={`absolute inset-0 transition-colors duration-1000 ${
         theme === 'dark' 

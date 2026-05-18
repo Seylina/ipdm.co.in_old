@@ -287,6 +287,7 @@ export function AISystemsPage({ onNavigateEngine }: { onNavigateEngine: (engineI
                     alt="Integrated Intelligence Framework" 
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000"
                     referrerPolicy="no-referrer"
+                    loading="lazy"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
                   <div className="absolute bottom-8 left-8 right-8 flex justify-between items-end">
@@ -431,6 +432,7 @@ export function AISystemsPage({ onNavigateEngine }: { onNavigateEngine: (engineI
                  alt="Autonomous Core Architecture"
                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-[2000ms]"
                  referrerPolicy="no-referrer"
+                 loading="lazy"
                />
                <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60" />
 

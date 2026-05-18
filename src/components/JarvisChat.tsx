@@ -198,6 +198,7 @@ export function JarvisChat() {
                   alt="JARVIS Intelligence" 
                   className="w-full h-full object-cover"
                   referrerPolicy="no-referrer"
+                  loading="lazy"
                 />
               </div>
             </motion.div>
@@ -232,6 +233,7 @@ export function JarvisChat() {
                     alt="JARVIS" 
                     className="w-full h-full object-cover"
                     referrerPolicy="no-referrer"
+                    loading="lazy"
                   />
                 </div>
                 <div>
@@ -330,6 +332,7 @@ export function JarvisChat() {
                               alt="JARVIS" 
                               className="w-full h-full object-cover"
                               referrerPolicy="no-referrer"
+                              loading="lazy"
                             />
                           )}
                         </div>

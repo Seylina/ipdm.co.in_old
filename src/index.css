@@ -1,5 +1,4 @@
 @import "tailwindcss";
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Sora:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
 
 @variant light (&:where(.light, .light *));
 
@@ -48,14 +47,14 @@
 
 @layer utilities {
   .bg-mesh {
-    background: radial-gradient(at 0% 0%, rgba(34, 211, 238, 0.1) 0, transparent 50%),
-                radial-gradient(at 50% 0%, rgba(79, 70, 229, 0.1) 0, transparent 50%),
-                radial-gradient(at 100% 0%, rgba(14, 165, 233, 0.1) 0, transparent 50%),
-                radial-gradient(at 0% 50%, rgba(59, 130, 246, 0.05) 0, transparent 50%),
-                radial-gradient(at 100% 50%, rgba(139, 92, 246, 0.05) 0, transparent 50%),
-                radial-gradient(at 0% 100%, rgba(45, 212, 191, 0.1) 0, transparent 50%),
-                radial-gradient(at 50% 100%, rgba(37, 99, 235, 0.1) 0, transparent 50%),
-                radial-gradient(at 100% 100%, rgba(67, 56, 202, 0.1) 0, transparent 50%);
+    background: radial-gradient(at 0% 0%, rgba(34, 211, 238, 0.15) 0, transparent 50%),
+                radial-gradient(at 50% 0%, rgba(14, 165, 233, 0.15) 0, transparent 50%),
+                radial-gradient(at 100% 0%, rgba(34, 211, 238, 0.15) 0, transparent 50%),
+                radial-gradient(at 0% 50%, rgba(6, 182, 212, 0.1) 0, transparent 50%),
+                radial-gradient(at 100% 50%, rgba(14, 165, 233, 0.1) 0, transparent 50%),
+                radial-gradient(at 0% 100%, rgba(45, 212, 191, 0.15) 0, transparent 50%),
+                radial-gradient(at 50% 100%, rgba(34, 211, 238, 0.15) 0, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(14, 165, 233, 0.15) 0, transparent 50%);
     background-size: 200% 200%;
     animation: mesh 20s ease infinite;
   }
@@ -89,6 +88,7 @@
   .text-gradient-vibrant {
     @apply bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent transition-all duration-300;
     @apply light:from-cyan-600 light:via-blue-700 light:to-purple-800;
+    padding-right: 0.15em;
   }
 
   .text-gradient-primary {
@@ -114,6 +114,14 @@
   .text-gradient-teal-pink {
     @apply text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-pink-500;
     @apply light:from-cyan-600 light:to-pink-600;
+    padding-right: 0.1em; /* Prevent italic clipping */
+  }
+
+  .tm-gradient {
+    @apply text-transparent bg-clip-text bg-gradient-to-br from-primary to-blue-500 align-super text-[0.65em] font-black inline-block;
+    padding-right: 4px;
+    margin-left: 1px;
+    vertical-align: super;
   }
 
   /* Theme-aware text color overrides for better visibility */

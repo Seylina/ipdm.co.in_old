@@ -6,39 +6,8 @@
 import { motion, useScroll, useSpring, AnimatePresence } from "motion/react";
 import { Navbar } from "./components/Navbar";
 import { Hero } from "./components/Hero";
-import { Cpu } from "lucide-react";
-import { Approach } from "./components/Approach";
+import { Cpu, Loader2 } from "lucide-react";
 import { Footer } from "./components/ContentSections";
-import { StrategicAdvisory } from "./components/StrategicAdvisory";
-import { AISystemsPage } from "./components/AISystemsPage";
-import { CompanyPage } from "./components/CompanyPage";
-import { PricingPage } from "./components/PricingPage";
-import { PoliciesPage } from "./components/PoliciesPage";
-import { Dashboard } from "./components/Dashboard";
-import { IPDMEcosystem } from "./components/IPDMEcosystem";
-import { IPDMSupporta } from "./components/IPDMSupporta";
-import { IPDMStrategos } from "./components/IPDMStrategos";
-import { IPDMSimulate } from "./components/IPDMSimulate";
-import { IPDMCore } from "./components/IPDMCore";
-import { IPDMEngage } from "./components/IPDMEngage";
-import { MultiAgentAI } from "./components/MultiAgentAI";
-import { LeadQualificationAI } from "./components/LeadQualificationAI";
-import { GuidedDecisionAI } from "./components/GuidedDecisionAI";
-import { ContextAwareAI } from "./components/ContextAwareAI";
-import { MultiLanguageAI } from "./components/MultiLanguageAI";
-import { ConversionAwareAI } from "./components/ConversionAwareAI";
-import { PersonalizedInteractionAI } from "./components/PersonalizedInteractionAI";
-import { PredictiveIntelligenceAI } from "./components/PredictiveIntelligenceAI";
-import { OmnichannelEngagementAI } from "./components/OmnichannelEngagementAI";
-import { BusinessIntelligenceAI } from "./components/BusinessIntelligenceAI";
-import { AutomationEngagementAI } from "./components/AutomationEngagementAI";
-import { TrustSecurityAI } from "./components/TrustSecurityAI";
-import { AdaptiveLearningAI } from "./components/AdaptiveLearningAI";
-import { CustomerJourneyAI } from "./components/CustomerJourneyAI";
-import { EnterpriseCollaborationAI } from "./components/EnterpriseCollaborationAI";
-import { RevenueGrowthAI } from "./components/RevenueGrowthAI";
-import { IPDMEvolve } from "./components/IPDMEvolve";
-import { IPDMFlow } from "./components/IPDMFlow";
 import { CustomCursor } from "./components/CustomCursor";
 import { AmbientBackground } from "./components/AmbientBackground";
 import { 
@@ -54,16 +23,64 @@ import {
   ClosingSection, 
   FinalCTA 
 } from "./components/HomeSections";
-import { DiagnostixChat } from "./components/DiagnostixChat";
-import { JarvisChat } from "./components/JarvisChat";
 import { ScrollToTop } from "./components/ScrollToTop";
 import { BrandIntro } from "./components/BrandIntro";
-import { useEffect, useState } from "react";
+import { useEffect, useState, lazy, Suspense } from "react";
 import { ContactModal } from "./components/ContactModal";
-
-import { AISystemCategoryPage } from "./components/AISystemCategoryPage";
-import { AIEngineDetails } from "./components/AIEngineDetails";
 import { SYSTEMS_ECOSYSTEM } from "./lib/systemsData";
+
+// Lazy-load non-critical components
+const StrategicAdvisory = lazy(() => import("./components/StrategicAdvisory").then(m => ({ default: m.StrategicAdvisory })));
+const AISystemsPage = lazy(() => import("./components/AISystemsPage").then(m => ({ default: m.AISystemsPage })));
+const CompanyPage = lazy(() => import("./components/CompanyPage").then(m => ({ default: m.CompanyPage })));
+const PricingPage = lazy(() => import("./components/PricingPage").then(m => ({ default: m.PricingPage })));
+const PoliciesPage = lazy(() => import("./components/PoliciesPage").then(m => ({ default: m.PoliciesPage })));
+const Dashboard = lazy(() => import("./components/Dashboard").then(m => ({ default: m.Dashboard })));
+const IPDMEcosystem = lazy(() => import("./components/IPDMEcosystem").then(m => ({ default: m.IPDMEcosystem })));
+const IPDMSupporta = lazy(() => import("./components/IPDMSupporta").then(m => ({ default: m.IPDMSupporta })));
+const IPDMStrategos = lazy(() => import("./components/IPDMStrategos").then(m => ({ default: m.IPDMStrategos })));
+const IPDMSimulate = lazy(() => import("./components/IPDMSimulate").then(m => ({ default: m.IPDMSimulate })));
+const IPDMCore = lazy(() => import("./components/IPDMCore").then(m => ({ default: m.IPDMCore })));
+const IPDMEngage = lazy(() => import("./components/IPDMEngage").then(m => ({ default: m.IPDMEngage })));
+const MultiAgentAI = lazy(() => import("./components/MultiAgentAI").then(m => ({ default: m.MultiAgentAI })));
+const LeadQualificationAI = lazy(() => import("./components/LeadQualificationAI").then(m => ({ default: m.LeadQualificationAI })));
+const GuidedDecisionAI = lazy(() => import("./components/GuidedDecisionAI").then(m => ({ default: m.GuidedDecisionAI })));
+const ContextAwareAI = lazy(() => import("./components/ContextAwareAI").then(m => ({ default: m.ContextAwareAI })));
+const MultiLanguageAI = lazy(() => import("./components/MultiLanguageAI").then(m => ({ default: m.MultiLanguageAI })));
+const ConversionAwareAI = lazy(() => import("./components/ConversionAwareAI").then(m => ({ default: m.ConversionAwareAI })));
+const PersonalizedInteractionAI = lazy(() => import("./components/PersonalizedInteractionAI").then(m => ({ default: m.PersonalizedInteractionAI })));
+const PredictiveIntelligenceAI = lazy(() => import("./components/PredictiveIntelligenceAI").then(m => ({ default: m.PredictiveIntelligenceAI })));
+const OmnichannelEngagementAI = lazy(() => import("./components/OmnichannelEngagementAI").then(m => ({ default: m.OmnichannelEngagementAI })));
+const BusinessIntelligenceAI = lazy(() => import("./components/BusinessIntelligenceAI").then(m => ({ default: m.BusinessIntelligenceAI })));
+const AutomationEngagementAI = lazy(() => import("./components/AutomationEngagementAI").then(m => ({ default: m.AutomationEngagementAI })));
+const TrustSecurityAI = lazy(() => import("./components/TrustSecurityAI").then(m => ({ default: m.TrustSecurityAI })));
+const AdaptiveLearningAI = lazy(() => import("./components/AdaptiveLearningAI").then(m => ({ default: m.AdaptiveLearningAI })));
+const CustomerJourneyAI = lazy(() => import("./components/CustomerJourneyAI").then(m => ({ default: m.CustomerJourneyAI })));
+const EnterpriseCollaborationAI = lazy(() => import("./components/EnterpriseCollaborationAI").then(m => ({ default: m.EnterpriseCollaborationAI })));
+const RevenueGrowthAI = lazy(() => import("./components/RevenueGrowthAI").then(m => ({ default: m.RevenueGrowthAI })));
+const IPDMEvolve = lazy(() => import("./components/IPDMEvolve").then(m => ({ default: m.IPDMEvolve })));
+const IPDMFlow = lazy(() => import("./components/IPDMFlow").then(m => ({ default: m.IPDMFlow })));
+const Approach = lazy(() => import("./components/Approach").then(m => ({ default: m.Approach })));
+const DiagnostixChat = lazy(() => import("./components/DiagnostixChat").then(m => ({ default: m.DiagnostixChat })));
+const JarvisChat = lazy(() => import("./components/JarvisChat").then(m => ({ default: m.JarvisChat })));
+const AISystemCategoryPage = lazy(() => import("./components/AISystemCategoryPage").then(m => ({ default: m.AISystemCategoryPage })));
+const AIEngineDetails = lazy(() => import("./components/AIEngineDetails").then(m => ({ default: m.AIEngineDetails })));
+
+// Loading Component
+function PageLoader() {
+  return (
+    <div className="w-full h-[60vh] flex flex-col items-center justify-center gap-4">
+      <motion.div
+        animate={{ rotate: 360 }}
+        transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+        className="text-primary"
+      >
+        <Loader2 className="w-10 h-10" />
+      </motion.div>
+      <span className="text-xs font-mono uppercase tracking-[0.3em] text-zinc-500 animate-pulse">Initializing Interface...</span>
+    </div>
+  );
+}
 
 export default function App() {
   const [currentPage, setCurrentPage] = useState<'home' | 'advisory' | 'ai-systems' | 'about' | 'pricing' | 'policies' | 'dashboard' | 'ecosystem' | 'supporta' | 'strategos' | 'simulate' | 'core' | 'engage' | 'multi-agent' | 'lead-qualifier' | 'guided-decision' | 'context-response' | 'multi-language' | 'conversion-action' | 'personalized-interaction' | 'predictive-intelligence' | 'omnichannel-orchestration' | 'business-intelligence' | 'automation-engagement' | 'trust-security' | 'adaptive-learning' | 'customer-journey' | 'enterprise-collaboration' | 'evolve' | 'flow' | 'core-intel' | 'decision-modeling' | 'revenue-growth' | 'revenue-growth-ai' | 'brand-content' | 'knowledge-research' | 'ops-automation' | 'cust-experience' | 'adv-strategic' | 'queries-guiding' | 'engine-detail'>('home');
@@ -103,81 +120,83 @@ export default function App() {
       <Navbar onNavigate={setCurrentPage} activePage={currentPage} />
       <ScrollToTop />
       <main>
-        {currentPage === 'home' ? (
-          <>
-            <BrandIntro />
-            <Hero onNavigate={setCurrentPage} />
-            
-            <CredibilityStrip />
-            
-            <CoreValueProp />
-            
-            <Deliverables />
+        <Suspense fallback={<PageLoader />}>
+          {currentPage === 'home' ? (
+            <>
+              <BrandIntro />
+              <Hero onNavigate={setCurrentPage} />
+              
+              <CredibilityStrip />
+              
+              <CoreValueProp />
+              
+              <Deliverables />
 
-            <IntelligencePlatform onNavigate={setCurrentPage} />
+              <IntelligencePlatform onNavigate={setCurrentPage} />
 
-            <ProprietarySystems />
+              <ProprietarySystems />
 
-            <MarketReality />
+              <MarketReality />
 
-            <Approach />
+              <Approach />
 
-            <OfferingsOverview />
+              <OfferingsOverview />
 
-            <WhyIPDM />
+              <WhyIPDM />
 
-            <Outcomes />
+              <Outcomes />
 
-            <ClosingSection />
+              <ClosingSection />
 
-            <FinalCTA onNavigate={setCurrentPage} />
-            
-            <DiagnostixChat />
-          </>
-        ) : (
-          <div className={currentPage === 'ai-systems' ? '' : 'pt-20'}>
-             {currentPage === 'advisory' ? <StrategicAdvisory onNavigate={setCurrentPage} /> : 
-              currentPage === 'ai-systems' ? <AISystemsPage onNavigateEngine={navigateToEngine} /> : 
-              currentPage === 'pricing' ? <PricingPage /> :
-              currentPage === 'policies' ? <PoliciesPage onNavigate={setCurrentPage} /> :
-              currentPage === 'dashboard' ? <Dashboard /> :
-              currentPage === 'ecosystem' ? <IPDMEcosystem onNavigate={setCurrentPage} onNavigateEngine={navigateToEngine} /> :
-              currentPage === 'supporta' ? <IPDMSupporta onNavigate={setCurrentPage} /> :
-              currentPage === 'strategos' ? <IPDMStrategos onNavigate={setCurrentPage} /> :
-              currentPage === 'simulate' ? <IPDMSimulate onNavigate={setCurrentPage} /> :
-              currentPage === 'core' ? <IPDMCore onNavigate={setCurrentPage} /> :
-              currentPage === 'engage' ? <IPDMEngage onNavigate={setCurrentPage} /> :
-              currentPage === 'multi-agent' ? <MultiAgentAI onNavigate={setCurrentPage} /> :
-              currentPage === 'lead-qualifier' ? <LeadQualificationAI onNavigate={setCurrentPage} /> :
-              currentPage === 'guided-decision' ? <GuidedDecisionAI onNavigate={setCurrentPage} /> :
-              currentPage === 'context-response' ? <ContextAwareAI onNavigate={setCurrentPage} /> :
-              currentPage === 'multi-language' ? <MultiLanguageAI onNavigate={setCurrentPage} /> :
-              currentPage === 'conversion-action' ? <ConversionAwareAI onNavigate={setCurrentPage} /> :
-              currentPage === 'personalized-interaction' ? <PersonalizedInteractionAI onNavigate={setCurrentPage} /> :
-              currentPage === 'predictive-intelligence' ? <PredictiveIntelligenceAI onNavigate={setCurrentPage} /> :
-              currentPage === 'omnichannel-orchestration' ? <OmnichannelEngagementAI onNavigate={setCurrentPage} /> :
-              currentPage === 'business-intelligence' ? <BusinessIntelligenceAI onNavigate={setCurrentPage} /> :
-              currentPage === 'automation-engagement' ? <AutomationEngagementAI onNavigate={setCurrentPage} /> :
-              currentPage === 'trust-security' ? <TrustSecurityAI onNavigate={setCurrentPage} /> :
-              currentPage === 'adaptive-learning' ? <AdaptiveLearningAI onNavigate={setCurrentPage} /> :
-              currentPage === 'customer-journey' ? <CustomerJourneyAI onNavigate={setCurrentPage} /> :
-              currentPage === 'enterprise-collaboration' ? <EnterpriseCollaborationAI onNavigate={setCurrentPage} /> :
-              currentPage === 'revenue-growth-ai' ? <RevenueGrowthAI onNavigate={setCurrentPage} /> :
-              currentPage === 'evolve' ? <IPDMEvolve onNavigate={setCurrentPage} /> :
-              currentPage === 'flow' ? <IPDMFlow onNavigate={setCurrentPage} /> :
-              currentPage === 'core-intel' ? <AISystemCategoryPage category={SYSTEMS_ECOSYSTEM[0]} onNavigate={setCurrentPage} onNavigateEngine={navigateToEngine} /> :
-              currentPage === 'decision-modeling' ? <AISystemCategoryPage category={SYSTEMS_ECOSYSTEM[1]} onNavigate={setCurrentPage} onNavigateEngine={navigateToEngine} /> :
-              currentPage === 'revenue-growth' ? <AISystemCategoryPage category={SYSTEMS_ECOSYSTEM[2]} onNavigate={setCurrentPage} onNavigateEngine={navigateToEngine} /> :
-              currentPage === 'brand-content' ? <AISystemCategoryPage category={SYSTEMS_ECOSYSTEM[3]} onNavigate={setCurrentPage} onNavigateEngine={navigateToEngine} /> :
-              currentPage === 'knowledge-research' ? <AISystemCategoryPage category={SYSTEMS_ECOSYSTEM[4]} onNavigate={setCurrentPage} onNavigateEngine={navigateToEngine} /> :
-              currentPage === 'ops-automation' ? <AISystemCategoryPage category={SYSTEMS_ECOSYSTEM[5]} onNavigate={setCurrentPage} onNavigateEngine={navigateToEngine} /> :
-              currentPage === 'cust-experience' ? <AISystemCategoryPage category={SYSTEMS_ECOSYSTEM[6]} onNavigate={setCurrentPage} onNavigateEngine={navigateToEngine} /> :
-              currentPage === 'adv-strategic' ? <AISystemCategoryPage category={SYSTEMS_ECOSYSTEM[7]} onNavigate={setCurrentPage} onNavigateEngine={navigateToEngine} /> :
-              currentPage === 'queries-guiding' ? <AISystemCategoryPage category={SYSTEMS_ECOSYSTEM[8]} onNavigate={setCurrentPage} onNavigateEngine={navigateToEngine} /> :
-              currentPage === 'engine-detail' ? <AIEngineDetails engineId={selectedEngineId || ""} onNavigate={setCurrentPage} /> :
-              <CompanyPage onNavigate={setCurrentPage} />}
-          </div>
-        )}
+              <FinalCTA onNavigate={setCurrentPage} />
+              
+              <DiagnostixChat />
+            </>
+          ) : (
+            <div className={currentPage === 'ai-systems' ? '' : 'pt-20'}>
+               {currentPage === 'advisory' ? <StrategicAdvisory onNavigate={setCurrentPage} /> : 
+                currentPage === 'ai-systems' ? <AISystemsPage onNavigateEngine={navigateToEngine} /> : 
+                currentPage === 'pricing' ? <PricingPage /> :
+                currentPage === 'policies' ? <PoliciesPage onNavigate={setCurrentPage} /> :
+                currentPage === 'dashboard' ? <Dashboard /> :
+                currentPage === 'ecosystem' ? <IPDMEcosystem onNavigate={setCurrentPage} onNavigateEngine={navigateToEngine} /> :
+                currentPage === 'supporta' ? <IPDMSupporta onNavigate={setCurrentPage} /> :
+                currentPage === 'strategos' ? <IPDMStrategos onNavigate={setCurrentPage} /> :
+                currentPage === 'simulate' ? <IPDMSimulate onNavigate={setCurrentPage} /> :
+                currentPage === 'core' ? <IPDMCore onNavigate={setCurrentPage} /> :
+                currentPage === 'engage' ? <IPDMEngage onNavigate={setCurrentPage} /> :
+                currentPage === 'multi-agent' ? <MultiAgentAI onNavigate={setCurrentPage} /> :
+                currentPage === 'lead-qualifier' ? <LeadQualificationAI onNavigate={setCurrentPage} /> :
+                currentPage === 'guided-decision' ? <GuidedDecisionAI onNavigate={setCurrentPage} /> :
+                currentPage === 'context-response' ? <ContextAwareAI onNavigate={setCurrentPage} /> :
+                currentPage === 'multi-language' ? <MultiLanguageAI onNavigate={setCurrentPage} /> :
+                currentPage === 'conversion-action' ? <ConversionAwareAI onNavigate={setCurrentPage} /> :
+                currentPage === 'personalized-interaction' ? <PersonalizedInteractionAI onNavigate={setCurrentPage} /> :
+                currentPage === 'predictive-intelligence' ? <PredictiveIntelligenceAI onNavigate={setCurrentPage} /> :
+                currentPage === 'omnichannel-orchestration' ? <OmnichannelEngagementAI onNavigate={setCurrentPage} /> :
+                currentPage === 'business-intelligence' ? <BusinessIntelligenceAI onNavigate={setCurrentPage} /> :
+                currentPage === 'automation-engagement' ? <AutomationEngagementAI onNavigate={setCurrentPage} /> :
+                currentPage === 'trust-security' ? <TrustSecurityAI onNavigate={setCurrentPage} /> :
+                currentPage === 'adaptive-learning' ? <AdaptiveLearningAI onNavigate={setCurrentPage} /> :
+                currentPage === 'customer-journey' ? <CustomerJourneyAI onNavigate={setCurrentPage} /> :
+                currentPage === 'enterprise-collaboration' ? <EnterpriseCollaborationAI onNavigate={setCurrentPage} /> :
+                currentPage === 'revenue-growth-ai' ? <RevenueGrowthAI onNavigate={setCurrentPage} /> :
+                currentPage === 'evolve' ? <IPDMEvolve onNavigate={setCurrentPage} /> :
+                currentPage === 'flow' ? <IPDMFlow onNavigate={setCurrentPage} /> :
+                currentPage === 'core-intel' ? <AISystemCategoryPage category={SYSTEMS_ECOSYSTEM[0]} onNavigate={setCurrentPage} onNavigateEngine={navigateToEngine} /> :
+                currentPage === 'decision-modeling' ? <AISystemCategoryPage category={SYSTEMS_ECOSYSTEM[1]} onNavigate={setCurrentPage} onNavigateEngine={navigateToEngine} /> :
+                currentPage === 'revenue-growth' ? <AISystemCategoryPage category={SYSTEMS_ECOSYSTEM[2]} onNavigate={setCurrentPage} onNavigateEngine={navigateToEngine} /> :
+                currentPage === 'brand-content' ? <AISystemCategoryPage category={SYSTEMS_ECOSYSTEM[3]} onNavigate={setCurrentPage} onNavigateEngine={navigateToEngine} /> :
+                currentPage === 'knowledge-research' ? <AISystemCategoryPage category={SYSTEMS_ECOSYSTEM[4]} onNavigate={setCurrentPage} onNavigateEngine={navigateToEngine} /> :
+                currentPage === 'ops-automation' ? <AISystemCategoryPage category={SYSTEMS_ECOSYSTEM[5]} onNavigate={setCurrentPage} onNavigateEngine={navigateToEngine} /> :
+                currentPage === 'cust-experience' ? <AISystemCategoryPage category={SYSTEMS_ECOSYSTEM[6]} onNavigate={setCurrentPage} onNavigateEngine={navigateToEngine} /> :
+                currentPage === 'adv-strategic' ? <AISystemCategoryPage category={SYSTEMS_ECOSYSTEM[7]} onNavigate={setCurrentPage} onNavigateEngine={navigateToEngine} /> :
+                currentPage === 'queries-guiding' ? <AISystemCategoryPage category={SYSTEMS_ECOSYSTEM[8]} onNavigate={setCurrentPage} onNavigateEngine={navigateToEngine} /> :
+                currentPage === 'engine-detail' ? <AIEngineDetails engineId={selectedEngineId || ""} onNavigate={setCurrentPage} /> :
+                <CompanyPage onNavigate={setCurrentPage} />}
+            </div>
+          )}
+        </Suspense>
       </main>
 
       {/* Floating Core Return Button - Visible on all sub-pages */}
@@ -195,7 +214,9 @@ export default function App() {
 
       <Footer onNavigate={setCurrentPage} />
       <ContactModal isOpen={isContactOpen} onClose={() => setIsContactOpen(false)} />
-      <JarvisChat />
+      <Suspense fallback={null}>
+        <JarvisChat />
+      </Suspense>
     </div>
   );
 }
