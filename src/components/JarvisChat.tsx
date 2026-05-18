@@ -193,7 +193,7 @@ export function JarvisChat() {
             >
               <div className="relative w-full h-full rounded-xl overflow-hidden shadow-2xl border border-primary/20">
                 <img 
-                  src="/src/assets/images/jarvis_friendly_robot_avatar_1779096462612.png" 
+                  src="/assets/images/jarvis_friendly_robot_avatar_1779096462612.png" 
                   alt="JARVIS Intelligence" 
                   className="w-full h-full object-cover"
                   referrerPolicy="no-referrer"
@@ -227,7 +227,7 @@ export function JarvisChat() {
               <div className="flex items-center gap-4">
                 <div className="w-11 h-11 rounded-2xl border border-primary/20 flex items-center justify-center overflow-hidden shrink-0">
                   <img 
-                    src="/src/assets/images/jarvis_friendly_robot_avatar_1779096462612.png" 
+                    src="/assets/images/jarvis_friendly_robot_avatar_1779096462612.png" 
                     alt="JARVIS" 
                     className="w-full h-full object-cover"
                     referrerPolicy="no-referrer"
@@ -325,7 +325,7 @@ export function JarvisChat() {
                         }`}>
                           {msg.role === 'user' ? <User size={16} /> : (
                             <img 
-                              src="/src/assets/images/jarvis_friendly_robot_avatar_1779096462612.png" 
+                              src="/assets/images/jarvis_friendly_robot_avatar_1779096462612.png" 
                               alt="JARVIS" 
                               className="w-full h-full object-cover"
                               referrerPolicy="no-referrer"

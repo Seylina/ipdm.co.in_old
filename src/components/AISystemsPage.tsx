@@ -240,59 +240,66 @@ export function AISystemsPage({ onNavigateEngine }: { onNavigateEngine: (engineI
          </div>
 
          <div className="max-w-7xl mx-auto relative">
-            <div className="flex flex-col items-start gap-12">
+            <div className="grid lg:grid-cols-2 gap-16 items-center">
                <motion.div 
                  initial={{ opacity: 0, x: -50 }}
                  whileInView={{ opacity: 1, x: 0 }}
                  viewport={{ once: true }}
-                 className="space-y-6"
+                 className="space-y-8"
                >
                   <h2 className="font-display font-bold text-3xl sm:text-5xl md:text-7xl lg:text-8xl leading-[1.1] tracking-tighter flex flex-col italic py-2">
                     <span className="pr-4">Integrated</span>
-                    <span className="text-primary not-italic scale-y-105 origin-left py-4">Intelligence</span>
+                    <span className="text-primary not-italic scale-y-105 origin-left py-2">Intelligence</span>
                     <span className="pr-4">Framework</span>
                   </h2>
+                  <p className="text-xl md:text-2xl text-zinc-500 dark:text-zinc-300 light:text-zinc-700 font-medium italic leading-relaxed transition-colors duration-1000 max-w-xl">
+                    The <span className="text-[var(--color-text)] font-bold transition-colors duration-1000">IPDM Intelligence Platform™</span> is a unified architecture that integrates <span className="text-secondary italic">AI, data, models, and workflows</span> into a single <span className="text-secondary font-black transition-colors duration-1000">hyper-productive operational layer.</span>
+                  </p>
+                  
+                  <div className="flex flex-wrap justify-start gap-4 pt-4">
+                    <button 
+                      onClick={openCalendly}
+                      className="px-10 py-5 bg-secondary text-black font-black rounded-2xl flex items-center gap-4 hover:shadow-[0_0_40px_rgba(var(--secondary-rgb),0.5)] transition-all group pointer-events-auto"
+                    >
+                      <Zap className="w-5 h-5 fill-current" />
+                      <span className="text-[11px] uppercase tracking-[0.2em]">INITIALIZE DEPLOYMENT</span>
+                    </button>
+                    <button 
+                      onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                      className="px-8 py-4 glass border-white/10 rounded-full flex items-center gap-4 hover:bg-white/5 transition-all text-secondary uppercase text-[10px] font-mono tracking-[0.3em] group"
+                    >
+                      RETURN TO CORE
+                    </button>
+                  </div>
                </motion.div>
 
-               <div className="grid lg:grid-cols-2 gap-24 items-end w-full">
-                  <motion.div 
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.3 }}
-                    className="flex gap-8 items-start max-w-2xl"
-                  >
-                     <div className="flex flex-col items-center gap-4 pt-2">
-                        <div className="w-10 h-10 rounded-full border border-secondary/30 flex items-center justify-center">
-                           <div className="w-2 h-2 bg-secondary rounded-full" />
+               <motion.div
+                 initial={{ opacity: 0, scale: 0.9, rotate: 5 }}
+                 whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
+                 viewport={{ once: true }}
+                 transition={{ duration: 1, ease: "circOut" }}
+                 className="relative aspect-square rounded-[4rem] overflow-hidden shadow-2xl border border-primary/20 group"
+               >
+                  <img 
+                    src="/assets/images/integrated_intelligence_framework_hero_1779097538107.png" 
+                    alt="Integrated Intelligence Framework" 
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000"
+                    referrerPolicy="no-referrer"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                  <div className="absolute bottom-8 left-8 right-8 flex justify-between items-end">
+                     <div className="space-y-1">
+                        <div className="text-[10px] font-mono text-primary uppercase tracking-[0.3em] font-black">Architecture_v4_Live</div>
+                        <div className="w-32 h-1 bg-white/20 rounded-full overflow-hidden">
+                           <motion.div 
+                             animate={{ x: ["-100%", "100%"] }}
+                             transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+                             className="w-1/2 h-full bg-primary"
+                           />
                         </div>
-                        <div className="w-px h-32 bg-gradient-to-b from-secondary/50 to-transparent" />
                      </div>
-                     <p className="text-xl md:text-2xl text-zinc-500 dark:text-zinc-300 light:text-zinc-700 font-medium italic leading-relaxed transition-colors duration-1000">
-                        The <span className="text-[var(--color-text)] font-bold transition-colors duration-1000">IPDM Intelligence Platform™</span> is a unified architecture that integrates <span className="text-secondary italic">AI, data, models, and workflows</span> into a single <span className="text-secondary font-black transition-colors duration-1000">hyper-productive operational layer.</span>
-                     </p>
-                  </motion.div>
-
-                   <div className="flex flex-wrap justify-start gap-6">
-                     <button 
-                       onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-                       className="px-8 py-4 glass border-white/10 rounded-full flex items-center gap-4 hover:bg-white/5 transition-all text-secondary uppercase text-[10px] font-mono tracking-[0.3em] group"
-                     >
-                        <div className="p-2 rounded-lg bg-secondary/10 border border-secondary/20">
-                           <Cpu className="w-4 h-4" />
-                        </div>
-                        RETURN TO CORE
-                     </button>
-
-                     <button 
-                       onClick={openCalendly}
-                       className="px-10 py-5 bg-secondary text-black font-black rounded-2xl flex items-center gap-4 hover:shadow-[0_0_40px_rgba(var(--secondary-rgb),0.5)] transition-all group scale-110 pointer-events-auto"
-                     >
-                        <Zap className="w-5 h-5 fill-current" />
-                        <span className="text-[11px] uppercase tracking-[0.2em]">INITIALIZE DEPLOYMENT</span>
-                     </button>
                   </div>
-               </div>
+               </motion.div>
             </div>
          </div>
       </section>
@@ -412,40 +419,27 @@ export function AISystemsPage({ onNavigateEngine }: { onNavigateEngine: (engineI
 
             {/* Visual Representation of Transformation */}
             <motion.div 
-              initial={{ opacity: 0, rotateY: 20 }}
-              whileInView={{ opacity: 1, rotateY: 0 }}
+              initial={{ opacity: 0.8, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
-              className="relative aspect-square glass rounded-[5rem] border-white/5 overflow-hidden group shadow-2xl scale-110 origin-right"
+              className="relative aspect-square glass rounded-[5rem] border-white/5 overflow-hidden group shadow-2xl scale-110 origin-right bg-black"
             >
-               <div className="absolute inset-0 bg-grid opacity-[0.05]" />
-               
-               {/* Animated Node Connections */}
-               <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="relative w-80 h-80">
-                     {[0, 120, 240].map((deg, i) => (
-                        <motion.div
-                           key={i}
-                           className="absolute inset-0 border border-secondary/10 rounded-full"
-                        >
-                           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-4 h-4 bg-secondary rounded-full blur-[6px]" />
-                        </motion.div>
-                     ))}
-                     <div className="absolute inset-0 flex items-center justify-center">
-                        <div className="p-12 rounded-full bg-secondary/10 border border-secondary/20 shadow-neon-strong">
-                           <Cpu className="w-16 h-16 text-secondary" />
-                        </div>
-                     </div>
-                  </div>
-               </div>
+               <img 
+                 src="/assets/images/autonomous_core_chip_orbit_1779097560290.png"
+                 alt="Autonomous Core Architecture"
+                 className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-[2000ms]"
+                 referrerPolicy="no-referrer"
+               />
+               <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60" />
 
                <div className="absolute bottom-16 left-16 right-16 flex justify-between items-end gap-10">
                   <div className="flex flex-col gap-2">
-                     <span className="text-[10px] font-mono text-zinc-700 uppercase tracking-widest">Logic_Throughput_Peak</span>
+                     <span className="text-[10px] font-mono text-primary/70 uppercase tracking-widest">Logic_Throughput_Peak</span>
                      <span className="text-xl font-bold text-white tracking-widest">98.40%</span>
                   </div>
                   <div className="flex flex-col gap-2 text-right">
-                     <span className="text-[10px] font-mono text-zinc-700 uppercase tracking-widest">Architecture_Sync</span>
-                     <span className="text-xl font-bold text-secondary uppercase tracking-[0.3em]">ACTIVE</span>
+                     <span className="text-[10px] font-mono text-primary/70 uppercase tracking-widest">Architecture_Sync</span>
+                     <span className="text-xl font-bold text-primary uppercase tracking-[0.3em]">ACTIVE</span>
                   </div>
                </div>
             </motion.div>
