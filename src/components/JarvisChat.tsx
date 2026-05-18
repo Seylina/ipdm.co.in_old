@@ -22,6 +22,7 @@ import {
 } from "lucide-react";
 import { askJarvis } from "../services/jarvisService";
 import { Trademark } from "./Trademark";
+import jarvisAvatar from "../assets/images/jarvis_friendly_robot.png";
 
 interface Message {
   role: "user" | "jarvis";
@@ -193,7 +194,7 @@ export function JarvisChat() {
             >
               <div className="relative w-full h-full rounded-xl overflow-hidden shadow-2xl border border-primary/20">
                 <img 
-                  src="/assets/images/jarvis_friendly_robot_avatar_1779096462612.png" 
+                  src={jarvisAvatar} 
                   alt="JARVIS Intelligence" 
                   className="w-full h-full object-cover"
                   referrerPolicy="no-referrer"
@@ -227,7 +228,7 @@ export function JarvisChat() {
               <div className="flex items-center gap-4">
                 <div className="w-11 h-11 rounded-2xl border border-primary/20 flex items-center justify-center overflow-hidden shrink-0">
                   <img 
-                    src="/assets/images/jarvis_friendly_robot_avatar_1779096462612.png" 
+                    src={jarvisAvatar} 
                     alt="JARVIS" 
                     className="w-full h-full object-cover"
                     referrerPolicy="no-referrer"
@@ -325,7 +326,7 @@ export function JarvisChat() {
                         }`}>
                           {msg.role === 'user' ? <User size={16} /> : (
                             <img 
-                              src="/assets/images/jarvis_friendly_robot_avatar_1779096462612.png" 
+                              src={jarvisAvatar} 
                               alt="JARVIS" 
                               className="w-full h-full object-cover"
                               referrerPolicy="no-referrer"

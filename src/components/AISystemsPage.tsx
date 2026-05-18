@@ -4,6 +4,8 @@ import React, { useRef, useState, useEffect, useMemo } from "react";
 import { openMeeting as openCalendly } from "../lib/calendly";
 import { Trademark } from "./Trademark";
 import { IndustryExplorer } from "./IndustryExplorer";
+import heroImg from "../assets/images/integrated_intelligence.png";
+import coreImg from "../assets/images/autonomous_core.png";
 
 const SYSTEMS_DATA = [
   {
@@ -281,7 +283,7 @@ export function AISystemsPage({ onNavigateEngine }: { onNavigateEngine: (engineI
                  className="relative aspect-square rounded-[4rem] overflow-hidden shadow-2xl border border-primary/20 group"
                >
                   <img 
-                    src="/assets/images/integrated_intelligence_framework_hero_1779097538107.png" 
+                    src={heroImg} 
                     alt="Integrated Intelligence Framework" 
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000"
                     referrerPolicy="no-referrer"
@@ -425,7 +427,7 @@ export function AISystemsPage({ onNavigateEngine }: { onNavigateEngine: (engineI
               className="relative aspect-square glass rounded-[5rem] border-white/5 overflow-hidden group shadow-2xl scale-110 origin-right bg-black"
             >
                <img 
-                 src="/assets/images/autonomous_core_chip_orbit_1779097560290.png"
+                 src={coreImg}
                  alt="Autonomous Core Architecture"
                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-[2000ms]"
                  referrerPolicy="no-referrer"
