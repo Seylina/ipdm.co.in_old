@@ -1,5 +1,5 @@
 import { motion } from "motion/react";
-import { ArrowLeft, Zap, Shield, Target, Cpu, Activity, Database, Users, Brain, Network, TrendingUp, BarChart3, Sparkles, PenTool, Radio, Archive, Search, Sliders, Eye, Workflow, Code, RotateCw, MessageSquare, ShieldCheck, Gamepad2, Compass, Stethoscope, Bot, Box, Terminal, Rocket, ArrowRight } from "lucide-react";
+import { ArrowLeft, Zap, Shield, Target, Cpu, Activity, Database, Users, Brain, Network, TrendingUp, BarChart3, Sparkles, PenTool, Radio, Archive, Search, Sliders, Eye, Workflow, Code, RotateCw, MessageSquare, ShieldCheck, Gamepad2, Compass, Stethoscope, Box, Terminal, Rocket, ArrowRight } from "lucide-react";
 import React, { useMemo } from "react";
 import { SYSTEMS_ECOSYSTEM, SystemEngine } from "../lib/systemsData";
 import { Trademark } from "./Trademark";

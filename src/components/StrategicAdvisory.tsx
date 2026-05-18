@@ -550,8 +550,8 @@ export function StrategicAdvisory({ onNavigate }: { onNavigate: (page: 'home' | 
                   <Sparkles className="w-6 h-6 text-cyan-500 animate-pulse" />
                </div>
                <div className="text-xs font-mono font-bold text-cyan-500 uppercase mb-6 tracking-widest">Infinite Potential Architecture</div>
-               <h3 className="text-2xl font-bold font-display mb-6 text-white dark:text-white light:text-zinc-900 transition-colors duration-1000">Decision-Driven Systems</h3>
-               <ul className="space-y-4 text-white/80 dark:text-white/80 light:text-zinc-800 text-sm transition-colors duration-1000">
+               <h3 className="text-2xl font-bold font-display mb-6 text-[var(--color-text)] transition-colors duration-1000">Decision-Driven Systems</h3>
+               <ul className="space-y-4 text-[var(--color-text)]/80 transition-colors duration-1000">
                  <li className="flex gap-3"><span className="text-cyan-500">✓</span> Real-Time Predictive Modeling</li>
                  <li className="flex gap-3"><span className="text-cyan-500">✓</span> Model-Verified Execution Paths</li>
                  <li className="flex gap-3"><span className="text-cyan-500">✓</span> Unified Strategic Operating Logic</li>
@@ -586,7 +586,7 @@ export function StrategicAdvisory({ onNavigate }: { onNavigate: (page: 'home' | 
               <div key={i} className="p-10 rounded-2xl glass border-white/5 hover:border-cyan-500/20 transition-all flex flex-col gap-6">
                  <div className="text-xs font-mono font-black text-cyan-500 uppercase tracking-widest bg-cyan-500/10 px-3 py-1 rounded w-fit">{card.focus}</div>
                  <h3 className="text-2xl font-bold font-display">{card.type}</h3>
-                 <p className="text-zinc-500 text-sm leading-relaxed">{card.desc}</p>
+                 <p className="text-zinc-500 dark:text-zinc-500 light:text-zinc-800 text-sm leading-relaxed transition-colors duration-1000">{card.desc}</p>
               </div>
             ))}
           </div>
@@ -692,12 +692,12 @@ function AccordionItem({ id, title, desc, details }: { id: string, title: string
       onClick={() => setIsOpen(!isOpen)}
     >
       <div className="p-8 flex gap-6 items-center">
-        <div className="text-zinc-700 font-mono font-black text-3xl group-hover:text-cyan-500 transition-colors">{id}</div>
+        <div className="text-[var(--color-text)] opacity-40 font-mono font-black text-3xl group-hover:text-cyan-500 transition-colors uppercase">{id}</div>
         <div className="flex-1">
-          <h3 className="text-xl font-bold font-display text-white">{title}</h3>
-          <p className="text-zinc-500 text-xs mt-1">{desc}</p>
+          <h3 className="text-xl font-bold font-display text-[var(--color-text)]">{title}</h3>
+          <p className="text-zinc-500 dark:text-zinc-500 light:text-zinc-700 text-xs mt-1 transition-colors duration-1000">{desc}</p>
         </div>
-        <div className={`w-8 h-8 rounded-full border border-white/10 flex items-center justify-center transition-transform ${isOpen ? 'rotate-45' : ''}`}>
+        <div className={`w-8 h-8 rounded-full border border-[var(--color-text)]/10 flex items-center justify-center transition-transform ${isOpen ? 'rotate-45' : ''}`}>
            <Zap className={`w-4 h-4 ${isOpen ? 'text-cyan-500' : 'text-zinc-600'}`} />
         </div>
       </div>
@@ -706,7 +706,7 @@ function AccordionItem({ id, title, desc, details }: { id: string, title: string
         animate={{ height: isOpen ? 'auto' : 0, opacity: isOpen ? 1 : 0 }}
         className="overflow-hidden"
       >
-        <div className="px-8 pb-8 pl-20 text-zinc-400 text-sm leading-relaxed border-t border-white/5 pt-6 italic">
+        <div className="px-8 pb-8 pl-20 text-zinc-400 dark:text-zinc-400 light:text-zinc-700 text-sm leading-relaxed border-t border-white/5 dark:border-white/5 light:border-black/5 pt-6 italic transition-colors duration-1000">
           {details}
         </div>
       </motion.div>

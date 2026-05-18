@@ -140,7 +140,7 @@ export function Dashboard() {
                  <span className="text-[10px] font-mono font-black text-primary uppercase tracking-[0.4em]">Autonomous Intelligence Grid</span>
               </div>
               <h1 className="text-4xl md:text-6xl font-display font-medium tracking-tight">System Command</h1>
-              <p className="text-zinc-500 font-mono text-xs uppercase tracking-widest mt-4">Monitoring 23 autonomous output nodes across 4 cognitive clusters</p>
+              <p className="text-zinc-500 dark:text-zinc-500 light:text-zinc-800 font-mono text-xs uppercase tracking-widest mt-4 transition-colors duration-1000">Monitoring 23 autonomous output nodes across 4 cognitive clusters</p>
            </div>
            
            <div className="flex flex-wrap gap-2">
@@ -306,7 +306,7 @@ export function Dashboard() {
 function StatCard({ label, value, trend, color }: { label: string, value: string, trend: string, color: string }) {
   return (
     <div className="glass p-6 group hover:border-primary/30 transition-all">
-       <p className="text-[10px] font-mono text-zinc-500 uppercase tracking-widest mb-2">{label}</p>
+       <p className="text-[10px] font-mono text-zinc-500 dark:text-zinc-500 light:text-zinc-800 uppercase tracking-widest mb-2 transition-colors duration-1000">{label}</p>
        <div className="flex justify-between items-end">
           <h4 className={`text-2xl md:text-3xl font-display font-bold ${color}`}>{value}</h4>
           <span className="text-[10px] font-mono text-emerald-400 mb-1">+{trend}%</span>

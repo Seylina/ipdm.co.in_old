@@ -34,7 +34,7 @@ export function PoliciesPage({ onNavigate }: { onNavigate: (page: any) => void }
               Shipping & <br />
               <span className="text-gradient">Exchange Policy</span>
             </h1>
-            <p className="text-zinc-500 max-w-2xl text-lg leading-relaxed border-l-2 border-primary/30 pl-6 italic">
+            <p className="text-zinc-500 light:text-zinc-700 max-w-2xl text-lg leading-relaxed border-l-2 border-primary/30 pl-6 italic">
               At Infinite Potential Digital Marketing Pvt Ltd, we offer digital services only. 
               The following terms apply to all products and services purchased through our platform.
             </p>
@@ -171,12 +171,12 @@ function PolicySection({ number, title, content, items, footer }: {
         </div>
         <div className="flex-1">
           <h2 className="text-2xl font-display font-bold text-[var(--color-text)] mb-6 group-hover:translate-x-1 transition-transform transition-colors duration-1000">{title}</h2>
-          <p className="text-zinc-400 leading-relaxed mb-6 italic">{content}</p>
+          <p className="text-zinc-400 dark:text-zinc-400 light:text-zinc-800 leading-relaxed mb-6 italic transition-colors duration-1000">{content}</p>
           
           {items && (
             <ul className="space-y-4 mb-6">
               {items.map((item, i) => (
-                <li key={i} className="flex items-start gap-4 italic text-zinc-500">
+                <li key={i} className="flex items-start gap-4 italic text-zinc-500 dark:text-zinc-500 light:text-zinc-700 transition-colors duration-1000">
                   <div className="w-1.5 h-1.5 rounded-full bg-primary/40 mt-2 shrink-0 shadow-[0_0_8px_#22d3ee55]" />
                   {item}
                 </li>
@@ -185,7 +185,7 @@ function PolicySection({ number, title, content, items, footer }: {
           )}
 
           {footer && (
-            <p className="text-zinc-600 text-sm font-medium border-l-2 border-zinc-800 pl-4 py-1 italic">
+            <p className="text-zinc-600 dark:text-zinc-600 light:text-zinc-800 text-sm font-medium border-l-2 border-zinc-800 dark:border-zinc-800 light:border-zinc-300 pl-4 py-1 italic transition-colors duration-1000">
               {footer}
             </p>
           )}

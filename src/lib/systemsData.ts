@@ -1,4 +1,4 @@
-import { Brain, Users, Network, Cpu, Zap, TrendingUp, BarChart3, Sparkles, Activity, PenTool, Radio, Archive, Search, Sliders, Eye, Workflow, Code, RotateCw, MessageSquare, ShieldCheck, Gamepad2, Compass, Bot, Stethoscope, Terminal, Target } from "lucide-react";
+import { Brain, Users, Network, Cpu, Zap, TrendingUp, BarChart3, Sparkles, Activity, PenTool, Radio, Archive, Search, Sliders, Eye, Workflow, Code, RotateCw, MessageSquare, ShieldCheck, Gamepad2, Compass, Stethoscope, Terminal, Target } from "lucide-react";
 import React from "react";
 
 export interface SystemEngine {
@@ -261,7 +261,7 @@ export const SYSTEMS_ECOSYSTEM: SystemCategory[] = [
         name: "JARVIS™",
         role: "Executive Guidance System",
         desc: "A personalized AI assistant for decision-makers, providing real-time insights and controls.",
-        icon: React.createElement(Bot),
+        icon: React.createElement(Brain),
         stats: { availability: "24/7", access: "Secure", response: "Instant" },
         tags: ["Assistant", "Executive", "Control"]
       }

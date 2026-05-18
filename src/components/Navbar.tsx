@@ -30,7 +30,7 @@ export function Navbar({ onNavigate, activePage }: {
     return (
       <button 
         onClick={() => { onNavigate(page); window.scrollTo({ top: 0, behavior: 'smooth' }); }} 
-        className={`relative transition-all whitespace-nowrap flex flex-col items-center group py-1 ${isActive ? 'text-[var(--color-text)] font-black' : 'text-zinc-400 hover:text-primary dark:hover:text-primary light:hover:text-black'}`}
+        className={`relative transition-all whitespace-nowrap flex flex-col items-center group py-1 ${isActive ? 'text-[var(--color-text)] font-black' : 'text-zinc-400 dark:text-zinc-400 light:text-zinc-600 hover:text-primary dark:hover:text-primary light:hover:text-black transition-colors duration-1000'}`}
       >
         <div className="flex items-center gap-2">
           <span className={`w-1.5 h-1.5 rounded-full ${isActive ? 'bg-primary' : dotColor}`} />
@@ -80,7 +80,7 @@ export function Navbar({ onNavigate, activePage }: {
         onMouseLeave={handleMouseLeave}
       >
         <button 
-          className={`relative transition-all whitespace-nowrap flex items-center gap-2 group ${hasActiveChild ? 'text-[var(--color-text)] font-black' : 'text-zinc-400 hover:text-primary dark:hover:text-primary light:hover:text-black'}`}
+          className={`relative transition-all whitespace-nowrap flex items-center gap-2 group ${hasActiveChild ? 'text-[var(--color-text)] font-black' : 'text-zinc-400 dark:text-zinc-400 light:text-zinc-600 hover:text-primary dark:hover:text-primary light:hover:text-black transition-colors duration-1000'}`}
         >
           <span className={`w-1.5 h-1.5 rounded-full ${hasActiveChild ? 'bg-primary' : dotColor}`} />
           {label}
@@ -112,7 +112,7 @@ export function Navbar({ onNavigate, activePage }: {
                         setIsHovered(false); 
                         window.scrollTo({ top: 0, behavior: 'smooth' }); 
                       }}
-                      className={`flex items-center gap-2 px-4 py-2.5 rounded-xl transition-all text-left group/item ${grid ? 'w-auto' : 'w-full'} ${activePage === item.page ? 'bg-primary/20 text-[var(--color-text)]' : 'text-zinc-400 hover:bg-[var(--color-text)]/[0.05] hover:text-[var(--color-text)]'}`}
+                      className={`flex items-center gap-2 px-4 py-2.5 rounded-xl transition-all text-left group/item ${grid ? 'w-auto' : 'w-full'} ${activePage === item.page ? 'bg-primary/20 text-[var(--color-text)]' : 'text-zinc-400 dark:text-zinc-400 light:text-zinc-600 hover:bg-[var(--color-text)]/[0.05] hover:text-[var(--color-text)] transition-colors duration-1000'}`}
                     >
                       <span className={`w-1.5 h-1.5 rounded-full transition-transform group-hover/item:scale-125 ${activePage === item.page ? 'bg-primary' : item.dotColor}`} />
                       <span className="text-[11px] font-black tracking-wider uppercase">{item.label}</span>
@@ -161,7 +161,7 @@ export function Navbar({ onNavigate, activePage }: {
           >
             
             {/* Navigation Links & CTA (Equally Spaced) */}
-            <div className="hidden md:flex items-center gap-6 lg:gap-8 text-xs lg:text-[13px] font-bold uppercase tracking-wider text-zinc-400">
+            <div className="hidden md:flex items-center gap-6 lg:gap-8 text-xs lg:text-[13px] font-bold uppercase tracking-wider text-zinc-400 dark:text-zinc-400 light:text-zinc-600 transition-colors duration-1000">
               <NavDropdown 
                 label="ABOUT" 
                 dotColor="bg-blue-500/60"

@@ -62,13 +62,13 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
             initial={{ opacity: 0, scale: 0.9, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.9, y: 20 }}
-            className="w-full max-w-xl glass-dark bg-zinc-950 border border-white/10 rounded-[3rem] overflow-hidden relative z-10"
+            className="w-full max-w-xl glass bg-[var(--color-bg)] border border-[var(--color-text)]/10 rounded-[3rem] overflow-hidden relative z-10 transition-colors duration-1000"
           >
             <div className="absolute inset-0 blueprint-grid opacity-[0.05] pointer-events-none" />
             
             <button 
               onClick={onClose}
-              className="absolute top-6 right-6 p-2 rounded-full hover:bg-white/5 transition-all text-zinc-500 hover:text-white z-50"
+              className="absolute top-6 right-6 p-2 rounded-full hover:bg-[var(--color-text)]/5 transition-all text-zinc-500 hover:text-[var(--color-text)] z-50 transition-colors duration-1000"
             >
               <X className="w-6 h-6" />
             </button>
@@ -83,22 +83,22 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
                   <div className="w-20 h-20 rounded-full bg-emerald-500/10 flex items-center justify-center text-emerald-500 mb-6 border border-emerald-500/20">
                      <CheckCircle2 className="w-10 h-10 shadow-[0_0_20px_rgba(16,185,129,0.3)]" />
                   </div>
-                  <h3 className="text-3xl font-display font-bold text-white mb-4">Message Initiated</h3>
-                  <p className="text-zinc-500 max-w-xs mx-auto">
+                  <h3 className="text-3xl font-display font-bold text-[var(--color-text)] mb-4 transition-colors duration-1000">Message Initiated</h3>
+                  <p className="text-zinc-500 max-w-xs mx-auto transition-colors duration-1000">
                     Thank you, {formData.name}. We've received your inquiry and will connect with you via info@ipdm.co.in.
                   </p>
                 </motion.div>
               ) : (
                 <>
                   <div className="mb-10">
-                    <h3 className="text-3xl font-bold font-display text-white mb-2 uppercase tracking-tighter">Initialize Contact</h3>
-                    <p className="text-zinc-500 text-sm font-medium">Identify your objective and reach the IPDM core.</p>
+                    <h3 className="text-3xl font-bold font-display text-[var(--color-text)] mb-2 uppercase tracking-tighter transition-colors duration-1000">Initialize Contact</h3>
+                    <p className="text-zinc-500 text-sm font-medium transition-colors duration-1000">Identify your objective and reach the IPDM core.</p>
                   </div>
 
                   <form onSubmit={handleSubmit} className="space-y-6">
                     <div className="grid sm:grid-cols-2 gap-6">
                       <div className="space-y-2">
-                        <label className="text-[10px] font-mono font-bold text-zinc-600 uppercase tracking-widest flex items-center gap-2 px-1">
+                        <label className="text-[10px] font-mono font-bold text-zinc-600 uppercase tracking-widest flex items-center gap-2 px-1 transition-colors duration-1000">
                           <User className="w-3 h-3 text-primary" /> Full Name
                         </label>
                         <input 
@@ -108,11 +108,11 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
                           value={formData.name}
                           onChange={handleChange}
                           placeholder="John Doe"
-                          className="w-full bg-white/5 border border-white/10 rounded-2xl p-4 text-white focus:border-primary/50 focus:ring-1 focus:ring-primary/50 outline-none transition-all placeholder:text-zinc-700"
+                          className="w-full bg-[var(--color-text)]/[0.03] border border-[var(--color-text)]/10 rounded-2xl p-4 text-[var(--color-text)] focus:border-primary/50 focus:ring-1 focus:ring-primary/50 outline-none transition-all placeholder:text-zinc-700 transition-colors duration-1000"
                         />
                       </div>
                       <div className="space-y-2">
-                        <label className="text-[10px] font-mono font-bold text-zinc-600 uppercase tracking-widest flex items-center gap-2 px-1">
+                        <label className="text-[10px] font-mono font-bold text-zinc-600 uppercase tracking-widest flex items-center gap-2 px-1 transition-colors duration-1000">
                           <Mail className="w-3 h-3 text-primary" /> Email Address
                         </label>
                         <input 
@@ -122,7 +122,7 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
                           value={formData.email}
                           onChange={handleChange}
                           placeholder="john@example.com"
-                          className="w-full bg-white/5 border border-white/10 rounded-2xl p-4 text-white focus:border-primary/50 focus:ring-1 focus:ring-primary/50 outline-none transition-all placeholder:text-zinc-700"
+                          className="w-full bg-[var(--color-text)]/[0.03] border border-[var(--color-text)]/10 rounded-2xl p-4 text-[var(--color-text)] focus:border-primary/50 focus:ring-1 focus:ring-primary/50 outline-none transition-all placeholder:text-zinc-700 transition-colors duration-1000"
                         />
                       </div>
                     </div>
@@ -138,12 +138,12 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
                         value={formData.mobile}
                         onChange={handleChange}
                         placeholder="+91 00000 00000"
-                        className="w-full bg-white/5 border border-white/10 rounded-2xl p-4 text-white focus:border-primary/50 focus:ring-1 focus:ring-primary/50 outline-none transition-all placeholder:text-zinc-700"
+                        className="w-full bg-[var(--color-text)]/[0.03] border border-[var(--color-text)]/10 rounded-2xl p-4 text-[var(--color-text)] focus:border-primary/50 focus:ring-1 focus:ring-primary/50 outline-none transition-all placeholder:text-zinc-700 transition-colors duration-1000"
                       />
                     </div>
 
                     <div className="space-y-2">
-                      <label className="text-[10px] font-mono font-bold text-zinc-600 uppercase tracking-widest flex items-center gap-2 px-1">
+                      <label className="text-[10px] font-mono font-bold text-zinc-600 uppercase tracking-widest flex items-center gap-2 px-1 transition-colors duration-1000">
                         <MessageSquare className="w-3 h-3 text-primary" /> Reason for Contact
                       </label>
                       <textarea 
@@ -153,7 +153,7 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
                         onChange={handleChange}
                         placeholder="State your business objective or inquiry..."
                         rows={4}
-                        className="w-full bg-white/5 border border-white/10 rounded-3xl p-4 text-white focus:border-primary/50 focus:ring-1 focus:ring-primary/50 outline-none transition-all placeholder:text-zinc-700 resize-none"
+                        className="w-full bg-[var(--color-text)]/[0.03] border border-[var(--color-text)]/10 rounded-3xl p-4 text-[var(--color-text)] focus:border-primary/50 focus:ring-1 focus:ring-primary/50 outline-none transition-all placeholder:text-zinc-700 resize-none transition-colors duration-1000"
                       />
                     </div>
 

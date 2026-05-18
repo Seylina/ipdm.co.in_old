@@ -45,13 +45,13 @@ interface Message {
 
 // Neural Visualization Component for background
 const NeuralMap = () => (
-  <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-20">
+  <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-20 transition-opacity duration-1000">
     <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(6,182,212,0.1),transparent_70%)]" />
     <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
       <defs>
         <pattern id="neural-grid" width="100" height="100" patternUnits="userSpaceOnUse">
-          <circle cx="2" cy="2" r="1" fill="rgba(255,255,255,0.05)" />
-          <path d="M 100 0 L 0 0 0 100" fill="none" stroke="rgba(255,255,255,0.02)" strokeWidth="0.5" />
+          <circle cx="2" cy="2" r="1" fill="currentColor" className="text-zinc-500 dark:text-zinc-500 light:text-zinc-300 transition-colors duration-1000" />
+          <path d="M 100 0 L 0 0 0 100" fill="none" stroke="currentColor" strokeWidth="0.5" className="text-zinc-500/10 dark:text-zinc-500/10 light:text-zinc-300/10 transition-colors duration-1000" />
         </pattern>
       </defs>
       <rect width="100%" height="100%" fill="url(#neural-grid)" />
@@ -63,7 +63,7 @@ const NeuralMap = () => (
         <circle cx="20%" cy="30%" r="2" fill="var(--color-primary)" className="shadow-neon" />
         <circle cx="80%" cy="70%" r="2" fill="var(--color-primary)" className="shadow-neon" />
         <circle cx="40%" cy="60%" r="2" fill="var(--color-primary)" className="shadow-neon" />
-        <path d="M 20% 30% L 40% 60% L 80% 70%" stroke="rgba(6,182,212,0.1)" strokeWidth="1" fill="none" />
+        <path d="M 20% 30% L 40% 60% L 80% 70%" stroke="var(--color-primary)" strokeOpacity="0.1" strokeWidth="1" fill="none" />
       </motion.g>
     </svg>
   </div>
@@ -529,9 +529,9 @@ export function IPDMAstra({ onBack }: { onBack: () => void }) {
           <div className="max-w-4xl mx-auto w-full pointer-events-auto">
              <div className="relative group">
                <div className="absolute -inset-1 bg-gradient-to-r from-primary/50 to-secondary/50 rounded-[2.5rem] blur opacity-25 group-focus-within:opacity-100 transition-opacity duration-1000" />
-               <div className="relative bg-zinc-900 border border-white/10 rounded-[2rem] overflow-hidden shadow-2xl backdrop-blur-3xl">
+               <div className="relative bg-[var(--color-bg)] dark:bg-zinc-900 light:bg-slate-50 border border-[var(--color-text)]/10 dark:border-white/10 light:border-black/10 rounded-[2rem] overflow-hidden shadow-2xl backdrop-blur-3xl transition-colors duration-1000">
                   <div className="flex items-center px-6">
-                    <Terminal size={18} className="text-zinc-600" />
+                    <Terminal size={18} className="text-zinc-600 dark:text-zinc-600 light:text-zinc-700 transition-colors" />
                     <textarea 
                       value={input}
                       onChange={(e) => setInput(e.target.value)}
@@ -543,7 +543,7 @@ export function IPDMAstra({ onBack }: { onBack: () => void }) {
                       }}
                       placeholder="ENTER STRATEGIC QUERY..."
                       rows={1}
-                      className="flex-1 bg-transparent border-none text-white p-6 focus:ring-0 resize-none font-mono text-sm placeholder:text-zinc-700 h-[72px] flex items-center"
+                      className="flex-1 bg-transparent border-none text-[var(--color-text)] p-6 focus:ring-0 resize-none font-mono text-sm placeholder:text-zinc-700 dark:placeholder:text-zinc-700 light:placeholder:text-zinc-400 h-[72px] flex items-center transition-colors"
                     />
                     <div className="flex items-center gap-3 pr-4">
                       {input && (
@@ -570,7 +570,7 @@ export function IPDMAstra({ onBack }: { onBack: () => void }) {
                   </div>
                   
                   {/* Status Bar */}
-                  <div className="px-6 py-2 bg-white/5 border-t border-white/5 flex items-center justify-between text-[11px] font-mono text-zinc-500 uppercase tracking-wider">
+                  <div className="px-6 py-2 bg-[var(--color-text)]/[0.03] border-t border-[var(--color-text)]/5 flex items-center justify-between text-[11px] font-mono text-zinc-500 uppercase tracking-wider transition-colors duration-1000">
                      <div className="flex gap-6">
                         <span>Astra Intelligence Active</span>
                         <span>Multi-Agent Sync: On</span>

@@ -1,6 +1,6 @@
 import { motion } from "motion/react";
 import React, { useEffect, useState } from "react";
-import { ArrowRight, Bot, Cpu, Network, Sparkles, Search } from "lucide-react";
+import { ArrowRight, Cpu, Network, Sparkles, Search, Brain } from "lucide-react";
 import { openMeeting as openCalendly } from "../lib/calendly";
 import { Trademark } from "./Trademark";
 import { useTheme } from "../lib/ThemeContext";
@@ -87,7 +87,7 @@ export function Hero({ onNavigate }: { onNavigate: (page: 'home' | 'advisory' | 
           <span className="text-[var(--color-text)] transition-colors duration-1000">Business</span> <span className="text-gradient-teal-pink inline-block py-2 px-2">Systems</span>
         </h1>
 
-        <p className="text-sm md:text-xl text-zinc-500 dark:text-zinc-300 max-w-2xl mx-auto mb-8 md:mb-10 font-medium leading-relaxed tracking-tight px-4 bg-white/5 backdrop-blur-sm rounded-lg py-2 transition-all duration-1000">
+        <p className="text-sm md:text-xl text-zinc-500 dark:text-zinc-300 light:text-zinc-800 max-w-2xl mx-auto mb-8 md:mb-10 font-medium leading-relaxed tracking-tight px-4 bg-white/5 backdrop-blur-sm rounded-lg py-2 transition-all duration-1000">
           Designing and deploying AI-powered systems that transform digital interfaces into revenue engines and operational infrastructure.
         </p>
 
@@ -185,7 +185,7 @@ export function Hero({ onNavigate }: { onNavigate: (page: 'home' | 'advisory' | 
         {/* Floating Elements (Visualizing System Architecture) - Inside reveal container */}
         <div className="mt-16 md:mt-20 grid grid-cols-2 md:grid-cols-4 gap-6 w-full max-w-6xl relative mx-auto">
           {[
-            { icon: <Bot className="text-primary" />, label: "Autonomous Agents" },
+            { icon: <Brain className="text-primary" />, label: "Autonomous Agents" },
             { icon: <Cpu className="text-secondary" />, label: "Knowledge Graphs" },
             { icon: <Network className="text-accent" />, label: "Multi-Agent Logic" },
             { icon: <Sparkles className={`${theme === 'dark' ? 'text-white' : 'text-zinc-800'}`} />, label: "Adaptive UI" }

@@ -99,7 +99,7 @@ const ECOSYSTEM_ITEMS = [
     id: "cust-experience",
     items: [
       { id: "engage", name: "ENGAGE™", role: "Interaction Engine", icon: <MessageSquare />, color: "text-cyan-400" },
-      { id: "supporta", name: "SUPPORTA™", role: "Support Engine", icon: <Bot />, color: "text-pink-400" },
+      { id: "supporta", name: "SUPPORTA™", role: "Support Engine", icon: <Sparkles />, color: "text-pink-400" },
       { id: "multi-agent", name: "Multi-Agent AI", role: "AI Orchestration Architecture", icon: <Workflow />, color: "text-primary" },
       { id: "lead-qualifier", name: "Lead Qualification AI", role: "Lead Intelligence System", icon: <Target />, color: "text-emerald-400" },
       { id: "guided-decision", name: "Decision Engine", role: "Guided Advisory System", icon: <Scaling />, color: "text-cyan-400" },
@@ -131,7 +131,7 @@ const ECOSYSTEM_ITEMS = [
     id: "queries-guiding",
     items: [
        { id: "diagnostics", name: "DIAGNOSTIX™", role: "Health & Diagnostic Intelligence", icon: <Stethoscope />, color: "text-green-400" },
-       { id: "jarvis", name: "JARVIS™", role: "Executive Guidance System", icon: <Bot />, color: "text-blue-500" },
+       { id: "jarvis", name: "JARVIS™", role: "Executive Guidance System", icon: <Brain />, color: "text-blue-500" },
     ]
   }
 ];
@@ -319,7 +319,7 @@ export function IPDMEcosystem({ onNavigate, onNavigateEngine }: { onNavigate: (p
                       <h3 className="text-lg font-bold font-display text-[var(--color-text)] tracking-tight group-hover:text-primary transition-colors transition-colors duration-1000">
                         <Trademark text={item.name} />
                       </h3>
-                      <p className="text-[10px] font-mono font-black text-zinc-400 light:text-zinc-500 uppercase tracking-wider mt-1 mb-4 italic leading-tight transition-colors duration-1000 pr-2">
+                      <p className="text-[10px] font-mono font-black text-zinc-400 dark:text-zinc-400 light:text-zinc-600 uppercase tracking-wider mt-1 mb-4 italic leading-tight transition-colors duration-1000 pr-2">
                         {item.role}
                       </p>
                       

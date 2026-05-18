@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect, FormEvent } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { Send, Bot, User, Loader2, Sparkles, X, MessageSquare, Trash2, Mic, Network, Download } from "lucide-react";
+import { Send, User, Loader2, Sparkles, X, MessageSquare, Trash2, Mic, Network, Download, Brain } from "lucide-react";
 import { GoogleGenAI } from "@google/genai";
 import { jsPDF } from "jspdf";
 import autoTable from "jspdf-autotable";
@@ -332,7 +332,7 @@ const NeuralOrb = ({ isActive }: { isActive: boolean }) => {
             {isActive ? (
                <Network className="w-10 h-10 text-white drop-shadow-[0_0_10px_white]" />
             ) : (
-               <Bot className="w-10 h-10 text-white/40" />
+               <Brain className="w-10 h-10 text-white/40" />
             )}
           </motion.div>
           
@@ -760,7 +760,7 @@ export function DiagnostixChat() {
             >
               <div className="px-6 py-4 border-b border-white/10 flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                  <Bot className="w-4 h-4 text-primary" />
+                  <Brain className="w-4 h-4 text-primary" />
                   <span className="text-xs font-bold text-white uppercase tracking-widest">Protocol Stream</span>
                 </div>
                 <button onClick={() => setIsChatOpen(false)} className="text-white/30 hover:text-white"><X className="w-4 h-4" /></button>

@@ -275,7 +275,7 @@ export function CompanyPage({ onNavigate }: { onNavigate: (page: 'home' | 'advis
              </h1>
              
              <div className="max-w-4xl mx-auto">
-               <p className="text-lg sm:text-2xl md:text-3xl text-zinc-400 leading-tight font-medium mb-12">
+               <p className="text-lg sm:text-2xl md:text-3xl text-zinc-400 dark:text-zinc-400 light:text-zinc-800 leading-tight font-medium mb-12 transition-colors duration-1000">
                  IPDM is an AI-first technology engine. We don&apos;t just build tools; we engineer the <span className="text-[var(--color-text)]">autonomous strategic cores</span> that redefine enterprise capability.
                </p>
                
@@ -322,7 +322,7 @@ export function CompanyPage({ onNavigate }: { onNavigate: (page: 'home' | 'advis
                 <h2 className="font-display font-bold text-3xl sm:text-4xl md:text-6xl leading-tight tracking-tighter mb-8">
                   The IPDM <br /><span className="text-gradient-primary">Multiverse.</span>
                 </h2>
-                <p className="text-xl sm:text-2xl text-zinc-500 leading-relaxed max-w-xl">
+                <p className="text-xl sm:text-2xl text-zinc-500 dark:text-zinc-500 light:text-zinc-800 leading-relaxed max-w-xl transition-colors duration-1000">
                   We operate at the convergence of four critical intelligence dimensions, creating a unified ecosystem of <span className="text-[var(--color-text)]">unstoppable growth.</span>
                 </p>
               </div>
@@ -346,7 +346,7 @@ export function CompanyPage({ onNavigate }: { onNavigate: (page: 'home' | 'advis
                       {React.cloneElement(item.icon as React.ReactElement<any>, { size: 28 })}
                     </div>
                     <h4 className="font-display font-bold text-xl uppercase tracking-tighter mb-2 text-[var(--color-text)]">{item.title}</h4>
-                    <p className="text-sm text-zinc-500 leading-relaxed font-medium">{item.desc}</p>
+                    <p className="text-sm text-zinc-500 dark:text-zinc-500 light:text-zinc-800 leading-relaxed font-medium transition-colors duration-1000">{item.desc}</p>
                   </motion.div>
                 ))}
               </div>

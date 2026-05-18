@@ -6,7 +6,6 @@ import {
   X, 
   Send, 
   Loader2, 
-  Bot, 
   User, 
   Sparkles, 
   Maximize2, 
@@ -15,6 +14,7 @@ import {
   Zap,
   Shield,
   Brain,
+  Workflow,
   Mic,
   MicOff,
   Volume2,
@@ -33,6 +33,7 @@ interface Message {
 export function JarvisChat() {
   const [isOpen, setIsOpen] = useState(false);
   const [isMinimized, setIsMinimized] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(false);
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -107,7 +108,7 @@ export function JarvisChat() {
     if (isOpen && !isMinimized) {
       scrollToBottom();
     }
-  }, [messages, isOpen, isMinimized]);
+  }, [messages, isOpen, isMinimized, isExpanded]);
 
   // Initial greeting
   useEffect(() => {
@@ -115,7 +116,7 @@ export function JarvisChat() {
       setMessages([
         {
           role: "jarvis",
-          content: "Welcome to IPDM. I am JARVIS™, your strategic business advisor and intelligent website navigator. How can I assist you in exploring our systems or achieving your enterprise transformation goals today?",
+          content: "System Initialized. I am **JARVIS™**, your Strategic Intelligence Partner. I have access to the IPDM Multiverse architecture and am prepared to assist with systems exploration, predictive modelling, or enterprise strategy. \n\nHow can we optimize your trajectory today?",
           id: "welcome",
           timestamp: new Date()
         }
@@ -157,7 +158,7 @@ export function JarvisChat() {
       console.error(error);
       const errorMessage: Message = {
         role: "jarvis",
-        content: "I apologize, but I encountered an operational interruption. Please retry your query.",
+        content: "Operational Interruption Detected. Connectivity with the strategic core was temporarily severed. Please re-issue your command.",
         id: (Date.now() + 1).toString(),
         timestamp: new Date()
       };
@@ -168,197 +169,84 @@ export function JarvisChat() {
   };
 
   return (
-    <div className="fixed bottom-6 right-6 z-[200]">
+    <div className={`fixed bottom-6 right-6 z-[200] transition-all duration-500 ${isExpanded ? 'inset-6 bottom-6 right-6' : ''}`}>
       <AnimatePresence>
         {!isOpen && (
           <motion.button
-            initial={{ scale: 0, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            exit={{ scale: 0, opacity: 0 }}
-            whileHover={{ scale: 1.05 }}
+            initial={{ scale: 0.8, opacity: 0, y: 20 }}
+            animate={{ scale: 1, opacity: 1, y: 0 }}
+            exit={{ scale: 0.8, opacity: 0, y: 20 }}
+            whileHover={{ scale: 1.05, y: -2 }}
             whileTap={{ scale: 0.95 }}
             onClick={() => setIsOpen(true)}
-            className="w-16 h-16 rounded-[1.5rem] bg-zinc-950/90 border border-primary/40 text-primary shadow-[0_0_35px_rgba(34,211,238,0.3)] flex items-center justify-center group relative overflow-hidden"
+            className="w-16 h-16 rounded-2xl bg-[var(--color-bg)] dark:bg-zinc-950 border border-primary/30 text-primary shadow-[0_20px_50px_rgba(34,211,238,0.2)] flex items-center justify-center group relative overflow-hidden transition-colors duration-1000"
           >
             {/* Cybernetic overlay background */}
-            <div className="absolute inset-0 bg-gradient-to-tr from-primary/20 via-transparent to-transparent opacity-60 group-hover:opacity-100 transition-opacity" />
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(34,211,238,0.15)_0%,_transparent_70%)] animate-pulse" />
+            <div className="absolute inset-0 bg-gradient-to-tr from-primary/10 via-transparent to-transparent opacity-40 group-hover:opacity-100 transition-opacity" />
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(34,211,238,0.1)_0%,_transparent_70%)] animate-pulse" />
             
-            {/* Interactive Glowing Cyber-Robot */}
+            {/* Human-Centric Strategic Icon */}
             <motion.div
-              className="relative w-12 h-12 flex items-center justify-center z-10"
-              animate={{ y: [0, -3, 0] }}
-              transition={{
-                duration: 3,
-                repeat: Infinity,
-                ease: "easeInOut"
-              }}
+              className="relative w-14 h-14 flex items-center justify-center z-10"
+              animate={{ y: [0, -1, 0] }}
+              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
             >
-              <svg
-                width="40"
-                height="40"
-                viewBox="0 0 40 40"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                className="text-primary drop-shadow-[0_0_6px_rgba(34,211,238,0.6)]"
-              >
-                {/* Antenna */}
-                <motion.path
-                  d="M20 10V4"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  animate={{ stroke: ["#22d3ee", "#67e8f9", "#22d3ee"] }}
-                  transition={{ duration: 1.5, repeat: Infinity }}
+              <div className="relative w-full h-full rounded-xl overflow-hidden shadow-2xl border border-primary/20">
+                <img 
+                  src="/src/assets/images/jarvis_friendly_robot_avatar_1779096462612.png" 
+                  alt="JARVIS Intelligence" 
+                  className="w-full h-full object-cover"
+                  referrerPolicy="no-referrer"
                 />
-                
-                {/* Antenna Tip (Glowing Beacon) */}
-                <motion.circle
-                  cx="20"
-                  cy="3"
-                  r="2"
-                  fill="#22d3ee"
-                  animate={{
-                    scale: [1, 1.4, 1],
-                    fill: ["#22d3ee", "#ffffff", "#22d3ee"],
-                  }}
-                  transition={{
-                    duration: 1.5,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                  }}
-                />
-                
-                {/* Ears / Side Bolts */}
-                <path d="M7 19C7 18.4477 7.44772 18 8 18H9V26H8C7.44772 26 7 25.5523 7 25V19Z" fill="currentColor" opacity="0.6" />
-                <path d="M33 19C33 18.4477 32.5523 18 32 18H31V26H32C32.5523 26 33 25.5523 33 25V19Z" fill="currentColor" opacity="0.6" />
-
-                {/* Robot Head Frame */}
-                <rect
-                  x="9"
-                  y="11"
-                  width="22"
-                  height="18"
-                  rx="6"
-                  fill="#09090b"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                />
-
-                {/* Digital Screen Overlay */}
-                <rect
-                  x="12"
-                  y="14"
-                  width="16"
-                  height="12"
-                  rx="3"
-                  fill="#030712"
-                  stroke="currentColor"
-                  strokeWidth="1"
-                  opacity="0.8"
-                />
-
-                {/* Blinking Eyes (glowing digital cyan lights) */}
-                <motion.ellipse
-                  cx="16.5"
-                  cy="19"
-                  rx="1.5"
-                  ry="1.5"
-                  fill="#22d3ee"
-                  animate={{
-                    scaleY: [1, 1, 0.1, 1, 1, 1, 0.1, 1],
-                  }}
-                  transition={{
-                    duration: 3.8,
-                    repeat: Infinity,
-                    times: [0, 0.4, 0.42, 0.44, 0.7, 0.72, 0.74, 1],
-                  }}
-                />
-                <motion.ellipse
-                  cx="23.5"
-                  cy="19"
-                  rx="1.5"
-                  ry="1.5"
-                  fill="#22d3ee"
-                  animate={{
-                    scaleY: [1, 1, 0.1, 1, 1, 1, 0.1, 1],
-                  }}
-                  transition={{
-                    duration: 3.8,
-                    repeat: Infinity,
-                    times: [0, 0.4, 0.42, 0.44, 0.7, 0.72, 0.74, 1],
-                  }}
-                />
-
-                {/* Mouth/Audio Frequency Wave */}
-                <motion.path
-                  d="M17 23H23"
-                  stroke="#22d3ee"
-                  strokeWidth="1"
-                  strokeLinecap="round"
-                  animate={{
-                    strokeWidth: [1, 1.6, 1, 1.6, 1],
-                    d: [
-                      "M17 23H23",
-                      "M16 23.5H24",
-                      "M17 23H23",
-                      "M16 23.5H24",
-                      "M17 23H23"
-                    ]
-                  }}
-                  transition={{
-                    duration: 2,
-                    repeat: Infinity,
-                    ease: "easeInOut"
-                  }}
-                />
-
-                {/* Neck */}
-                <rect x="19" y="29" width="2" height="2" fill="currentColor" opacity="0.6" />
-
-                {/* Shoulders / Upper torso */}
-                <path
-                  d="M14 31H26C27.5 31 28.5 32 28.5 33.5V35H11.5V33.5C11.5 32 12.5 31 14 31Z"
-                  fill="#09090b"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                />
-              </svg>
+              </div>
             </motion.div>
+
+            {/* Notification Dot */}
+            <div className="absolute top-3 right-3 w-2 h-2 bg-primary rounded-full shadow-[0_0_10px_#22d3ee]" />
           </motion.button>
         )}
       </AnimatePresence>
 
-      <AnimatePresence>
+      <AnimatePresence mode="wait">
         {isOpen && (
           <motion.div
-            initial={{ y: 20, opacity: 0, scale: 0.95 }}
+            layoutId="jarvis-window"
+            initial={{ y: 40, opacity: 0, scale: 0.98 }}
             animate={{ 
               y: 0, 
               opacity: 1, 
               scale: 1,
-              height: isMinimized ? "auto" : "600px",
-              width: "400px"
+              height: isMinimized ? "72px" : isExpanded ? "calc(100vh - 48px)" : "680px",
+              width: isExpanded ? "calc(100vw - 48px)" : "480px"
             }}
-            exit={{ y: 20, opacity: 0, scale: 0.95 }}
-            className={`bg-zinc-950 border border-white/10 rounded-[2rem] shadow-2xl flex flex-col overflow-hidden backdrop-blur-3xl`}
+            exit={{ y: 40, opacity: 0, scale: 0.98 }}
+            className="bg-[var(--color-bg)] dark:bg-zinc-950 border border-[var(--color-text)]/10 dark:border-white/10 rounded-[2.5rem] shadow-[0_30px_100px_rgba(0,0,0,0.4)] flex flex-col overflow-hidden backdrop-blur-3xl transition-colors duration-1000"
           >
             {/* Header */}
-            <div className="p-4 border-b border-white/10 bg-white/5 flex items-center justify-between">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center text-primary">
-                  <Zap size={20} />
+            <div className="px-6 py-4 border-b border-[var(--color-text)]/5 dark:border-white/5 bg-[var(--color-text)]/[0.02] dark:bg-white/5 flex items-center justify-between transition-colors duration-1000">
+              <div className="flex items-center gap-4">
+                <div className="w-11 h-11 rounded-2xl border border-primary/20 flex items-center justify-center overflow-hidden shrink-0">
+                  <img 
+                    src="/src/assets/images/jarvis_friendly_robot_avatar_1779096462612.png" 
+                    alt="JARVIS" 
+                    className="w-full h-full object-cover"
+                    referrerPolicy="no-referrer"
+                  />
                 </div>
                 <div>
-                  <h3 className="text-sm font-bold tracking-tight text-white flex items-center gap-1">
+                  <h3 className="text-sm font-bold tracking-tight text-[var(--color-text)] flex items-center gap-2">
                     <Trademark text="JARVIS™" />
+                    <span className="text-[9px] px-1.5 py-0.5 rounded-full bg-primary/10 text-primary border border-primary/20 font-black">PRO</span>
                   </h3>
-                  <div className="flex items-center gap-1.5">
-                    <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                    <span className="text-[10px] font-mono text-zinc-500 uppercase tracking-widest">Active Intelligence</span>
+                  <div className="flex items-center gap-2">
+                    <div className="flex gap-0.5">
+                       {[0, 1, 2].map(i => <div key={i} className="w-1 h-1 rounded-full bg-emerald-500" />)}
+                    </div>
+                    <span className="text-[10px] font-mono text-zinc-500 uppercase tracking-widest font-black">Strategic Core Linkage: Active</span>
                   </div>
                 </div>
               </div>
+              
               <div className="flex items-center gap-1">
                 <button 
                   onClick={() => {
@@ -369,82 +257,122 @@ export function JarvisChat() {
                       setIsSpeaking(false);
                     }
                   }}
-                  className={`p-2 transition-colors ${voiceEnabled ? 'text-primary' : 'text-zinc-500'}`}
+                  className={`p-2 rounded-xl transition-all ${voiceEnabled ? 'text-primary bg-primary/10' : 'text-zinc-500 hover:bg-[var(--color-text)]/5'}`}
                   title={voiceEnabled ? "Voice Enabled" : "Voice Disabled"}
                 >
-                  {voiceEnabled ? <Volume2 size={16} /> : <VolumeX size={16} />}
+                  {voiceEnabled ? <Volume2 size={18} /> : <VolumeX size={18} />}
+                </button>
+                <button 
+                  onClick={() => {
+                    setIsExpanded(!isExpanded);
+                    setIsMinimized(false);
+                  }}
+                  className="p-2 text-zinc-500 hover:text-[var(--color-text)] hover:bg-[var(--color-text)]/5 rounded-xl transition-all"
+                  title="Toggle Full Screen"
+                >
+                  {isExpanded ? <Minimize2 size={18} /> : <Maximize2 size={18} />}
                 </button>
                 <button 
                   onClick={() => setIsMinimized(!isMinimized)}
-                  className="p-2 text-zinc-500 hover:text-white transition-colors"
+                  className="p-2 text-zinc-500 hover:text-[var(--color-text)] hover:bg-[var(--color-text)]/5 rounded-xl transition-all"
                 >
-                  {isMinimized ? <Maximize2 size={16} /> : <Minimize2 size={16} />}
+                   {isMinimized ? <ChevronRight className="-rotate-90" size={18} /> : <Minimize2 className="rotate-45" size={18} />}
                 </button>
                 <button 
                   onClick={() => setIsOpen(false)}
-                  className="p-2 text-zinc-500 hover:text-white transition-colors"
+                  className="p-2 text-zinc-500 hover:text-red-500 hover:bg-red-500/10 rounded-xl transition-all"
                 >
-                  <X size={16} />
+                  <X size={18} />
                 </button>
               </div>
             </div>
 
             {!isMinimized && (
               <>
+                {/* Status Bar for Expanded View */}
+                {isExpanded && (
+                  <div className="px-6 py-2 bg-[var(--color-text)]/[0.03] border-b border-[var(--color-text)]/5 flex items-center gap-12 overflow-x-auto scrollbar-hide">
+                    {[
+                      { icon: <Zap size={12} />, label: "POWER", value: "STABLE" },
+                      { icon: <Shield size={12} />, label: "SECURITY", value: "ENCR_L3" },
+                      { icon: <Brain size={12} />, label: "NEURAL", value: "94.2%" },
+                      { icon: <Workflow size={12} />, label: "AGENTS", value: "4 ACTIVE" },
+                    ].map((stat, i) => (
+                      <div key={i} className="flex items-center gap-2 whitespace-nowrap">
+                         <span className="text-primary">{stat.icon}</span>
+                         <span className="text-[10px] font-mono text-zinc-600 font-bold uppercase">{stat.label}:</span>
+                         <span className="text-[10px] font-mono text-[var(--color-text)] font-black uppercase">{stat.value}</span>
+                      </div>
+                    ))}
+                  </div>
+                )}
+
                 {/* Messages */}
-                <div className="flex-1 overflow-y-auto p-4 space-y-4 scrollbar-hide bg-gradient-to-b from-transparent to-black/40">
+                <div className="flex-1 overflow-y-auto p-6 space-y-6 scrollbar-hide bg-gradient-to-b from-transparent to-[var(--color-text)]/[0.02]">
                   {messages.map((msg) => (
-                    <div 
+                    <motion.div 
+                      layout
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
                       key={msg.id}
                       className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
                     >
-                      <div className={`flex gap-3 max-w-[85%] ${msg.role === 'user' ? 'flex-row-reverse' : ''}`}>
-                        <div className={`w-8 h-8 rounded-lg flex items-center justify-center shrink-0 border ${
-                          msg.role === 'user' ? 'bg-zinc-800 border-white/10' : 'bg-primary/10 border-primary/20 text-primary'
-                        }`}>
-                          {msg.role === 'user' ? <User size={14} /> : <Bot size={14} />}
-                        </div>
-                        <div className={`p-3 rounded-2xl text-sm leading-relaxed relative group/msg ${
+                      <div className={`flex gap-4 max-w-[90%] md:max-w-[80%] ${msg.role === 'user' ? 'flex-row-reverse' : ''}`}>
+                        <div className={`w-9 h-9 rounded-xl flex items-center justify-center shrink-0 border transition-all mt-1 overflow-hidden ${
                           msg.role === 'user' 
-                            ? 'bg-zinc-800 text-white rounded-tr-none' 
-                            : 'bg-white/5 border border-white/10 text-zinc-300 rounded-tl-none'
+                            ? 'bg-[var(--color-text)]/[0.05] border-[var(--color-text)]/10 text-[var(--color-text)]' 
+                            : 'border-primary/20 shadow-neon-sm'
+                        }`}>
+                          {msg.role === 'user' ? <User size={16} /> : (
+                            <img 
+                              src="/src/assets/images/jarvis_friendly_robot_avatar_1779096462612.png" 
+                              alt="JARVIS" 
+                              className="w-full h-full object-cover"
+                              referrerPolicy="no-referrer"
+                            />
+                          )}
+                        </div>
+                        <div className={`p-4 rounded-3xl text-sm leading-relaxed relative group/msg transition-all ${
+                          msg.role === 'user' 
+                            ? 'bg-[var(--color-text)] text-[var(--color-bg)] rounded-tr-none shadow-xl' 
+                            : 'bg-[var(--color-text)]/[0.03] dark:bg-white/5 border border-[var(--color-text)]/10 dark:border-white/10 text-zinc-600 dark:text-zinc-300 rounded-tl-none'
                         }`}>
                           {msg.role === 'jarvis' && (
                             <button 
                               onClick={() => speak(msg.content, true)}
-                              className="absolute -right-10 top-0 p-2 text-zinc-500 hover:text-primary opacity-0 group-hover/msg:opacity-100 transition-opacity"
+                              className="absolute -right-12 top-0 p-2 text-zinc-500 hover:text-primary opacity-0 group-hover/msg:opacity-100 transition-opacity"
                               title="Listen to message"
                             >
-                              <Volume2 size={14} />
+                              <Volume2 size={16} />
                             </button>
                           )}
                           {msg.role === 'jarvis' ? (
-                            <div className="markdown-content">
+                            <div className="markdown-content prose prose-invert prose-sm max-w-none">
                                <Markdown>{msg.content}</Markdown>
                             </div>
                           ) : (
-                            msg.content
+                            <span className="font-medium">{msg.content}</span>
                           )}
-                          <div className={`text-[10px] font-mono mt-1 ${msg.role === 'user' ? 'text-zinc-500' : 'text-zinc-600'}`}>
-                            {msg.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                          <div className={`text-[9px] font-mono mt-3 uppercase tracking-widest font-black opacity-40 ${msg.role === 'user' ? 'text-[var(--color-bg)]' : 'text-[var(--color-text)]'}`}>
+                            {msg.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })} • TRANSMIT_OK
                           </div>
                         </div>
                       </div>
-                    </div>
+                    </motion.div>
                   ))}
                   {isLoading && (
                     <div className="flex justify-start">
-                      <div className="flex gap-3 items-center">
-                        <div className="w-8 h-8 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center text-primary">
-                          <Loader2 size={14} className="animate-spin" />
+                      <div className="flex gap-4 items-center">
+                        <div className="w-9 h-9 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center text-primary">
+                          <Loader2 size={16} className="animate-spin" />
                         </div>
-                        <div className="flex gap-1">
+                        <div className="flex gap-1.5 px-4 py-3 bg-[var(--color-text)]/[0.03] rounded-2xl">
                           {[0, 1, 2].map(i => (
                             <motion.div 
                               key={i}
-                              animate={{ opacity: [0.3, 1, 0.3] }}
-                              transition={{ duration: 1.5, repeat: Infinity, delay: i * 0.2 }}
-                              className="w-1 h-1 rounded-full bg-primary"
+                              animate={{ opacity: [0.3, 1, 0.3], scale: [0.8, 1.2, 0.8] }}
+                              transition={{ duration: 1.2, repeat: Infinity, delay: i * 0.2 }}
+                              className="w-1.5 h-1.5 rounded-full bg-primary"
                             />
                           ))}
                         </div>
@@ -454,45 +382,49 @@ export function JarvisChat() {
                   <div ref={messagesEndRef} />
                 </div>
 
-                {/* Input */}
-                <div className="p-4 border-t border-white/10 bg-black/60">
-                  <div className="relative group">
-                    <div className="absolute -inset-0.5 bg-gradient-to-r from-primary/50 to-secondary/50 rounded-xl blur opacity-20 group-focus-within:opacity-100 transition-opacity" />
-                    <div className="relative flex items-center gap-2 bg-zinc-900 border border-white/10 rounded-xl p-2">
+                {/* Input Area */}
+                <div className="p-6 border-t border-[var(--color-text)]/5 dark:border-white/5 bg-[var(--color-text)]/[0.02] dark:bg-black/40">
+                  <div className="relative group max-w-5xl mx-auto">
+                    <div className="absolute -inset-1 bg-gradient-to-r from-primary to-secondary rounded-2xl blur opacity-10 group-focus-within:opacity-30 transition-opacity" />
+                    <div className="relative flex items-center gap-3 bg-[var(--color-bg)] dark:bg-zinc-900 border border-[var(--color-text)]/10 dark:border-white/10 rounded-2xl p-3 shadow-inner">
                       <button 
                         onClick={toggleListening}
-                        className={`p-2 rounded-lg transition-all ${
+                        className={`p-3 rounded-xl transition-all ${
                           isListening 
                             ? 'text-red-500 bg-red-500/10 animate-pulse' 
-                            : 'text-zinc-500 hover:text-primary hover:bg-primary/10'
+                            : 'text-zinc-500 hover:text-primary hover:bg-primary/5'
                         }`}
                       >
-                        {isListening ? <MicOff size={18} /> : <Mic size={18} />}
+                        {isListening ? <MicOff size={20} /> : <Mic size={20} />}
                       </button>
                       <input 
                         type="text"
                         value={input}
                         onChange={(e) => setInput(e.target.value)}
                         onKeyDown={(e) => e.key === 'Enter' && handleSend()}
-                        placeholder="Ask JARVIS™ anything..."
-                        className="flex-1 bg-transparent border-none text-white text-xs px-2 focus:ring-0 placeholder:text-zinc-600 font-mono"
+                        placeholder="INPUT STRATEGIC QUERY OR COMMAND..."
+                        className="flex-1 bg-transparent border-none text-[var(--color-text)] text-sm px-2 focus:ring-0 placeholder:text-zinc-600 font-mono font-bold uppercase tracking-tight"
                       />
                       <button 
                         onClick={handleSend}
                         disabled={!input.trim() || isLoading}
-                        className={`p-2 rounded-lg transition-all ${
+                        className={`p-3 rounded-xl transition-all shadow-lg ${
                           !input.trim() || isLoading 
-                            ? 'text-zinc-700' 
-                            : 'text-primary hover:bg-primary/10'
+                            ? 'text-zinc-700 bg-zinc-800/10' 
+                            : 'text-white bg-primary hover:brightness-110 active:scale-95'
                         }`}
                       >
-                        <Send size={18} />
+                        <Send size={20} />
                       </button>
                     </div>
                   </div>
-                  <div className="mt-2 flex items-center justify-between px-1">
-                    <span className="text-[11px] font-mono text-zinc-600 uppercase tracking-wider">Premium AI Support</span>
-                    <Trademark text="IPDM JARVIS™" className="text-[8px] opacity-30" />
+                  <div className="mt-4 flex items-center justify-between px-2 max-w-5xl mx-auto">
+                    <div className="flex items-center gap-4">
+                       <span className="text-[10px] font-mono text-zinc-500 uppercase tracking-widest font-black">Authorized Intelligence Access </span>
+                       <div className="h-px w-8 bg-zinc-800" />
+                       <span className="text-[10px] font-mono text-primary uppercase font-bold">Latency: 142ms</span>
+                    </div>
+                    <Trademark text="PREMIUM DECISION ENGINE v4.2" className="text-[9px] font-mono opacity-40 italic" />
                   </div>
                 </div>
               </>
