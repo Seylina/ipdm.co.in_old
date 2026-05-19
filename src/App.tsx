@@ -63,8 +63,10 @@ const IPDMFlow = lazy(() => import("./components/IPDMFlow").then(m => ({ default
 const Approach = lazy(() => import("./components/Approach").then(m => ({ default: m.Approach })));
 const DiagnostixChat = lazy(() => import("./components/DiagnostixChat").then(m => ({ default: m.DiagnostixChat })));
 const JarvisChat = lazy(() => import("./components/JarvisChat").then(m => ({ default: m.JarvisChat })));
+const VelocityLeadEngine = lazy(() => import("./components/VelocityLeadEngine").then(m => ({ default: m.VelocityLeadEngine })));
 const AISystemCategoryPage = lazy(() => import("./components/AISystemCategoryPage").then(m => ({ default: m.AISystemCategoryPage })));
 const AIEngineDetails = lazy(() => import("./components/AIEngineDetails").then(m => ({ default: m.AIEngineDetails })));
+const EmployeeDashboard = lazy(() => import("./components/EmployeeDashboard").then(m => ({ default: m.EmployeeDashboard })));
 
 // Loading Component
 function PageLoader() {
@@ -83,12 +85,16 @@ function PageLoader() {
 }
 
 export default function App() {
-  const [currentPage, setCurrentPage] = useState<'home' | 'advisory' | 'ai-systems' | 'about' | 'pricing' | 'policies' | 'dashboard' | 'ecosystem' | 'supporta' | 'strategos' | 'simulate' | 'core' | 'engage' | 'multi-agent' | 'lead-qualifier' | 'guided-decision' | 'context-response' | 'multi-language' | 'conversion-action' | 'personalized-interaction' | 'predictive-intelligence' | 'omnichannel-orchestration' | 'business-intelligence' | 'automation-engagement' | 'trust-security' | 'adaptive-learning' | 'customer-journey' | 'enterprise-collaboration' | 'evolve' | 'flow' | 'core-intel' | 'decision-modeling' | 'revenue-growth' | 'revenue-growth-ai' | 'brand-content' | 'knowledge-research' | 'ops-automation' | 'cust-experience' | 'adv-strategic' | 'queries-guiding' | 'engine-detail'>('home');
+  const [currentPage, setCurrentPage] = useState<'home' | 'advisory' | 'ai-systems' | 'about' | 'pricing' | 'policies' | 'dashboard' | 'ecosystem' | 'supporta' | 'strategos' | 'simulate' | 'core' | 'engage' | 'multi-agent' | 'lead-qualifier' | 'guided-decision' | 'context-response' | 'multi-language' | 'conversion-action' | 'personalized-interaction' | 'predictive-intelligence' | 'omnichannel-orchestration' | 'business-intelligence' | 'automation-engagement' | 'trust-security' | 'adaptive-learning' | 'customer-journey' | 'enterprise-collaboration' | 'evolve' | 'flow' | 'core-intel' | 'decision-modeling' | 'revenue-growth' | 'revenue-growth-ai' | 'brand-content' | 'knowledge-research' | 'ops-automation' | 'cust-experience' | 'adv-strategic' | 'queries-guiding' | 'engine-detail' | 'velocity-engine' | 'employee-portal'>('home');
   const [selectedEngineId, setSelectedEngineId] = useState<string | null>(null);
 
   const navigateToEngine = (engineId: string) => {
-    setSelectedEngineId(engineId);
-    setCurrentPage('engine-detail');
+    if (engineId.toUpperCase().includes('VELOCITY')) {
+      setCurrentPage('velocity-engine');
+    } else {
+      setSelectedEngineId(engineId);
+      setCurrentPage('engine-detail');
+    }
   };
   const [isContactOpen, setIsContactOpen] = useState(false);
   const { scrollYProgress } = useScroll();
@@ -193,6 +199,8 @@ export default function App() {
                 currentPage === 'adv-strategic' ? <AISystemCategoryPage category={SYSTEMS_ECOSYSTEM[7]} onNavigate={setCurrentPage} onNavigateEngine={navigateToEngine} /> :
                 currentPage === 'queries-guiding' ? <AISystemCategoryPage category={SYSTEMS_ECOSYSTEM[8]} onNavigate={setCurrentPage} onNavigateEngine={navigateToEngine} /> :
                 currentPage === 'engine-detail' ? <AIEngineDetails engineId={selectedEngineId || ""} onNavigate={setCurrentPage} /> :
+                currentPage === 'velocity-engine' ? <VelocityLeadEngine onNavigate={setCurrentPage} /> :
+                currentPage === 'employee-portal' ? <EmployeeDashboard onNavigate={setCurrentPage} /> :
                 <CompanyPage onNavigate={setCurrentPage} />}
             </div>
           )}

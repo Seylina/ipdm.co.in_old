@@ -48,6 +48,23 @@ async function startServer() {
     res.json({ success: true });
   });
 
+  // Velocity Lead Generation Endpoint
+  app.post("/api/velocity/generate-leads", async (req, res) => {
+    const { businessDescription } = req.body;
+    if (!businessDescription) {
+      return res.status(400).json({ error: "Business description is required" });
+    }
+
+    try {
+      const { generateVelocityLeads } = await import("./src/services/velocityService");
+      const result = await generateVelocityLeads(businessDescription);
+      res.json(result);
+    } catch (error: any) {
+      console.error("Velocity API Error:", error);
+      res.status(500).json({ error: error.message || "Failed to generate leads" });
+    }
+  });
+
   // Vite middleware for development
   if (process.env.NODE_ENV !== "production") {
     const vite = await createViteServer({

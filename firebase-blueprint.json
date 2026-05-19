@@ -1,0 +1,68 @@
+{
+  "entities": {
+    "Employee": {
+      "title": "Employee",
+      "description": "Represents an employee user in the system.",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "description": "Firebase Auth UID" },
+        "displayName": { "type": "string" },
+        "email": { "type": "string" },
+        "photoURL": { "type": "string" },
+        "role": { "type": "string", "enum": ["agent", "admin"] },
+        "stats": {
+          "type": "object",
+          "properties": {
+            "callsMade": { "type": "number" },
+            "appointmentsFixed": { "type": "number" },
+            "totalLeads": { "type": "number" }
+          }
+        }
+      },
+      "required": ["uid", "email"]
+    },
+    "Task": {
+      "title": "Task",
+      "description": "A lead or task assigned to an employee.",
+      "type": "object",
+      "properties": {
+        "employeeId": { "type": "string", "description": "UID of the assigned employee" },
+        "clientName": { "type": "string" },
+        "clientIndustry": { "type": "string" },
+        "status": { "type": "string", "enum": ["pending", "called", "appointment_fixed", "rejected"] },
+        "notes": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["employeeId", "clientName", "status"]
+    },
+    "UserFile": {
+      "title": "UserFile",
+      "description": "Metadata for a file uploaded by an employee.",
+      "type": "object",
+      "properties": {
+        "employeeId": { "type": "string" },
+        "fileName": { "type": "string" },
+        "fileSize": { "type": "number" },
+        "fileType": { "type": "string" },
+        "uploadDate": { "type": "string", "format": "date-time" },
+        "url": { "type": "string" }
+      },
+      "required": ["employeeId", "fileName", "url"]
+    }
+  },
+  "firestore": {
+    "/employees/{employeeId}": {
+      "schema": "Employee",
+      "description": "Employee profile and statistics."
+    },
+    "/tasks/{taskId}": {
+      "schema": "Task",
+      "description": "Leads and tasks assigned to employees."
+    },
+    "/files/{fileId}": {
+      "schema": "UserFile",
+      "description": "Records of uploaded files."
+    }
+  }
+}

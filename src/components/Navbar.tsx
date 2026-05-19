@@ -6,7 +6,7 @@ import { openMeeting as openCalendly } from "../lib/calendly";
 import { useTheme } from "../lib/ThemeContext";
 
 export function Navbar({ onNavigate, activePage }: { 
-  onNavigate: (page: 'home' | 'advisory' | 'ai-systems' | 'about' | 'pricing' | 'policies' | 'dashboard' | 'ecosystem' | 'supporta' | 'strategos' | 'simulate' | 'core' | 'engage' | 'evolve' | 'flow' | 'core-intel' | 'decision-modeling' | 'revenue-growth' | 'brand-content' | 'knowledge-research' | 'ops-automation' | 'cust-experience' | 'adv-strategic' | 'queries-guiding') => void,
+  onNavigate: (page: 'home' | 'advisory' | 'ai-systems' | 'about' | 'pricing' | 'policies' | 'dashboard' | 'ecosystem' | 'supporta' | 'strategos' | 'simulate' | 'core' | 'engage' | 'evolve' | 'flow' | 'core-intel' | 'decision-modeling' | 'revenue-growth' | 'brand-content' | 'knowledge-research' | 'ops-automation' | 'cust-experience' | 'adv-strategic' | 'queries-guiding' | 'employee-portal') => void,
   activePage: string 
 }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -180,6 +180,7 @@ export function Navbar({ onNavigate, activePage }: {
                   { page: 'strategos', label: 'STRATEGOS', dotColor: 'bg-amber-500/60' },
                   { page: 'simulate', label: 'SIMULATE', dotColor: 'bg-blue-400/60' },
                   { page: 'dashboard', label: 'DASHBOARD', dotColor: 'bg-emerald-500/60' },
+                  { page: 'employee-portal', label: 'EMPLOYEE PORTAL', dotColor: 'bg-primary/60' },
                 ]}
               />
 
@@ -260,6 +261,7 @@ export function Navbar({ onNavigate, activePage }: {
                 <button onClick={() => { onNavigate('strategos'); setIsOpen(false); window.scrollTo({ top: 0, behavior: 'smooth' }); }} className={`${activePage === 'strategos' ? 'text-primary' : 'text-zinc-500'} font-bold uppercase tracking-widest text-[10px] hover:text-primary light:hover:text-black dark:hover:text-white`}>Strategos</button>
                 <button onClick={() => { onNavigate('simulate'); setIsOpen(false); window.scrollTo({ top: 0, behavior: 'smooth' }); }} className={`${activePage === 'simulate' ? 'text-primary' : 'text-zinc-500'} font-bold uppercase tracking-widest text-[10px] hover:text-primary light:hover:text-black dark:hover:text-white`}>Simulate</button>
                 <button onClick={() => { onNavigate('dashboard'); setIsOpen(false); window.scrollTo({ top: 0, behavior: 'smooth' }); }} className={`${activePage === 'dashboard' ? 'text-primary' : 'text-zinc-500'} font-bold uppercase tracking-widest text-[10px] hover:text-primary light:hover:text-black dark:hover:text-white`}>Dashboard</button>
+                <button onClick={() => { onNavigate('employee-portal'); setIsOpen(false); window.scrollTo({ top: 0, behavior: 'smooth' }); }} className={`${activePage === 'employee-portal' ? 'text-primary' : 'text-zinc-500'} font-bold uppercase tracking-widest text-[10px] hover:text-primary light:hover:text-black dark:hover:text-white`}>Employee Portal</button>
 
                  <div className="h-px bg-zinc-500/10 my-1" />
                 <span className="text-[11px] text-zinc-500 font-black tracking-wider uppercase">Ecosystem</span>
