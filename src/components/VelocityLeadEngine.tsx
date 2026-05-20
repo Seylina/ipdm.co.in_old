@@ -39,8 +39,7 @@ import {
 } from "@vis.gl/react-google-maps";
 import { GoogleGenAI } from "@google/genai";
 const API_KEY = process.env.GOOGLE_MAPS_PLATFORM_KEY || "";
-const hasValidKey =
-  Boolean(API_KEY) && API_KEY !== "AIzaSyD8VZuRKHVKjnnE5sCjtHxParMaJXTIueo";
+const hasValidKey = true;
 
 interface Lead {
   id?: string;
