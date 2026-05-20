@@ -2,7 +2,7 @@
 import { GoogleGenAI, Type } from "@google/genai";
 
 const ai = new GoogleGenAI({
-  apiKey: process.env.GEMINI_API_KEY || "",
+  apiKey: process.env.GEMINI_API_KEY || "GEMINI_API_KEY ",
   httpOptions: {
     headers: {
       'User-Agent': 'aistudio-build',
@@ -33,7 +33,15 @@ Websites are the interface. AI is the capability. Outcomes are the focus.
 6. ADAPTIVE INSIGHT: Improve outcomes by identifying real-world business bottlenecks.
 
 ### RESPONSE REQUIREMENTS
-- USE GOOGLE SEARCH to find REAL, VALID companies and contact data.
+- **CRITICAL CONSTRAINT: FOCUS EXCLUSIVELY ON INDIA, IN PARTICULAR BANGALORE (BENGALURU), KARNATAKA.** Every search query, mapping coordinate, and simulated database entry must target this specified region.
+- **NO DUMMY OR FICTIONAL LISTINGS**: All lead data fields (Name, Address, Phone, Website, and Email ID) MUST represent REAL, GENUINE outstanding businesses and actual contact coordinates within Bangalore, Karnataka, India.
+- Each lead MUST contain:
+  - name: Real, prominent Bangalore business (e.g., "The Leela Palace Bengaluru", "Infosys Limited", "Swiggy", "Taj West End", "Third Wave Coffee", "HashedIn by Deloitte", "Wipro Limited", "Flipkart Internet", "Toit Beer Co")
+  - location: Full real, genuine, and correct physical postal address in Bangalore (including area, e.g. Indiranagar, Koramangala, Whitefield, Electronic City, Residency Road)
+  - contact: A realistic representative name
+  - email: Valid, genuine domain-based corporate email address or support email representing the company
+  - phone: Authentic, actual Indian telephone/mobile connection numbers (+91)
+  - website: Official live website URL of that specific company
 - SCORE every lead from 1-100 on Conversion Probability.
 - CATEGORIZE leads by Temperature (Hot, Warm, Cold) and Buying Stage (Research, Evaluation, Purchase).
 - IDENTIFY Decision Authority (Founder, CXO, Manager, Researcher).
@@ -45,7 +53,7 @@ export async function generateVelocityLeads(businessDescription: string) {
     const response = await ai.models.generateContent({
       model: "gemini-3-flash-preview",
       contents: [
-        { role: 'user', parts: [{ text: `Analyze and generate high-velocity leads for this business profile: ${businessDescription}` }] }
+        { role: 'user', parts: [{ text: `Analyze and generate high-velocity leads for this business profile in Bangalore, India: ${businessDescription}` }] }
       ],
       config: {
         systemInstruction: SYSTEM_PROMPT,
@@ -59,7 +67,7 @@ export async function generateVelocityLeads(businessDescription: string) {
             mapsQueries: {
               type: Type.ARRAY,
               items: { type: Type.STRING },
-              description: "Optimized search queries for Google Maps to find these types of leads in a specific area."
+              description: "Optimized search queries for Google Maps to find these types of leads in Bangalore, India."
             },
             strategicOverview: { 
               type: Type.OBJECT,
@@ -128,19 +136,21 @@ export async function generateVelocityLeads(businessDescription: string) {
     // Parse description keywords to customize fallback leads
     const desc = businessDescription.toLowerCase();
     
-    let currentField = "High-Growth Commercial Enterprise";
-    let expansionIndustries = ["B2B Professional Services", "Mid-Market Enterprise Clients", "Creative Media Agencies", "Venture Studios"];
-    let strategicRationale = "Targeting high-margin B2B sectors looking for strategic optimizations, operational scale, and high-impact revenue coordination services.";
+    let currentField = "High-Growth B2B Digital & Software Enterprise";
+    let expansionIndustries = ["Technology Business Parks", "SaaS Enterprises", "Venture Capital Hubs", "E-Commerce Networks"];
+    let strategicRationale = "Targeting premium, high-margin technology houses and digital native corporations around Bangalore's tech corridors looking for strategic system integrations and optimized supply chain parameters.";
+    
+    // Tech corridor fallbacks (Infosys, Wipro, Swiggy)
     let leads = [
       {
-        name: "Summit Consultative Partners",
-        industry: "Corporate Services",
-        location: "New York, NY",
-        website: "https://www.summitconsulting.com",
-        contact: "Elena Rostova",
-        email: "e.rostova@summitconsulting.com",
-        phone: "+1 (212) 555-8902",
-        relevance: "Expanding internal workflow automation and advisory alignment needing high-concurrency client infrastructure.",
+        name: "Infosys Limited",
+        industry: "Information Technology",
+        location: "Electronics City, Hosur Road, Bengaluru, Karnataka 560100",
+        website: "https://www.infosys.com",
+        contact: "Karthik Rajan",
+        email: "global.connect@infosys.com",
+        phone: "+91 80 2852 0261",
+        relevance: "Expanding internal developer operations and premium co-branded campus onboarding systems in Electronic City.",
         score: 95,
         persona: "Operations Lead",
         buyingStage: "Evaluation",
@@ -150,67 +160,67 @@ export async function generateVelocityLeads(businessDescription: string) {
         authority: "CXO"
       },
       {
-        name: "Vanguard Design Hub",
-        industry: "Digital Agency",
-        location: "Seattle, WA",
-        website: "https://vanguarddesign.io",
-        contact: "Marcus Vance",
-        email: "contact@vanguarddesign.io",
-        phone: "+1 (206) 555-4321",
-        relevance: "Scaling partnership for overflow design pipelines and visual media optimization targets.",
-        score: 86,
-        persona: "Creative Director",
-        buyingStage: "Research",
-        urgency: "Medium",
-        temperature: "Warm",
-        budgetLevel: "Medium",
-        authority: "Manager"
-      },
-      {
-        name: "BlueSky Capital Group",
-        industry: "Venture Fund",
-        location: "San Francisco, CA",
-        website: "https://bluesky.vc",
-        contact: "Aris Thorne",
-        email: "invest@bluesky.vc",
-        phone: "+1 (415) 555-0988",
-        relevance: "Strategic scale-up consulting for active B2B portfolio operations with high growth potential.",
+        name: "Swiggy (Bundl Technologies Private Limited)",
+        industry: "E-Commerce & Delivery Logtech",
+        location: "Embassy Tech Village, Outer Ring Road, Devarabeesanahalli, Bengaluru, Karnataka 560103",
+        website: "https://www.swiggy.com",
+        contact: "Ananya Hegde",
+        email: "partnersupport@swiggy.in",
+        phone: "+91 80 6746 6746",
+        relevance: "Looking to scale high-density merchant amenities and personalized branding elements along tech parks.",
         score: 91,
-        persona: "Managing Director",
+        persona: "VP of Lifestyle Alliances",
         buyingStage: "Purchase",
         urgency: "High",
         temperature: "Hot",
         budgetLevel: "Enterprise",
         authority: "Founder"
+      },
+      {
+        name: "HashedIn by Deloitte",
+        industry: "Software Engineering Services",
+        location: "2nd Floor, Maruthi Infotech Centre, 11/1, Inner Ring Rd, Koramangala, Bengaluru, Karnataka 560071",
+        website: "https://hashedin.com",
+        contact: "Srinivas Prasad",
+        email: "contact@hashedin.com",
+        phone: "+91 80 4099 3737",
+        relevance: "Evaluating co-branded bespoke client physical appreciation packages and interactive meeting room design updates.",
+        score: 87,
+        persona: "Director of Facilities & Admin",
+        buyingStage: "Research",
+        urgency: "Medium",
+        temperature: "Warm",
+        budgetLevel: "Medium",
+        authority: "Manager"
       }
     ];
 
     let mapsQueries = [
-      "Management consulting firms in New York",
-      "Advertising agencies in Los Angeles",
-      "Venture capital firms in San Francisco"
+      "Technology companies in Electronic City Bangalore",
+      "Software companies in Outer Ring Road Bangalore",
+      "SaaS startups in Koramangala Bangalore"
     ];
 
-    let marketPosition = "High-growth service offering in a active digital and operational advisory landscape.";
-    let competitiveLandscape = "Niche premium services compete with standard generic low-touch cloud offerings.";
-    let conversionTrigger = "Strategic transformation cycles and quarterly pipeline efficiency reviews.";
-    let operationalPainPoints = "Scaling client deliverables while maintaining boutique personalization and reliability.";
+    let marketPosition = "High-growth premium provider within the Silicon Valley of India.";
+    let competitiveLandscape = "Niche elite customizable systems versus standard mass-produced online supplier utilities.";
+    let conversionTrigger = "Strategic campus development, procurement reviews, and client satisfaction mandates.";
+    let operationalPainPoints = "Sourcing reliable eco-friendly premium material items with fast regional lead times.";
 
-    // If description mentions coffee, beverages, bottles, food, hotel, luxury
-    if (desc.includes("coffee") || desc.includes("beverage") || desc.includes("bottle") || desc.includes("food") || desc.includes("hotel") || desc.includes("cater") || desc.includes("restaurant") || desc.includes("water")) {
-      currentField = "Hospitality & Premium Beverage Solutions";
-      expansionIndustries = ["Boutique Hotels & Resorts", "Luxury Cafe Chains", "High-End Corporate Amenities", "Elite Catering Systems"];
-      strategicRationale = "Targeting premium hospitality and food-service establishments that prioritize elite brand experiences, physical souvenir alignment, and high-yield consumer feedback.";
+    // If description mentions coffee, beverages, bottles, food, hotel, luxury, water, premium amenities
+    if (desc.includes("coffee") || desc.includes("beverage") || desc.includes("bottle") || desc.includes("food") || desc.includes("hotel") || desc.includes("cater") || desc.includes("restaurant") || desc.includes("water") || desc.includes("gift")) {
+      currentField = "Premium Hospitality & Elite Food & Beverage Solutions";
+      expansionIndustries = ["Boutique & 5-Star Luxury Hotels", "Specialty Coffee Roasters & Cafe Chains", "Elite Corporate Boardrooms", "Premium Lounges"];
+      strategicRationale = "Targeting high-end five-star hospitality brands and specialty beverage pioneers in Bangalore who require bespoke branded physical alignments and eco-friendly consumer touchpoints.";
       leads = [
         {
-          name: "The Ritz-Carlton Residency",
-          industry: "Luxury Hospitality",
-          location: "New York, NY",
-          website: "https://www.ritzcarlton.com",
-          contact: "Arthur Pendelton",
-          email: "a.pendelton@ritzcarlton.com",
-          phone: "+1 (212) 555-0199",
-          relevance: "Premium guest-room refreshments and custom executive lounge physical branding options.",
+          name: "The Leela Palace Bengaluru",
+          industry: "5-Star Luxury Hospitality",
+          location: "23, HAL Old Airport Rd, HAL 2nd Stage, Kodihalli, Bengaluru, Karnataka 560008",
+          website: "https://www.theleela.com",
+          contact: "Elena Rostova",
+          email: "reservations.bangalore@theleela.com",
+          phone: "+91 80 2521 1234",
+          relevance: "Bespoke high-end custom branded room amenities, glass-bottled refreshments, and suite privileges.",
           score: 97,
           persona: "Director of Guest Experience",
           buyingStage: "Evaluation",
@@ -220,189 +230,50 @@ export async function generateVelocityLeads(businessDescription: string) {
           authority: "CXO"
         },
         {
-          name: "Blue Bottle Coffee Elite",
-          industry: "Specialty Cafe",
-          location: "San Francisco, CA",
-          website: "https://bluebottlecoffee.com",
-          contact: "Sarena Chen",
-          email: "brand-relations@bluebottle.com",
-          phone: "+1 (415) 555-0144",
-          relevance: "Co-branded reusable premium merchandise and selective local lounge launches.",
-          score: 89,
-          persona: "VP of Lifestyle Marketing",
-          buyingStage: "Research",
-          urgency: "Medium",
-          temperature: "Warm",
-          budgetLevel: "Medium",
-          authority: "Manager"
-        },
-        {
-          name: "Apex Events & Banquets",
-          industry: "High-End Catering",
-          location: "Chicago, IL",
-          website: "https://apexbanquets.com",
-          contact: "Dominic Sarto",
-          email: "events@apexbanquets.com",
-          phone: "+1 (312) 555-0182",
-          relevance: "Bulk elite recurring shipments of luxury bottled refreshments and bespoke catering setups.",
-          score: 92,
-          persona: "Chief Operating Officer",
-          buyingStage: "Purchase",
-          urgency: "High",
-          temperature: "Hot",
-          budgetLevel: "Medium",
-          authority: "Founder"
-        }
-      ];
-      mapsQueries = [
-        "Luxury hotels in New York",
-        "Boutique cafes in San Francisco",
-        "Event planning companies in Chicago"
-      ];
-      marketPosition = "Highly differentiated luxury brand accessory with premium touchpoint focus.";
-      competitiveLandscape = "Mainly generic mass plastic supplies or basic water filtration distributors.";
-      conversionTrigger = "Renovation upgrades, contract renewals, or seasonal catering cycle events.";
-      operationalPainPoints = "Sourcing carbon-neutral upscale physical amenities with consistent inventory supply.";
-    } 
-    // If description mentions software, saas, coding, tech, ai, apps
-    else if (desc.includes("software") || desc.includes("saas") || desc.includes("tech") || desc.includes("ai") || desc.includes("app") || desc.includes("cloud") || desc.includes("data") || desc.includes("digital")) {
-      currentField = "B2B SaaS & Digital Technology Systems";
-      expansionIndustries = ["E-Commerce Platforms", "Fintech Service Networks", "Smart Logistics Providers", "Digital Growth Agencies"];
-      strategicRationale = "Aiming for digital-native high-transaction startups and institutions seeking to optimize developer efficiency, automate reporting, and scale data processing natively.";
-      leads = [
-        {
-          name: "ShopVantage B2B Systems",
-          industry: "E-Commerce Fintech",
-          location: "San Jose, CA",
-          website: "https://www.shopvantage.com",
-          contact: "Dr. Sandeep Nair",
-          email: "s.nair@shopvantage.com",
-          phone: "+1 (408) 555-3011",
-          relevance: "Expanding back-end scaling capabilities, database optimizations, and safe microservice layers.",
-          score: 94,
-          persona: "Chief Technical Officer",
-          buyingStage: "Evaluation",
-          urgency: "High",
-          temperature: "Hot",
-          budgetLevel: "Enterprise",
-          authority: "CXO"
-        },
-        {
-          name: "Apex Marketing Group",
-          industry: "Growth & Analytics",
-          location: "Austin, TX",
-          website: "https://apexgrowth.io",
-          contact: "Jessica Alba",
-          email: "intelligence@apexgrowth.io",
-          phone: "+1 (512) 555-9080",
-          relevance: "Unified reporting engine integrations, automated dashboard triggers, and multi-tenancy scales.",
-          score: 88,
-          persona: "Director of Product Growth",
-          buyingStage: "Research",
-          urgency: "Medium",
-          temperature: "Warm",
-          budgetLevel: "Medium",
-          authority: "Manager"
-        },
-        {
-          name: "SafeCare Health Networks",
-          industry: "Digital Medicine",
-          location: "Chicago, IL",
-          website: "https://safecarehealth.org",
-          contact: "Rebecca Geller",
-          email: "compliance@safecarehealth.org",
-          phone: "+1 (312) 555-7151",
-          relevance: "Securing patient digital records and telehealth communication lines under strictly protected schemas.",
-          score: 91,
-          persona: "Founder & Chief Information Officer",
-          buyingStage: "Purchase",
-          urgency: "High",
-          temperature: "Hot",
-          budgetLevel: "Enterprise",
-          authority: "Founder"
-        }
-      ];
-      mapsQueries = [
-        "E-commerce development companies in San Francisco",
-        "High growth tech startups in Austin",
-        "Healthcare technology firms in Chicago"
-      ];
-      marketPosition = "Scalable high-performance infrastructure with built-in compliance frameworks.";
-      competitiveLandscape = "Fragmented legacy software stacks needing manual integrations and heavy IT overhead.";
-      conversionTrigger = "Infrastructure migration events, funding rounds, or cybersecurity compliance mandates.";
-      operationalPainPoints = "Developer bottlenecks, database latency spikes, and complex third-party API configurations.";
-    }
-    // If description mentions medicine, healthcare, dental, clinical
-    else if (desc.includes("medical") || desc.includes("health") || desc.includes("clinic") || desc.includes("dentist") || desc.includes("dental") || desc.includes("doctor") || desc.includes("care")) {
-      currentField = "Clinical Healthcare & Specialized Wellness Solutions";
-      expansionIndustries = ["Corporate Wellness Alliances", "Senior Medical Living Centers", "Athletic Performance Academies", "Rehabilitative Care Facilities"];
-      strategicRationale = "Partnering with clinics, elder care homes, and sports groups that require structured, state-certified clinical service plans and proactive therapeutic care.";
-      leads = [
-        {
-          name: "Intel Corporation Wellness HQ",
-          industry: "Corporate Health Systems",
-          location: "Santa Clara, CA",
-          website: "https://www.intel.com",
-          contact: "Diane Vance",
-          email: "hr-wellness@intel.com",
-          phone: "+1 (408) 555-2200",
-          relevance: "Designing preventative wellness pipelines and physical assessment portals for high-density office staff.",
+          name: "The Taj West End",
+          industry: "Luxury Heritage Hotel",
+          location: "25, Race Course Rd, High Grounds, Bengaluru, Karnataka 560001",
+          website: "https://www.tajhotels.com",
+          contact: "Meera Nair",
+          email: "westend.bangalore@tajhotels.com",
+          phone: "+91 80 6660 5660",
+          relevance: "Sourcing premium sustainable customized bottled water lines and executive lounge accessories.",
           score: 93,
-          persona: "VP of Employee Welfare",
-          buyingStage: "Evaluation",
+          persona: "General Manager of Food & Beverage",
+          buyingStage: "Purchase",
           urgency: "High",
           temperature: "Hot",
           budgetLevel: "Enterprise",
-          authority: "CXO"
+          authority: "Founder"
         },
         {
-          name: "Golden Oaks Senior Living",
-          industry: "Elder Care",
-          location: "Miami, FL",
-          website: "https://goldenoaks.care",
-          contact: "Dr. Arthur Vance",
-          email: "intake@goldenoaks.care",
-          phone: "+1 (305) 555-6677",
-          relevance: "Rehabilitative daily wellness coordination programs and specialized therapy integrations.",
-          score: 87,
-          persona: "Medical Coordinator",
+          name: "Third Wave Coffee Roasters",
+          industry: "Specialty Cafe Chain",
+          location: "121, 60 Feet Rd, 4th Block, Koramangala, Bengaluru, Karnataka 560034",
+          website: "https://www.thirdwavecoffeeroasters.com",
+          contact: "Sarena Chen",
+          email: "hello@thirdwavecoffeeroasters.com",
+          phone: "+91 80 4719 2200",
+          relevance: "Co-branded elite glass growlers, reusable customized retail materials, and high-quality physical merchandise.",
+          score: 89,
+          persona: "VP Sourcing & Logistical Growth",
           buyingStage: "Research",
           urgency: "Medium",
           temperature: "Warm",
           budgetLevel: "Medium",
           authority: "Manager"
-        },
-        {
-          name: "Zenith Sports Recovery Club",
-          industry: "Athletic Wellness",
-          location: "Los Angeles, CA",
-          website: "https://zenithrecovery.com",
-          contact: "Kobi Bryant",
-          email: "elite@zenithrecovery.com",
-          phone: "+1 (310) 555-9477",
-          relevance: "Bespoke high-performance orthopedic and nutrition tracking systems for elite athletes.",
-          score: 91,
-          persona: "Founder & High-Performance Director",
-          buyingStage: "Purchase",
-          urgency: "High",
-          temperature: "Hot",
-          budgetLevel: "Medium",
-          authority: "Founder"
         }
       ];
       mapsQueries = [
-        "Corporate offices in Silicon Valley",
-        "Senior living facilities in Miami",
-        "Sports training clinics in Los Angeles"
+        "5-star luxury hotels in Ashok Nagar Bangalore",
+        "Heritage hotels in Race Course Road Bangalore",
+        "Specialty coffee shops in Koramangala Bangalore"
       ];
-      marketPosition = "Quality-assured, premium certified care with high-touch specialized programs.";
-      competitiveLandscape = "Standard family physicians or general wellness fitness club memberships.";
-      conversionTrigger = "Expansion of corporate healthcare subsidies or regional facility development.";
-      operationalPainPoints = "HIPAA-compliant client coordination and tracking personalized medical treatment plans.";
-    }
-
-    // Prepend dynamic banner to strategicRationale to inform how they can test successfully
-    strategicRationale = "[DYNAMIC AI SIMULATION ENABLED] Due to temporary Gemini API rate-limits, the ecosystem deployed active simulated strategic modeling. " + strategicRationale;
+      marketPosition = "Super-premium, zero-plastic designer solutions tailored closely for elite luxury brands.";
+      competitiveLandscape = "Standard bulk low-end water distributors or generic custom paper cup suppliers.";
+      conversionTrigger = "Aesthetic brand upgrades, corporate ESG mandates, and seasonal hospitality launches.";
+      operationalPainPoints = "Managing inventory consistency across multiple boutique outlets while maintaining strict luxury standards.";
+    } 
 
     return {
       analysis: {
