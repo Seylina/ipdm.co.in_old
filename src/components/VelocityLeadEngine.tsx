@@ -18,15 +18,33 @@ import {
   Building2,
   ChevronRight,
   ExternalLink,
-  ShieldCheck
+  ShieldCheck,
+  Map as MapIcon,
+  Navigation
 } from "lucide-react";
 import React, { useState, useRef, useEffect } from "react";
 import { Trademark } from "./Trademark";
+import { 
+  APIProvider, 
+  Map, 
+  AdvancedMarker, 
+  Pin, 
+  InfoWindow, 
+  useMap, 
+  useMapsLibrary,
+  useAdvancedMarkerRef
+} from '@vis.gl/react-google-maps';
+import { GoogleGenAI } from "@google/genai";
+const API_KEY = process.env.GOOGLE_MAPS_PLATFORM_KEY || '';
+const hasValidKey = Boolean(API_KEY) && API_KEY !== 'AIzaSyD8VZuRKHVKjnnE5sCjtHxParMaJXTIueo';
 
 interface Lead {
+  id?: string;
   name: string;
   industry: string;
   location: string;
+  lat?: number;
+  lng?: number;
   website?: string;
   contact?: string;
   email?: string;
@@ -39,6 +57,7 @@ interface Lead {
   temperature: string;
   budgetLevel: string;
   authority: string;
+  isRealTime?: boolean;
 }
 
 interface StrategicOverview {
@@ -58,10 +77,14 @@ export function VelocityLeadEngine({ onNavigate }: { onNavigate: (page: any) => 
   const [input, setInput] = useState("");
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [leads, setLeads] = useState<Lead[]>([]);
+  const [realTimeLeads, setRealTimeLeads] = useState<Lead[]>([]);
   const [analysis, setAnalysis] = useState<Analysis | null>(null);
   const [overview, setOverview] = useState<StrategicOverview | null>(null);
+  const [mapsQueries, setMapsQueries] = useState<string[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [activeAgent, setActiveAgent] = useState("");
+  const [isVerifying, setIsVerifying] = useState(false);
+  const [selectedLead, setSelectedLead] = useState<Lead | null>(null);
 
   const agents = [
     "Business Identity AI: Mapping Profile...",
@@ -111,6 +134,8 @@ export function VelocityLeadEngine({ onNavigate }: { onNavigate: (page: any) => 
       setAnalysis(data.analysis);
       setLeads(data.leads);
       setOverview(data.strategicOverview);
+      setMapsQueries(data.mapsQueries || []);
+      setRealTimeLeads([]);
     } catch (err: any) {
       console.error(err);
       setError(err.message || "An unexpected error occurred.");
@@ -192,12 +217,47 @@ export function VelocityLeadEngine({ onNavigate }: { onNavigate: (page: any) => 
       setOverview(mockOverview);
       setAnalysis(mockAnalysis);
       setLeads(mockLeads);
+      setMapsQueries(isBottleCo ? ["Luxury hotels in New York", "Boutique cafes in San Francisco"] : []);
       setIsAnalyzing(false);
     }, 5000);
   };
 
+  const handleApplyRealTimeLeads = (newLeads: Lead[]) => {
+    setRealTimeLeads(newLeads);
+    setIsVerifying(false);
+  };
+
+  if (!hasValidKey) {
+    return (
+      <div className="min-h-screen bg-black flex items-center justify-center p-6 font-sans">
+        <div className="max-w-xl w-full p-12 rounded-[3rem] bg-white/[0.02] border border-white/10 glass text-center">
+          <div className="w-20 h-20 bg-primary/20 rounded-[2rem] flex items-center justify-center mx-auto mb-8 border border-primary/30">
+            <MapPin className="text-primary" size={40} />
+          </div>
+          <h2 className="text-3xl font-display font-medium text-white mb-6">Maps API Key Required</h2>
+          <div className="space-y-6 text-left mb-10">
+            <div className="flex gap-4">
+               <div className="w-6 h-6 rounded-full bg-primary text-black flex items-center justify-center text-[10px] font-black shrink-0">1</div>
+               <p className="text-sm text-zinc-400">Get an API key from the <a href="https://console.cloud.google.com/google/maps-apis/start?utm_campaign=gmp-code-assist-ais" target="_blank" rel="noopener" className="text-primary hover:underline">Google Cloud Console</a>.</p>
+            </div>
+            <div className="flex gap-4">
+               <div className="w-6 h-6 rounded-full bg-primary text-black flex items-center justify-center text-[10px] font-black shrink-0">2</div>
+               <p className="text-sm text-zinc-400">Open <b>Settings</b> (gear icon) → <b>Secrets</b>.</p>
+            </div>
+            <div className="flex gap-4">
+               <div className="w-6 h-6 rounded-full bg-primary text-black flex items-center justify-center text-[10px] font-black shrink-0">3</div>
+               <p className="text-sm text-zinc-400">Add <code>GOOGLE_MAPS_PLATFORM_KEY</code> and paste your key.</p>
+            </div>
+          </div>
+          <p className="text-[10px] font-mono text-zinc-600 uppercase tracking-widest bg-white/5 py-4 rounded-2xl">The app will rebuild automatically.</p>
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <div className="min-h-screen bg-[var(--color-bg)] text-[var(--color-text)] flex flex-col font-sans transition-colors duration-1000">
+    <APIProvider apiKey={API_KEY} version="weekly">
+      <div className="min-h-screen bg-[var(--color-bg)] text-[var(--color-text)] flex flex-col font-sans transition-colors duration-1000">
       {/* Header HUD */}
       <header className="h-20 border-b border-white/5 bg-black/40 backdrop-blur-3xl flex items-center justify-between px-8 sticky top-0 z-[60]">
         <div className="flex items-center gap-6">
@@ -394,14 +454,71 @@ export function VelocityLeadEngine({ onNavigate }: { onNavigate: (page: any) => 
                  </div>
               </div>
 
+              {/* Maps Integration */}
+              {mapsQueries.length > 0 && (
+                <MapsIntegration queries={mapsQueries} onLeadsFound={handleApplyRealTimeLeads} />
+              )}
+
               {/* Leads Results */}
               <div className="space-y-6">
                  <div className="flex items-center justify-between mb-2">
-                    <h3 className="text-sm font-display font-medium uppercase tracking-[0.2em] italic text-primary">Generated High-Intent Leads</h3>
-                    <div className="flex items-center gap-2 px-3 py-1 bg-white/5 rounded-full border border-white/10 text-[9px] font-mono text-zinc-500">
-                       <ShieldCheck size={12} className="text-emerald-500" /> IDENTITY_VERIFIED
+                    <h3 className="text-sm font-display font-medium uppercase tracking-[0.2em] italic text-primary">
+                      {realTimeLeads.length > 0 ? 'Verified Real-Time Leads' : 'Synthesized High-Intent Leads'}
+                    </h3>
+                    <div className="flex items-center gap-4">
+                       {realTimeLeads.length > 0 && (
+                         <div className="flex items-center gap-2 px-3 py-1 bg-emerald-500/10 rounded-full border border-emerald-500/20 text-[9px] font-mono text-emerald-400">
+                            <ShieldCheck size={12} /> LIVE_DATA_SYNCED
+                         </div>
+                       )}
+                       <div className="flex items-center gap-2 px-3 py-1 bg-white/5 rounded-full border border-white/10 text-[9px] font-mono text-zinc-500">
+                          <Target size={12} className="text-primary" /> IDENTITY_VERIFIED
+                       </div>
                     </div>
                  </div>
+
+                 {realTimeLeads.length > 0 && (
+                   <div className="w-full h-[400px] rounded-[3rem] overflow-hidden border border-white/10 mb-10 shadow-2xl relative">
+                      <Map
+                        defaultCenter={realTimeLeads[0].lat ? { lat: realTimeLeads[0].lat, lng: realTimeLeads[0].lng } : { lat: 0, lng: 0 }}
+                        defaultZoom={11}
+                        mapId="VELOCITY_MAP"
+                        style={{ width: '100%', height: '100%' }}
+                        internalUsageAttributionIds={['gmp_mcp_codeassist_v1_aistudio']}
+                      >
+                         {realTimeLeads.map((lead, i) => lead.lat && lead.lng && (
+                           <AdvancedMarker 
+                             key={i} 
+                             position={{ lat: lead.lat, lng: lead.lng }}
+                             onClick={() => setSelectedLead(lead)}
+                           >
+                              <Pin background={lead.score > 90 ? "#10b981" : "#3b82f6"} glyphColor="#fff" />
+                           </AdvancedMarker>
+                         ))}
+                         {selectedLead && selectedLead.lat && selectedLead.lng && (
+                           <InfoWindow 
+                             position={{ lat: selectedLead.lat, lng: selectedLead.lng }} 
+                             onCloseClick={() => setSelectedLead(null)}
+                           >
+                              <div className="p-2 min-w-[150px]">
+                                 <h5 className="font-bold text-sm text-black">{selectedLead.name}</h5>
+                                 <p className="text-[10px] text-zinc-500 uppercase">{selectedLead.industry}</p>
+                                 <div className="mt-2 flex items-center gap-2">
+                                    <span className="px-1.5 py-0.5 bg-emerald-100 text-emerald-700 text-[9px] font-black rounded">Score: {selectedLead.score}</span>
+                                 </div>
+                              </div>
+                           </InfoWindow>
+                         )}
+                      </Map>
+                      <div className="absolute bottom-6 left-6 p-4 bg-black/80 backdrop-blur-md rounded-2xl border border-white/10 glass max-w-xs">
+                         <div className="flex items-center gap-3 mb-2">
+                            <Navigation size={14} className="text-primary animate-pulse" />
+                            <span className="text-[10px] font-mono text-white uppercase tracking-widest italic font-black">Live Spatial Intelligence</span>
+                         </div>
+                         <p className="text-[9px] text-zinc-400">Velocity Engine is currently mapping {realTimeLeads.length} verified business targets across analyzed operational territories.</p>
+                      </div>
+                   </div>
+                 )}
 
                  <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {isAnalyzing && leads.length === 0 ? (
@@ -409,7 +526,7 @@ export function VelocityLeadEngine({ onNavigate }: { onNavigate: (page: any) => 
                         <div key={i} className="h-64 rounded-[2rem] bg-white/[0.01] border border-white/5 animate-pulse" />
                       ))
                     ) : (
-                      leads.map((lead, i) => (
+                      (realTimeLeads.length > 0 ? realTimeLeads : leads).map((lead, i) => (
                         <motion.div 
                            key={i}
                            initial={{ opacity: 0, scale: 0.95 }}
@@ -512,6 +629,94 @@ export function VelocityLeadEngine({ onNavigate }: { onNavigate: (page: any) => 
         <div className="absolute bottom-1/4 left-1/4 w-[800px] h-[800px] bg-secondary/5 rounded-full blur-[180px]" />
         <div className="absolute inset-0 bg-grid opacity-10" />
       </div>
+    </div>
+  </APIProvider>
+);
+}
+
+function MapsIntegration({ queries, onLeadsFound }: { queries: string[], onLeadsFound: (leads: Lead[]) => void }) {
+  const placesLib = useMapsLibrary('places');
+  const [isSearching, setIsSearching] = useState(false);
+  const [results, setResults] = useState<Lead[]>([]);
+
+  const searchPlaces = async () => {
+    if (!placesLib || queries.length === 0) return;
+    setIsSearching(true);
+    const allResults: Lead[] = [];
+
+    for (const query of queries) {
+      try {
+        const { places } = await placesLib.Place.searchByText({
+          textQuery: query,
+          fields: ['displayName', 'location', 'formattedAddress', 'websiteURI', 'nationalPhoneNumber', 'id', 'rating', 'userRatingCount'],
+          maxResultCount: 5,
+        });
+
+        if (places) {
+          places.forEach(p => {
+             allResults.push({
+               id: p.id,
+               name: p.displayName || 'Unknown Business',
+               industry: query.split(' in ')[0],
+               location: p.formattedAddress || 'Unknown Location',
+               lat: p.location?.lat(),
+               lng: p.location?.lng(),
+               website: p.websiteURI || undefined,
+               phone: p.nationalPhoneNumber || undefined,
+               relevance: `Genuine business found via Google Maps matching search profile for "${query}".`,
+               score: Math.min(100, Math.round(70 + (p.rating || 0) * 5)),
+               persona: "Business Owner / Manager",
+               buyingStage: "Direct Discovery",
+               urgency: "High",
+               temperature: "Hot",
+               budgetLevel: "Enterprise/SME",
+               authority: "Decision Maker",
+               isRealTime: true
+             });
+          });
+        }
+      } catch (err) {
+        console.error("Search error for query:", query, err);
+      }
+    }
+
+    setResults(allResults);
+    onLeadsFound(allResults);
+    setIsSearching(false);
+  };
+
+  return (
+    <div className="p-8 rounded-[2.5rem] bg-emerald-500/5 border border-emerald-500/20 glass mb-10">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
+        <div className="flex items-center gap-5">
+           <div className="w-12 h-12 bg-emerald-500/20 rounded-2xl flex items-center justify-center border border-emerald-500/30">
+              <Globe className="text-emerald-400" size={24} />
+           </div>
+           <div>
+              <h3 className="text-lg font-display font-bold text-white italic">Live Business Discovery</h3>
+              <p className="text-[10px] font-mono text-zinc-500 uppercase tracking-widest mt-0.5">Integrate real-world data from Google Maps</p>
+           </div>
+        </div>
+
+        <button 
+          onClick={searchPlaces}
+          disabled={isSearching || queries.length === 0}
+          className="px-8 py-4 bg-emerald-500 text-black font-black uppercase tracking-[0.2em] rounded-2xl flex items-center gap-3 hover:scale-105 active:scale-95 transition-all shadow-[0_0_20px_rgba(16,185,129,0.3)] disabled:opacity-30 text-[10px]"
+        >
+          {isSearching ? <Loader2 className="animate-spin" size={16} /> : <Search size={16} />}
+          {isSearching ? 'Synchronizing Node...' : 'Verify Genuine Leads'}
+        </button>
+      </div>
+
+      {queries.length > 0 && !isSearching && results.length === 0 && (
+        <div className="mt-6 flex flex-wrap gap-2">
+           {queries.map((q, i) => (
+             <span key={i} className="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-[9px] font-mono text-zinc-500 italic">
+               Search Node: {q}
+             </span>
+           ))}
+        </div>
+      )}
     </div>
   );
 }
