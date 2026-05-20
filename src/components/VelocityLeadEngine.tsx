@@ -22,6 +22,8 @@ import {
   Navigation,
   X,
   CreditCard,
+  Copy,
+  Check,
 } from "lucide-react";
 import React, { useState, useRef, useEffect } from "react";
 import { Trademark } from "./Trademark";
@@ -93,6 +95,13 @@ export function VelocityLeadEngine({
   const [activeAgent, setActiveAgent] = useState("");
   const [isVerifying, setIsVerifying] = useState(false);
   const [selectedLead, setSelectedLead] = useState<Lead | null>(null);
+  const [copiedId, setCopiedId] = useState<string | null>(null);
+
+  const handleCopyText = (text: string, id: string) => {
+    navigator.clipboard.writeText(text);
+    setCopiedId(id);
+    setTimeout(() => setCopiedId(null), 1500);
+  };
 
   // Premium Onboard Demo State
   const [isPremium, setIsPremium] = useState(true);
@@ -222,7 +231,7 @@ export function VelocityLeadEngine({
               industry: "5-Star Luxury Hospitality",
               location: "23, HAL Old Airport Rd, HAL 2nd Stage, Kodihalli, Bengaluru, Karnataka 560008",
               website: "https://www.theleela.com",
-              contact: "Elena Rostova",
+              contact: "Anjali Sharma",
               email: "reservations.bangalore@theleela.com",
               phone: "+91 80 2521 1234",
               relevance:
@@ -240,7 +249,7 @@ export function VelocityLeadEngine({
               industry: "Luxury Heritage Hotel",
               location: "25, Race Course Rd, High Grounds, Bengaluru, Karnataka 560001",
               website: "https://www.tajhotels.com",
-              contact: "Meera Nair",
+              contact: "Rajesh Khanna",
               email: "westend.bangalore@tajhotels.com",
               phone: "+91 80 6660 5660",
               relevance:
@@ -258,7 +267,7 @@ export function VelocityLeadEngine({
               industry: "Specialty Cafe Chain",
               location: "121, 60 Feet Rd, 4th Block, Koramangala, Bengaluru, Karnataka 560034",
               website: "https://www.thirdwavecoffeeroasters.com",
-              contact: "Sarena Chen",
+              contact: "Rohan Murty",
               email: "hello@thirdwavecoffeeroasters.com",
               phone: "+91 80 4719 2200",
               relevance:
@@ -270,6 +279,42 @@ export function VelocityLeadEngine({
               temperature: "Warm",
               budgetLevel: "Medium",
               authority: "Manager",
+            },
+            {
+              name: "Toit Beer Co",
+              industry: "Specialty Craft Brewery",
+              location: "298, 100 Feet Rd, Metro Pillar 62, Indiranagar, Bengaluru, Karnataka 560038",
+              website: "https://toit.in",
+              contact: "Sreenivas Reddy",
+              email: "info@toit.in",
+              phone: "+91 90197 13380",
+              relevance:
+                "Sourcing high-quality customized craft beverage containers, co-branded premium glass pints, and corporate group party souvenir packs.",
+              score: 91,
+              persona: "Operations Director",
+              buyingStage: "Purchase",
+              urgency: "High",
+              temperature: "Hot",
+              budgetLevel: "Medium",
+              authority: "CXO",
+            },
+            {
+              name: "ITC Gardenia, Bengaluru",
+              industry: "Luxury Premium Hotel",
+              location: "1, Residency Rd, Ashok Nagar, Bengaluru, Karnataka 560025",
+              website: "https://www.itchotels.com",
+              contact: "Priya Nair",
+              email: "reservations.itcgardenia@itchotels.in",
+              phone: "+91 80 2211 9898",
+              relevance:
+                "Scaling luxury sustainable custom premium tableware, fine corporate crystal presentation gifts, and eco-friendly hospitality amenities.",
+              score: 94,
+              persona: "Procurement Supervisor",
+              buyingStage: "Evaluation",
+              urgency: "High",
+              temperature: "Hot",
+              budgetLevel: "Enterprise",
+              authority: "CXO",
             },
           ]
         : [
@@ -326,6 +371,42 @@ export function VelocityLeadEngine({
               temperature: "Warm",
               budgetLevel: "Medium",
               authority: "Manager",
+            },
+            {
+              name: "Wipro Limited",
+              industry: "IT & Consulting Conglomerate",
+              location: "Doddakannelli, Sarjapur Road, Bengaluru, Karnataka 560035",
+              website: "https://www.wipro.com",
+              contact: "Sanjay Murthy",
+              email: "info@wipro.com",
+              phone: "+91 80 2844 0011",
+              relevance:
+                "Procurement of high-end corporate welcome bundles, customized employee milestone rewards, and executive desk organizers.",
+              score: 93,
+              persona: "Senior Sourcing Partner",
+              buyingStage: "Evaluation",
+              urgency: "High",
+              temperature: "Hot",
+              budgetLevel: "Enterprise",
+              authority: "CXO",
+            },
+            {
+              name: "Flipkart Internet Private Limited",
+              industry: "E-Commerce Platform",
+              location: "Buildings Alyssa, Begonia & Clover, Embassy Tech Village, Outer Ring Road, Devarabeesanahalli, Bengaluru, Karnataka 560103",
+              website: "https://www.flipkart.com",
+              contact: "Divya Iyer",
+              email: "business@flipkart.com",
+              phone: "+91 80 4908 3908",
+              relevance:
+                "Optimization of merchant gift parcels, luxury corporate office welcome kits, and physical brand touchpoints across regional logistic centers.",
+              score: 89,
+              persona: "Senior Director of Supply Chain",
+              buyingStage: "Research",
+              urgency: "Medium",
+              temperature: "Warm",
+              budgetLevel: "Enterprise",
+              authority: "CXO",
             },
           ];
 
@@ -469,39 +550,49 @@ export function VelocityLeadEngine({
                   identify high-value lead opportunities.
                 </p>
 
-                <div className="relative group">
+                <div className="flex flex-col gap-4">
                   <textarea
                     value={input}
                     onChange={(e) => setInput(e.target.value)}
                     placeholder="Example: My client owns a water customized bottle company. They are looking for potential clients from restaurants, hotels, cafes, and caterers..."
-                    className="w-full bg-white/[0.03] border border-white/10 rounded-3xl p-6 min-h-[120px] text-zinc-300 focus:outline-none focus:border-primary/40 focus:ring-1 focus:ring-primary/20 transition-all text-sm leading-relaxed"
+                    className="w-full bg-white/[0.03] border border-white/10 rounded-3xl p-6 min-h-[150px] text-zinc-300 focus:outline-none focus:border-primary/40 focus:ring-1 focus:ring-primary/20 transition-all text-sm leading-relaxed"
                   />
-                  <button
-                    onClick={handleGenerate}
-                    disabled={!input.trim() || isAnalyzing}
-                    className="absolute bottom-4 right-4 px-8 py-3 bg-primary text-black font-black rounded-2xl flex items-center gap-3 hover:scale-105 active:scale-95 transition-all shadow-neon disabled:opacity-30 disabled:hover:scale-100"
-                  >
-                    {isAnalyzing ? (
-                      <div className="flex flex-col items-center gap-3">
-                        <Loader2 className="w-5 h-5 animate-spin text-primary" />
-                        <motion.span
-                          key={activeAgent}
-                          initial={{ opacity: 0, y: 5 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          className="text-[10px] uppercase tracking-widest text-primary font-black"
-                        >
-                          {activeAgent}
-                        </motion.span>
-                      </div>
-                    ) : (
-                      <>
-                        <Sparkles className="w-4 h-4" />
-                        <span className="text-[11px] uppercase tracking-wider">
-                          Generate Pipeline
+                  
+                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 bg-white/[0.02] border border-white/5 p-4 rounded-2xl">
+                    <div className="flex items-center gap-3">
+                      <div className="flex items-center gap-2 px-3 py-1.5 bg-primary/10 border border-primary/20 rounded-xl">
+                        <MapPin size={12} className="text-primary animate-pulse" />
+                        <span className="text-[10px] font-mono font-bold text-primary uppercase tracking-wider">
+                          Locale Focus: Bengaluru, India
                         </span>
-                      </>
-                    )}
-                  </button>
+                      </div>
+                      <span className="text-[10px] font-mono text-zinc-600 uppercase tracking-widest hidden md:inline">
+                        • 5 Guaranteed Outstanding Leads
+                      </span>
+                    </div>
+
+                    <button
+                      onClick={handleGenerate}
+                      disabled={!input.trim() || isAnalyzing}
+                      className="px-8 py-3.5 bg-primary text-black font-black rounded-2xl flex items-center justify-center gap-3 hover:scale-105 active:scale-95 transition-all shadow-neon disabled:opacity-30 disabled:hover:scale-100 shrink-0"
+                    >
+                      {isAnalyzing ? (
+                        <div className="flex items-center gap-2">
+                          <Loader2 className="w-3.5 h-3.5 animate-spin text-black" />
+                          <span className="text-[10px] uppercase tracking-widest font-black leading-none shrink-0">
+                            {activeAgent || "Synthesis Active..."}
+                          </span>
+                        </div>
+                      ) : (
+                        <>
+                          <Sparkles className="w-4 h-4" />
+                          <span className="text-[11px] uppercase tracking-wider font-extrabold leading-none shrink-0">
+                            Generate Pipeline
+                          </span>
+                        </>
+                      )}
+                    </button>
+                  </div>
                 </div>
               </div>
 
@@ -776,206 +867,269 @@ export function VelocityLeadEngine({
                     </div>
                   )}
 
-                  <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {isAnalyzing && leads.length === 0
-                      ? [...Array(6)].map((_, i) => (
+                      ? [...Array(5)].map((_, i) => (
                           <div
                             key={i}
-                            className="h-64 rounded-[2rem] bg-white/[0.01] border border-white/5 animate-pulse"
-                          />
+                            className="h-[460px] rounded-[2.5rem] bg-white/[0.01] border border-white/5 animate-pulse flex flex-col justify-between p-8"
+                          >
+                            <div className="space-y-4">
+                              <div className="flex justify-between items-start">
+                                <div className="h-12 w-12 bg-white/5 rounded-2xl" />
+                                <div className="space-y-2">
+                                  <div className="h-4 bg-white/5 rounded w-20" />
+                                  <div className="h-3 bg-white/5 rounded w-16" />
+                                </div>
+                              </div>
+                              <div className="h-6 bg-white/5 rounded w-3/4" />
+                              <div className="h-4 bg-white/5 rounded w-1/2" />
+                            </div>
+                            <div className="h-24 bg-white/5 rounded-2xl" />
+                            <div className="h-10 bg-white/5 rounded-xl w-full" />
+                          </div>
                         ))
                       : (realTimeLeads.length > 0 ? realTimeLeads : leads).map(
                           (lead, i) => (
                             <motion.div
                               key={i}
-                              initial={{ opacity: 0, scale: 0.95 }}
-                              animate={{ opacity: 1, scale: 1 }}
-                              transition={{ delay: i * 0.1 }}
-                              className="p-8 rounded-[2rem] bg-white/[0.02] border border-white/5 hover:border-primary/30 transition-all group relative overflow-hidden"
+                              initial={{ opacity: 0, y: 30 }}
+                              animate={{ opacity: 1, y: 0 }}
+                              transition={{ duration: 0.5, delay: i * 0.1 }}
+                              className="p-8 rounded-[2.5rem] bg-gradient-to-b from-white/[0.03] to-white/[0.01] border border-white/5 hover:border-primary/40 hover:shadow-[0_0_50px_-12px_rgba(var(--color-primary-rgb),0.15)] transition-all duration-500 group relative overflow-hidden flex flex-col justify-between min-h-[520px]"
                             >
-                              <div className="absolute top-0 right-0 p-6 flex flex-col items-end gap-1.5 z-10">
-                                <div className="px-2 py-1 bg-primary text-black text-[9px] font-mono font-black rounded-lg shadow-lg">
-                                  SCORE: {lead.score}%
+                              {/* Background Glow Overlay */}
+                              <div className="absolute top-0 left-0 w-full h-[3px] bg-gradient-to-r from-transparent via-primary/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                              
+                              <div>
+                                {/* Status & Metrics Header Row */}
+                                <div className="flex justify-between items-start mb-6">
+                                  <div className="w-12 h-12 bg-zinc-900 rounded-2xl flex items-center justify-center border border-white/10 group-hover:border-primary/20 group-hover:bg-primary/5 transition-all duration-500 shadow-inner">
+                                    <Building2
+                                      size={22}
+                                      className="text-zinc-500 group-hover:text-primary transition-colors duration-500"
+                                    />
+                                  </div>
+                                  
+                                  <div className="flex flex-col items-end gap-1.5">
+                                    <div className="px-3 py-1 bg-white/[0.03] border border-white/10 text-white text-[11px] font-mono font-black rounded-xl shadow-lg flex items-center gap-1.5 hover:border-primary/30 transition-colors">
+                                      <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
+                                      SCORE: <span className="text-primary">{lead.score}%</span>
+                                    </div>
+                                    <div className="flex items-center gap-1">
+                                      <div
+                                        className={`px-2 py-0.5 text-[8px] font-mono font-black rounded-full border ${
+                                          lead.temperature === "Hot"
+                                            ? "bg-orange-500/10 border-orange-500/30 text-orange-400"
+                                            : lead.temperature === "Warm"
+                                              ? "bg-amber-500/10 border-amber-500/30 text-amber-400"
+                                              : "bg-blue-500/10 border-blue-500/30 text-blue-400"
+                                        }`}
+                                      >
+                                        {lead.temperature.toUpperCase()}{" "}
+                                        {lead.temperature === "Hot"
+                                          ? "🔥"
+                                          : lead.temperature === "Warm"
+                                            ? "⚡"
+                                            : "❄️"}
+                                      </div>
+                                      <span
+                                        className={`px-2 py-0.5 text-[8px] font-mono font-black rounded-full border ${
+                                          lead.urgency === "High"
+                                            ? "bg-red-500/10 border-red-500/25 text-red-400"
+                                            : "bg-zinc-500/10 border-zinc-500/25 text-zinc-400"
+                                        }`}
+                                      >
+                                        {lead.urgency.toUpperCase()} INTENT
+                                      </span>
+                                    </div>
+                                  </div>
                                 </div>
-                                <div
-                                  className={`px-2 py-0.5 text-[8px] font-mono font-black rounded-full border ${
-                                    lead.temperature === "Hot"
-                                      ? "bg-orange-500/20 border-orange-500/40 text-orange-400"
-                                      : lead.temperature === "Warm"
-                                        ? "bg-amber-500/20 border-amber-500/40 text-amber-400"
-                                        : "bg-blue-500/20 border-blue-500/40 text-blue-400"
-                                  }`}
-                                >
-                                  {lead.temperature.toUpperCase()}{" "}
-                                  {lead.temperature === "Hot"
-                                    ? "🔥"
-                                    : lead.temperature === "Warm"
-                                      ? "⚡"
-                                      : "❄️"}
-                                </div>
-                                <span
-                                  className={`px-2 py-0.5 text-[8px] font-mono font-black rounded-full border ${
-                                    lead.urgency === "High"
-                                      ? "bg-red-500/10 border-red-500/25 text-red-400"
-                                      : "bg-zinc-500/10 border-zinc-500/25 text-zinc-400"
-                                  }`}
-                                >
-                                  {lead.urgency.toUpperCase()} INTENT
-                                </span>
-                              </div>
 
-                              <div className="flex items-center gap-4 mb-6">
-                                <div className="w-12 h-12 bg-zinc-900 rounded-2xl flex items-center justify-center border border-white/10 group-hover:border-primary/20 transition-colors">
-                                  <Building2
-                                    size={24}
-                                    className="text-zinc-500 group-hover:text-primary transition-colors"
-                                  />
-                                </div>
-                                <div className="flex-1 min-w-0 pr-16">
-                                  <h4 className="text-lg font-display font-medium text-white truncate">
+                                {/* Title & Core Info */}
+                                <div className="mb-6">
+                                  <h4 className="text-xl font-display font-semibold text-white tracking-tight leading-snug group-hover:text-primary transition-colors duration-300">
                                     {lead.name}
                                   </h4>
-                                  <p className="text-[10px] font-mono text-zinc-500 uppercase truncate">
+                                  <p className="text-[10px] font-mono text-zinc-500 uppercase tracking-widest mt-1">
                                     {lead.industry}
                                   </p>
                                 </div>
-                              </div>
 
-                                                            {/* Lead Score Breakdown Segment */}
-                              <div className="p-4 rounded-2xl bg-white/[0.01] border border-white/5 space-y-3 mb-4">
-                                <div className="flex justify-between items-center text-[8px] font-mono text-zinc-500">
-                                  <span>QUALIFICATION METRICS</span>
-                                  <span className="text-primary font-bold">
-                                    INTELLIGENCE MAP
-                                  </span>
-                                </div>
-
-                                <div className="space-y-1 key-behavior">
-                                  <div className="flex justify-between text-[8px] font-mono text-zinc-400">
-                                    <span>Behavior Engagement</span>
-                                    <span className="text-blue-400 font-bold">
-                                      +{Math.max(15, lead.score - (lead.temperature === "Hot" ? 35 : lead.temperature === "Warm" ? 24 : 15) - ((lead.authority === "CXO" || lead.authority === "Founder" || lead.authority === "Decision Maker" || lead.authority.includes("Owner") || lead.authority.includes("Director")) ? 30 : lead.budgetLevel.toLowerCase().includes("enterprise") ? 25 : 18))} (Web Clicks/Visits)
-                                    </span>
+                                {/* Strategic Outreach Trigger Block */}
+                                <div className="p-4 rounded-2xl bg-white/[0.01] border border-white/5 mb-5 relative">
+                                  <div className="absolute top-3 right-3 opacity-15">
+                                    <Sparkles size={16} className="text-primary" />
                                   </div>
-                                  <div className="w-full h-1 bg-white/5 rounded-full overflow-hidden">
-                                    <div
-                                      className="h-full bg-blue-500 rounded-full"
-                                      style={{
-                                        width: `${(Math.max(15, lead.score - (lead.temperature === "Hot" ? 35 : lead.temperature === "Warm" ? 24 : 15) - ((lead.authority === "CXO" || lead.authority === "Founder" || lead.authority === "Decision Maker" || lead.authority.includes("Owner") || lead.authority.includes("Director")) ? 30 : lead.budgetLevel.toLowerCase().includes("enterprise") ? 25 : 18)) / 35) * 100}%`,
-                                      }}
-                                    />
-                                  </div>
-                                </div>
-
-                                <div className="space-y-1 key-urgency">
-                                  <div className="flex justify-between text-[8px] font-mono text-zinc-400">
-                                    <span>Buying Cycle Urgency</span>
-                                    <span className="text-orange-400 font-bold">
-                                      +{lead.temperature === "Hot" ? 35 : lead.temperature === "Warm" ? 24 : 15} ({lead.buyingStage})
-                                    </span>
-                                  </div>
-                                  <div className="w-full h-1 bg-white/5 rounded-full overflow-hidden">
-                                    <div
-                                      className="h-full bg-orange-500 rounded-full"
-                                      style={{
-                                        width: `${((lead.temperature === "Hot" ? 35 : lead.temperature === "Warm" ? 24 : 15) / 35) * 100}%`,
-                                      }}
-                                    />
-                                  </div>
-                                </div>
-
-                                <div className="space-y-1 key-authority">
-                                  <div className="flex justify-between text-[8px] font-mono text-zinc-400">
-                                    <span>Authority & Budget Tier</span>
-                                    <span className="text-emerald-400 font-bold">
-                                      +{((lead.authority === "CXO" || lead.authority === "Founder" || lead.authority === "Decision Maker" || lead.authority.includes("Owner") || lead.authority.includes("Director")) ? 30 : lead.budgetLevel.toLowerCase().includes("enterprise") ? 25 : 18)} ({lead.budgetLevel})
-                                    </span>
-                                  </div>
-                                  <div className="w-full h-1 bg-white/5 rounded-full overflow-hidden">
-                                    <div
-                                      className="h-full bg-emerald-500 rounded-full"
-                                      style={{
-                                        width: `${(((lead.authority === "CXO" || lead.authority === "Founder" || lead.authority === "Decision Maker" || lead.authority.includes("Owner") || lead.authority.includes("Director")) ? 30 : lead.budgetLevel.toLowerCase().includes("enterprise") ? 25 : 18) / 30) * 100}%`,
-                                      }}
-                                    />
-                                  </div>
-                                </div>
-                              </div>
-
-                              {/* Decision Maker Contact Section */}
-                              {lead.contact && (
-                                <div className="p-4 rounded-2xl bg-primary/[0.02] border border-primary/10 mb-6">
-                                  <p className="text-[8px] font-mono text-primary uppercase tracking-widest mb-1 font-black italic">
-                                    PRIMARY DECISION MAKER
+                                  <p className="text-[8px] font-mono text-zinc-500 uppercase tracking-wider mb-1.5">
+                                    CONVERSION REQUISITE
                                   </p>
-                                  <div className="flex items-center gap-3">
-                                    <div className="w-8 h-8 rounded-xl bg-primary/15 border border-primary/30 flex items-center justify-center text-[10px] font-black text-primary">
-                                      {lead.contact.split(" ").map((n) => n[0]).join("")}
+                                  <p className="text-xs text-zinc-300 leading-relaxed italic font-medium">
+                                    " {lead.relevance} "
+                                  </p>
+                                </div>
+
+                                {/* Dynamic CRM Qualification Dialect */}
+                                <div className="p-4 rounded-2xl bg-white/[0.02] border border-white/5 space-y-3 mb-5 hover:bg-white/[0.03] transition-colors duration-300">
+                                  <div className="flex justify-between items-center text-[8px] font-mono text-zinc-500">
+                                    <span>QUALIFICATION LEVELS</span>
+                                    <span className="text-primary font-bold">LIVE METRIC CAP</span>
+                                  </div>
+
+                                  {/* Metric 1 */}
+                                  <div className="space-y-1">
+                                    <div className="flex justify-between text-[8px] font-mono text-zinc-400">
+                                      <span>Behavior Analytics</span>
+                                      <span className="text-blue-400 font-bold">
+                                        +{(lead.score > 90 ? 32 : 24)} (Web Visits/Telemetry)
+                                      </span>
                                     </div>
-                                    <div>
-                                      <h5 className="text-[11px] font-bold text-white leading-none">
-                                        {lead.contact}
-                                      </h5>
-                                      <p className="text-[9px] text-zinc-500 font-mono mt-1">
-                                        {lead.persona || "Decision Maker"} • {lead.authority}
-                                      </p>
+                                    <div className="w-full h-1 bg-white/5 rounded-full overflow-hidden">
+                                      <div
+                                        className="h-full bg-blue-500 rounded-full"
+                                        style={{ width: `${lead.score > 90 ? 92 : 75}%` }}
+                                      />
+                                    </div>
+                                  </div>
+
+                                  {/* Metric 2 */}
+                                  <div className="space-y-1">
+                                    <div className="flex justify-between text-[8px] font-mono text-zinc-400">
+                                      <span>Decision Intent</span>
+                                      <span className="text-orange-400 font-bold">
+                                        +{lead.temperature === "Hot" ? 35 : 24} ({lead.buyingStage})
+                                      </span>
+                                    </div>
+                                    <div className="w-full h-1 bg-white/5 rounded-full overflow-hidden">
+                                      <div
+                                        className="h-full bg-orange-500 rounded-full"
+                                        style={{ width: `${lead.temperature === "Hot" ? 95 : 70}%` }}
+                                      />
+                                    </div>
+                                  </div>
+
+                                  {/* Metric 3 */}
+                                  <div className="space-y-1">
+                                    <div className="flex justify-between text-[8px] font-mono text-zinc-400">
+                                      <span>Authority Depth</span>
+                                      <span className="text-emerald-400 font-bold">
+                                        +{lead.budgetLevel === "Enterprise" ? 30 : 20} ({lead.budgetLevel})
+                                      </span>
+                                    </div>
+                                    <div className="w-full h-1 bg-white/5 rounded-full overflow-hidden">
+                                      <div
+                                        className="h-full bg-emerald-500 rounded-full"
+                                        style={{ width: `${lead.budgetLevel === "Enterprise" ? 100 : 70}%` }}
+                                      />
                                     </div>
                                   </div>
                                 </div>
-                              )}
 
-                              <div className="space-y-4 mb-8">
-                                <div className="flex items-center gap-3 text-zinc-400">
-                                  <MapPin size={14} className="text-zinc-600" />
-                                  <span className="text-xs truncate">
+                                {/* Human Interactive Executive Panel */}
+                                {lead.contact && (
+                                  <div className="p-4 rounded-2xl bg-primary/[0.02]/70 border border-primary/10 mb-6">
+                                    <div className="flex justify-between items-center mb-2">
+                                      <p className="text-[8px] font-mono text-primary uppercase tracking-widest font-black italic">
+                                        PRIMARY DECISION MAKER
+                                      </p>
+                                      <span className="text-[8px] font-mono text-emerald-400 px-1.5 py-0.5 bg-emerald-500/10 border border-emerald-500/20 rounded">
+                                        {lead.authority}
+                                      </span>
+                                    </div>
+                                    
+                                    <div className="flex items-center gap-3">
+                                      <div className="w-9 h-9 rounded-xl bg-primary/15 border border-primary/30 flex items-center justify-center text-[11px] font-black text-primary font-display shrink-0 shadow-inner">
+                                        {lead.contact.split(" ").map((n) => n[0]).join("")}
+                                      </div>
+                                      <div className="flex-1 min-w-0">
+                                        <h5 className="text-[12px] font-bold text-white leading-none truncate">
+                                          {lead.contact}
+                                        </h5>
+                                        <p className="text-[9px] text-zinc-500 font-semibold mt-1">
+                                          {lead.persona || "Decision Maker"}
+                                        </p>
+                                      </div>
+                                    </div>
+
+                                    {/* Copy Contact Shortcuts */}
+                                    <div className="mt-3 pt-2.5 border-t border-white/5 flex items-center justify-between gap-4">
+                                      {lead.email && (
+                                        <button
+                                          onClick={() => handleCopyText(lead.email!, `email-${i}`)}
+                                          className="text-[10px] font-mono text-zinc-400 hover:text-white flex items-center gap-1.5 py-0.5 transition-colors focus:outline-none"
+                                          title="Copy Email ID"
+                                        >
+                                          {copiedId === `email-${i}` ? (
+                                            <>
+                                              <Check size={10} className="text-emerald-400" />
+                                              <span className="text-emerald-400 text-[9px] font-bold">Email Copied!</span>
+                                            </>
+                                          ) : (
+                                            <>
+                                              <Copy size={10} className="text-zinc-600 group-hover:text-zinc-400" />
+                                              <span className="truncate max-w-[120px]">{lead.email}</span>
+                                            </>
+                                          )}
+                                        </button>
+                                      )}
+
+                                      {lead.phone && (
+                                        <button
+                                          onClick={() => handleCopyText(lead.phone!, `phone-${i}`)}
+                                          className="text-[10px] font-mono text-zinc-400 hover:text-white flex items-center gap-1.5 py-0.5 transition-colors focus:outline-none shrink-0"
+                                          title="Copy Phone Number"
+                                        >
+                                          {copiedId === `phone-${i}` ? (
+                                            <>
+                                              <Check size={10} className="text-emerald-400" />
+                                              <span className="text-emerald-400 text-[9px] font-bold">Copied!</span>
+                                            </>
+                                          ) : (
+                                            <>
+                                              <Copy size={10} className="text-zinc-600" />
+                                              <span>{lead.phone}</span>
+                                            </>
+                                          )}
+                                        </button>
+                                      )}
+                                    </div>
+                                  </div>
+                                )}
+                              </div>
+
+                              {/* Footer Action Desk */}
+                              <div>
+                                <div className="flex items-center gap-2 text-zinc-400 text-xs mb-4 pt-1">
+                                  <MapPin size={13} className="text-primary shrink-0 animate-pulse" />
+                                  <span className="truncate font-mono text-[10px] tracking-tight">
                                     {lead.location}
                                   </span>
                                 </div>
-                                <p className="text-xs text-zinc-500 leading-relaxed line-clamp-2 italic">
-                                  " {lead.relevance} "
-                                </p>
-                              </div>
 
-                              <div className="grid grid-cols-2 gap-3 pt-4 border-t border-white/5 bg-black/15 p-2 rounded-2xl">
-                                {lead.website && (
-                                  <a
-                                    href={lead.website}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="flex items-center justify-center gap-2 p-2.5 bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl transition-all"
-                                  >
-                                    <Globe size={11} className="text-primary" />
-                                    <span className="text-[9px] font-mono font-bold uppercase tracking-widest text-zinc-300">
+                                <div className="grid grid-cols-2 gap-3 pt-3 border-t border-white/5">
+                                  {lead.website && (
+                                    <a
+                                      href={lead.website}
+                                      target="_blank"
+                                      rel="noopener noreferrer"
+                                      className="flex items-center justify-center gap-1.5 p-2.5 bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl transition-all font-mono text-[9px] font-bold uppercase tracking-widest text-zinc-200 active:scale-95"
+                                    >
+                                      <Globe size={11} className="text-primary" />
                                       Portal
-                                    </span>
-                                  </a>
-                                )}
-                                {lead.phone && (
-                                  <a
-                                    href={`tel:${lead.phone}`}
-                                    className="flex items-center justify-center gap-2 p-2.5 bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl transition-all"
-                                  >
-                                    <Phone
-                                      size={11}
-                                      className="text-emerald-500 font-bold"
-                                    />
-                                    <span className="text-[9px] font-mono font-bold uppercase tracking-widest text-zinc-300">
-                                      Call Now
-                                    </span>
-                                  </a>
-                                )}
-                                {lead.email && (
-                                  <a
-                                    href={`mailto:${lead.email}`}
-                                    className="flex items-center justify-center gap-2 p-2.5 bg-primary/5 hover:bg-primary/10 border border-primary/20 rounded-xl transition-all col-span-2 text-center overflow-hidden"
-                                  >
-                                    <Mail size={11} className="text-primary shrink-0" />
-                                    <span className="text-[9px] font-mono font-bold uppercase tracking-widest text-primary truncate">
-                                      {lead.email}
-                                    </span>
-                                  </a>
-                                )}
-                              </div></motion.div>
+                                    </a>
+                                  )}
+                                  {lead.phone && (
+                                    <a
+                                      href={`tel:${lead.phone}`}
+                                      className="flex items-center justify-center gap-1.5 p-2.5 bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl transition-all font-mono text-[9px] font-bold uppercase tracking-widest text-zinc-200 active:scale-95"
+                                    >
+                                      <Phone size={11} className="text-emerald-500" />
+                                      Call
+                                    </a>
+                                  )}
+                                </div>
+                              </div>
+                            </motion.div>
                           ),
                         )}
                   </div>
