@@ -136,15 +136,8 @@ const ECOSYSTEM_ITEMS = [
   }
 ];
 
-import { IPDMAstra } from "./IPDMAstra";
-
 export function IPDMEcosystem({ onNavigate, onNavigateEngine }: { onNavigate: (page: any) => void, onNavigateEngine: (engineId: string) => void }) {
   const [hoveredId, setHoveredId] = useState<string | null>(null);
-  const [showAstra, setShowAstra] = useState(false);
-
-  if (showAstra) {
-    return <IPDMAstra onBack={() => setShowAstra(false)} />;
-  }
 
   // Animation variants for the "uncoil" effect
   const containerVariants = {
@@ -282,7 +275,7 @@ export function IPDMEcosystem({ onNavigate, onNavigateEngine }: { onNavigate: (p
                     whileHover={{ scale: 1.02, y: -5, rotateZ: 1 }}
                     onClick={() => {
                       if (item.id === 'astra') {
-                        setShowAstra(true);
+                        onNavigate('astra');
                       } else if (['engage', 'multi-agent', 'lead-qualifier', 'guided-decision', 'context-response', 'multi-language', 'conversion-action', 'personalized-interaction', 'predictive-intelligence', 'omnichannel-orchestration', 'customer-journey', 'enterprise-collaboration', 'revenue-growth-ai', 'business-intelligence', 'automation-engagement', 'trust-security', 'adaptive-learning', 'evolve', 'flow', 'strategos', 'simulate', 'supporta', 'core'].includes(item.id)) {
                         onNavigate(item.id);
                       } else {
