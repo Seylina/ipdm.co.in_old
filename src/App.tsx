@@ -68,6 +68,7 @@ const AISystemCategoryPage = lazy(() => import("./components/AISystemCategoryPag
 const AIEngineDetails = lazy(() => import("./components/AIEngineDetails").then(m => ({ default: m.AIEngineDetails })));
 const EmployeeDashboard = lazy(() => import("./components/EmployeeDashboard").then(m => ({ default: m.EmployeeDashboard })));
 const AstraPage = lazy(() => import("./components/AstraPage").then(m => ({ default: m.AstraPage })));
+const IPDMSpectra = lazy(() => import("./components/IPDMSpectra").then(m => ({ default: m.IPDMSpectra })));
 
 // Loading Component
 function PageLoader() {
@@ -86,7 +87,7 @@ function PageLoader() {
 }
 
 export default function App() {
-  const [currentPage, setCurrentPage] = useState<'home' | 'advisory' | 'ai-systems' | 'about' | 'pricing' | 'policies' | 'dashboard' | 'ecosystem' | 'supporta' | 'strategos' | 'simulate' | 'core' | 'engage' | 'multi-agent' | 'lead-qualifier' | 'guided-decision' | 'context-response' | 'multi-language' | 'conversion-action' | 'personalized-interaction' | 'predictive-intelligence' | 'omnichannel-orchestration' | 'business-intelligence' | 'automation-engagement' | 'trust-security' | 'adaptive-learning' | 'customer-journey' | 'enterprise-collaboration' | 'evolve' | 'flow' | 'core-intel' | 'decision-modeling' | 'revenue-growth' | 'revenue-growth-ai' | 'brand-content' | 'knowledge-research' | 'ops-automation' | 'cust-experience' | 'adv-strategic' | 'queries-guiding' | 'engine-detail' | 'velocity-engine' | 'employee-portal' | 'astra'>('home');
+  const [currentPage, setCurrentPage] = useState<'home' | 'advisory' | 'ai-systems' | 'about' | 'pricing' | 'policies' | 'dashboard' | 'ecosystem' | 'supporta' | 'strategos' | 'simulate' | 'core' | 'engage' | 'multi-agent' | 'lead-qualifier' | 'guided-decision' | 'context-response' | 'multi-language' | 'conversion-action' | 'personalized-interaction' | 'predictive-intelligence' | 'omnichannel-orchestration' | 'business-intelligence' | 'automation-engagement' | 'trust-security' | 'adaptive-learning' | 'customer-journey' | 'enterprise-collaboration' | 'evolve' | 'flow' | 'core-intel' | 'decision-modeling' | 'revenue-growth' | 'revenue-growth-ai' | 'brand-content' | 'knowledge-research' | 'ops-automation' | 'cust-experience' | 'adv-strategic' | 'queries-guiding' | 'engine-detail' | 'velocity-engine' | 'employee-portal' | 'astra' | 'spectra'>('home');
   const [selectedEngineId, setSelectedEngineId] = useState<string | null>(null);
 
   const navigateToEngine = (engineId: string) => {
@@ -94,6 +95,8 @@ export default function App() {
       setCurrentPage('velocity-engine');
     } else if (engineId.toUpperCase().includes('ASTRA')) {
       setCurrentPage('astra');
+    } else if (engineId.toUpperCase().includes('SPECTRA')) {
+      setCurrentPage('spectra');
     } else {
       setSelectedEngineId(engineId);
       setCurrentPage('engine-detail');
@@ -205,6 +208,7 @@ export default function App() {
                 currentPage === 'velocity-engine' ? <VelocityLeadEngine onNavigate={setCurrentPage} /> :
                 currentPage === 'employee-portal' ? <EmployeeDashboard onNavigate={setCurrentPage} /> :
                 currentPage === 'astra' ? <AstraPage onBack={() => setCurrentPage('ecosystem')} /> :
+                currentPage === 'spectra' ? <IPDMSpectra onNavigate={setCurrentPage} /> :
                 <CompanyPage onNavigate={setCurrentPage} />}
             </div>
           )}

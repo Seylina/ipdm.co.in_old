@@ -484,6 +484,16 @@ export function ProprietarySystems() {
           capabilities: ["KPI tracking", "Behavioral analytics", "Dashboard insights"],
           outcomes: ["Better visibility", "Data-backed decisions", "Performance optimization"],
           cta: "Explore LENS™"
+        },
+        { 
+          name: "IPDM SPECTRA™", 
+          role: "Autonomous Business Intelligence", 
+          desc: "Autonomous Business Intelligence & Opportunity Discovery Infrastructure. Websites are public interfaces. Intelligence is the advantage. Opportunity is the outcome.", 
+          icon: <Target className="w-5 h-5" />, 
+          color: "rose",
+          capabilities: ["Business intelligence", "Opportunity discovery", "Market positioning"],
+          outcomes: ["Definitive advantage", "Uncovered strategic paths", "Accelerated outcomes"],
+          cta: "Explore SPECTRA™"
         }
       ]
     },

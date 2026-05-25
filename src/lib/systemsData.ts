@@ -160,6 +160,14 @@ export const SYSTEMS_ECOSYSTEM: SystemCategory[] = [
         icon: React.createElement(Eye),
         stats: { recognition: "99.2%", types: "Object/Text/Brand", latency: "Fast" },
         tags: ["Vision", "Visual-Intel", "OCR"]
+      },
+      {
+        name: "IPDM SPECTRA™",
+        role: "Autonomous Business Intelligence & Opportunity Discovery Infrastructure",
+        desc: "Websites are public interfaces. Intelligence is the advantage. Opportunity is the outcome.",
+        icon: React.createElement(Target),
+        stats: { intelligence: "Autonomous", discovery: "Real-time", vantage: "Definitive" },
+        tags: ["Business Intelligence", "Market Discovery", "Strategy Alignment"]
       }
     ]
   },

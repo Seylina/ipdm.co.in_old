@@ -83,6 +83,7 @@ const ECOSYSTEM_ITEMS = [
       { id: "insightra", name: "INSIGHTRA™", role: "Research Engine", icon: <Search />, color: "text-cyan-400" },
       { id: "synapse", name: "SYNAPSE™", role: "Decision Intelligence Engine", icon: <Network />, color: "text-indigo-400" },
       { id: "lens", name: "LENS™", role: "Analytics Engine", icon: <Eye />, color: "text-violet-400" },
+      { id: "spectra", name: "IPDM SPECTRA™", role: "Autonomous Business Intelligence & Opportunity Discovery Infrastructure", icon: <Target />, color: "text-rose-400" },
     ]
   },
   {
